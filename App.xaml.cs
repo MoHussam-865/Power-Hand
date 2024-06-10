@@ -11,7 +11,9 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Power_Hand.DBContext;
-using Power_Hand.Api;
+using Power_Hand.ViewModels;
+using Power_Hand.View;
+using Power_Hand.Interfaces;
 
 namespace Power_Hand
 {
@@ -27,23 +29,40 @@ namespace Power_Hand
 			_host = Host.CreateDefaultBuilder().ConfigureServices((context, services) =>
 			{
 				// rigester to the dependance injection
-				// add window
-				services.AddSingleton<MainWindow>();
+				// add Views
+				services.AddSingleton<MainWindow>(provider => new MainWindow
+				{
+					DataContext = provider.GetRequiredService<MainVM>()
+				});
+
+				services.AddTransient<CasherView>();
+				services.AddTransient<HomeView>();
 
 				// database context service goes here 
 				services.AddDbContext<DatabaseContext>(options =>
 					options.UseSqlServer("connection string"));
 
 				// add view models
+				services.AddSingleton<CasherVM>();
+
+                services.AddSingleton<HomeVM>();
+
+                services.AddSingleton<MainVM>();
 
 
-				// add other services
+                // add other services
 
-				// add the Refit Api for Http
-				
+                services.AddSingleton<INavigationService,NavigationService>();
+
+                services.AddSingleton<Func<Type, ViewModel>>(provider =>
+                    viewModelType => (ViewModel) provider.GetRequiredService(viewModelType));
 
 
-			}).Build();
+                // add the Refit Api for Http
+
+
+
+            }).Build();
 		}
 
 		protected override async void OnStartup(StartupEventArgs e)

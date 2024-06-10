@@ -3,10 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Power_Hand"
+        xmlns:local="clr-namespace:Power_Hand" 
+        xmlns:viewmodels="clr-namespace:Power_Hand.ViewModels" 
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainVM}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        WindowState="Maximized"
+        Title="Power Hand" Height="450" Width="800">
+
+
     <Grid>
-        <TextBox Text="Hello" />
+
+
+        <ContentControl 
+            Content="{Binding MyNavigationService.CurrentView}"/>
+
+
     </Grid>
+
+    
 </Window>

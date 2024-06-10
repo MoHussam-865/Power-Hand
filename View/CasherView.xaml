@@ -1,0 +1,131 @@
+﻿<UserControl x:Class="Power_Hand.View.CasherView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Power_Hand.View"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch"
+             mc:Ignorable="d"
+             xmlns:vm="clr-namespace:Power_Hand.ViewModels"
+             Background="GhostWhite">
+    
+    
+   
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="92*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel 
+        Orientation="Horizontal"
+        Grid.Row="0"
+        HorizontalAlignment="Right">
+
+            <Button Margin="0,3,3,3" Width="50">
+                Exit
+            </Button>
+
+            <Button Margin="0,3,3,3" Width="100">
+                Rejestrasion
+            </Button>
+
+            <Button Margin="20,3,3,3" Width="100">
+                calculator
+            </Button>
+
+
+        </StackPanel>
+
+        <!-- main body -->
+        <Grid
+        Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="70*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- the controll (delete all, delete one, close) view -->
+
+            <Border BorderBrush="DarkGray"
+                Margin="3"
+                BorderThickness="0.5"
+                Grid.Column="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80*"/>
+                        <RowDefinition Height="20*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Vertical"
+                            Grid.Row="0">
+
+                        <Button Content="Discard"
+                            Style="{StaticResource ControllBtns}"
+                            Background="Red"/>
+
+                        <Button Content="Delete"
+                            Background="Red"
+                            Style="{StaticResource ControllBtns}"/>
+
+                    </StackPanel>
+
+
+                    <StackPanel Grid.Row="1" 
+                            Orientation="Vertical">
+
+                        <Button Content="Close"
+                            Background="GreenYellow"
+                            Style="{StaticResource ControllBtns}"/>
+
+                        <Button Content="Fast Close"
+                            Background="CornflowerBlue"
+                            Style="{StaticResource ControllBtns}"/>
+
+
+                    </StackPanel>
+
+
+                </Grid>
+            </Border>
+
+
+            <ListBox Margin="5"
+                 Grid.Column="1"/>
+
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70*"/>
+                    <RowDefinition Height="30*"/>
+                </Grid.RowDefinitions>
+
+
+                <Border Grid.Row="0" 
+                    Margin="5"
+                    CornerRadius="3"
+                    BorderBrush="DarkGray" 
+                    BorderThickness="0.5">
+                    <UniformGrid Background="White"/>
+                </Border>
+
+                <Border Grid.Row="1"
+                    Margin="5,5,5,8"
+                    CornerRadius="3"
+                    BorderBrush="DarkGray" 
+                    BorderThickness="0.5">
+                    <UniformGrid Background="White"/>
+                </Border>
+            </Grid>
+
+
+            <!--end of list items view -->
+
+
+        </Grid>
+
+    </Grid>
+    
+</UserControl>
