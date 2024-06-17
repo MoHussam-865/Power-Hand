@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Power_Hand.View
+namespace Power_Hand.View.Component
 {
     /// <summary>
-    /// Interaction logic for Calculator.xaml
+    /// Interaction logic for CustomTextBox.xaml
     /// </summary>
-    public partial class Calculator : UserControl
+    public partial class CustomTextBox : UserControl
     {
-        public Calculator()
+        public CustomTextBox()
         {
             InitializeComponent();
         }

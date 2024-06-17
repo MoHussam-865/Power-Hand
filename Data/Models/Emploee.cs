@@ -14,6 +14,9 @@ namespace Power_Hand.Models
 
         // this is the things that the emploee has the othurity to do
         // TODO 
-        public List<string>? Options { get; set; }
+        public List<string>? Authorities { get; set; }
+
+        // TODO
+        public List<object>? Settings { get; set; }
     }
 }

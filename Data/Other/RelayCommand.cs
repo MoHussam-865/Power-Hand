@@ -26,7 +26,7 @@ namespace Power_Hand.Commands
         {
             if (para != null)
             {
-                _executeMethod((T)para);
+                _executeMethod((T) para);
             }
         }
 

@@ -14,6 +14,10 @@ using Power_Hand.DBContext;
 using Power_Hand.ViewModels;
 using Power_Hand.View;
 using Power_Hand.Interfaces;
+using Power_Hand.Data.Repository.Invoices;
+using Power_Hand.Data.Repository.Items;
+using Power_Hand.Data;
+using Power_Hand.Data.Repository.Other;
 
 namespace Power_Hand
 {
@@ -40,7 +44,7 @@ namespace Power_Hand
 
 				// database context service goes here 
 				services.AddDbContext<DatabaseContext>(options =>
-					options.UseSqlServer("connection string"));
+					options.UseSqlServer("Server=PowerServer; Database=MyDatabase.db; Integrated Security=True"));
 
 				// add view models
 				services.AddSingleton<CasherVM>();
@@ -56,6 +60,15 @@ namespace Power_Hand
 
                 services.AddSingleton<Func<Type, ViewModel>>(provider =>
                     viewModelType => (ViewModel) provider.GetRequiredService(viewModelType));
+
+                // repositories
+                services.AddSingleton<IInvoicesRepo, InvoicesRepoImpl>();
+                services.AddSingleton<IItemsRepo, ItemsRepoImpl>();
+                services.AddSingleton<IPeopleRepo, PeopleRepoImpl>();
+
+                // shared data services acts like a service that has some data
+                // which ViewModel subscribe or publish to it 
+                services.AddSingleton<EmploeeShare>();
 
 
                 // add the Refit Api for Http

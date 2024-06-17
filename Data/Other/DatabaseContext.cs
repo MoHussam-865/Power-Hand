@@ -18,6 +18,7 @@ namespace Power_Hand.DBContext
 		public DbSet<Client> Client { get; set; }
 		public DbSet<Invoice> Invoice { get; set; }
 		public DbSet<InvoiceItem> InvoiceItem { get; set; }
+        public DbSet<Emploee> Emploee { get; set; }
 
 	}
 }

@@ -3,10 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Power_Hand.View"
+             xmlns:components="clr-namespace:Power_Hand.View.Component"
+             xmlns:styles="clr-namespace:Power_Hand.View"
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch"
              mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
              xmlns:vm="clr-namespace:Power_Hand.ViewModels"
              Background="GhostWhite">
     
@@ -62,27 +64,17 @@
                     <StackPanel Orientation="Vertical"
                             Grid.Row="0">
 
-                        <Button Content="Discard"
-                            Style="{StaticResource ControllBtns}"
-                            Background="Red"/>
-
-                        <Button Content="Delete"
-                            Background="Red"
-                            Style="{StaticResource ControllBtns}"/>
-
+                        <components:SomeBtn MyText="Delete" />
+                        <components:SomeBtn MyText="Discard"/>
                     </StackPanel>
 
 
                     <StackPanel Grid.Row="1" 
                             Orientation="Vertical">
 
-                        <Button Content="Close"
-                            Background="GreenYellow"
-                            Style="{StaticResource ControllBtns}"/>
+                        <components:SomeBtn MyText="Close" MyColor="Green"/>
+                        <components:SomeBtn MyText="Fast Close" MyColor="Green"/>
 
-                        <Button Content="Fast Close"
-                            Background="CornflowerBlue"
-                            Style="{StaticResource ControllBtns}"/>
 
 
                     </StackPanel>
@@ -92,37 +84,9 @@
             </Border>
 
 
-            <ListBox Margin="5"
-                 Grid.Column="1"/>
+            <components:InvoiceList Grid.Column="1"/>
 
-
-            <Grid Grid.Column="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="70*"/>
-                    <RowDefinition Height="30*"/>
-                </Grid.RowDefinitions>
-
-
-                <Border Grid.Row="0" 
-                    Margin="5"
-                    CornerRadius="3"
-                    BorderBrush="DarkGray" 
-                    BorderThickness="0.5">
-                    <UniformGrid Background="White"/>
-                </Border>
-
-                <Border Grid.Row="1"
-                    Margin="5,5,5,8"
-                    CornerRadius="3"
-                    BorderBrush="DarkGray" 
-                    BorderThickness="0.5">
-                    <UniformGrid Background="White"/>
-                </Border>
-            </Grid>
-
-
-            <!--end of list items view -->
-
+            <components:MyItemGrid Grid.Column="2"/>
 
         </Grid>
 
