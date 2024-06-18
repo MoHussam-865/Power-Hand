@@ -1,23 +1,15 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
-using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Refit;
-using System.Threading.Tasks;
+﻿using System.Windows;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Power_Hand.DBContext;
-using Power_Hand.ViewModels;
-using Power_Hand.View;
-using Power_Hand.Interfaces;
+using Microsoft.Extensions.Hosting;
+using Power_Hand.Data;
 using Power_Hand.Data.Repository.Invoices;
 using Power_Hand.Data.Repository.Items;
-using Power_Hand.Data;
 using Power_Hand.Data.Repository.Other;
+using Power_Hand.DBContext;
+using Power_Hand.Interfaces;
+using Power_Hand.View;
+using Power_Hand.ViewModels;
 
 namespace Power_Hand
 {
@@ -26,28 +18,28 @@ namespace Power_Hand
     /// </summary>
     public partial class App : Application
     {
-		private readonly IHost _host;
+        private readonly IHost _host;
 
-		public App()
-		{
-			_host = Host.CreateDefaultBuilder().ConfigureServices((context, services) =>
-			{
-				// rigester to the dependance injection
-				// add Views
-				services.AddSingleton<MainWindow>(provider => new MainWindow
-				{
-					DataContext = provider.GetRequiredService<MainVM>()
-				});
+        public App()
+        {
+            _host = Host.CreateDefaultBuilder().ConfigureServices((context, services) =>
+            {
+                // rigester to the dependance injection
+                // add Views
+                services.AddSingleton<MainWindow>(provider => new MainWindow
+                {
+                    DataContext = provider.GetRequiredService<MainVM>()
+                });
 
-				services.AddTransient<CasherView>();
-				services.AddTransient<HomeView>();
+                services.AddTransient<CasherView>();
+                services.AddTransient<HomeView>();
 
-				// database context service goes here 
-				services.AddDbContext<DatabaseContext>(options =>
-					options.UseSqlServer("Server=PowerServer; Database=MyDatabase.db; Integrated Security=True"));
+                // database context service goes here 
+                services.AddDbContext<DatabaseContext>(options =>
+                    options.UseSqlServer("Server=PowerServer; Database=MyDatabase.db; Integrated Security=True"));
 
-				// add view models
-				services.AddSingleton<CasherVM>();
+                // add view models
+                services.AddSingleton<CasherVM>();
 
                 services.AddSingleton<HomeVM>();
 
@@ -56,10 +48,10 @@ namespace Power_Hand
 
                 // add other services
 
-                services.AddSingleton<INavigationService,NavigationService>();
+                services.AddSingleton<INavigationService, NavigationService>();
 
                 services.AddSingleton<Func<Type, ViewModel>>(provider =>
-                    viewModelType => (ViewModel) provider.GetRequiredService(viewModelType));
+                    viewModelType => (ViewModel)provider.GetRequiredService(viewModelType));
 
                 // repositories
                 services.AddSingleton<IInvoicesRepo, InvoicesRepoImpl>();
@@ -76,25 +68,25 @@ namespace Power_Hand
 
 
             }).Build();
-		}
+        }
 
-		protected override async void OnStartup(StartupEventArgs e)
-		{
-			await _host.StartAsync();
+        protected override async void OnStartup(StartupEventArgs e)
+        {
+            await _host.StartAsync();
 
-			var mainWindow = _host.Services.GetRequiredService<MainWindow>();
-			mainWindow.Show();
+            var mainWindow = _host.Services.GetRequiredService<MainWindow>();
+            mainWindow.Show();
 
-			base.OnStartup(e);
-		}
+            base.OnStartup(e);
+        }
 
-		protected override async void OnExit(ExitEventArgs e)
-		{
-			await _host.StopAsync(TimeSpan.FromSeconds(5));
-			_host.Dispose();
+        protected override async void OnExit(ExitEventArgs e)
+        {
+            await _host.StopAsync(TimeSpan.FromSeconds(5));
+            _host.Dispose();
 
-			base.OnExit(e);
-		}
-	}
+            base.OnExit(e);
+        }
+    }
 
 }

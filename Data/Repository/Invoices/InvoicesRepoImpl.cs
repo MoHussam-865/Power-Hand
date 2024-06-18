@@ -25,12 +25,14 @@ namespace Power_Hand.Data.Repository.Invoices
             _database.Invoice.Add(invoice);
             await _database.SaveChangesAsync();
 
-            foreach (InvoiceItem item in invoice.Items)
+            invoice.Items.ForEach(item =>
             {
-               item.InvoiceId = invoice.Id;
-               _database.InvoiceItem.Add(item);
-            }
+                item.InvoiceId = invoice.Id;
+                _database.InvoiceItem.Add(item);
+
+            });
             await _database.SaveChangesAsync();
+
         }
 
 

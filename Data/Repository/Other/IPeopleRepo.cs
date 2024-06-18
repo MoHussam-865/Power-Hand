@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Power_Hand.Models;
+﻿using Power_Hand.Models;
 
 namespace Power_Hand.Data.Repository.Other
 {

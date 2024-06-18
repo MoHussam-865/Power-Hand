@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.EntityFrameworkCore;
 using Power_Hand.DBContext;
 using Power_Hand.Models;
 
@@ -13,23 +7,23 @@ namespace Power_Hand.Data.Repository.Other
     public class PeopleRepoImpl : IPeopleRepo
     {
         private readonly DatabaseContext _database;
-        public PeopleRepoImpl(DatabaseContext database) 
+        public PeopleRepoImpl(DatabaseContext database)
         {
-            _database = database;   
+            _database = database;
         }
 
         public async Task<Client?> GetClient(string search)
         {
             return await _database.Client.FirstOrDefaultAsync(client =>
 
-                 (client.Name == null ? false: client.Name.Contains(search)) ||
+                 (client.Name == null ? false : client.Name.Contains(search)) ||
 
-                (client.Address == null ? false :  client.Address.Contains(search)) ||
+                (client.Address == null ? false : client.Address.Contains(search)) ||
 
-                (client.PhoneNumber == null ? false :  client.PhoneNumber.Contains(search)) ||
+                (client.PhoneNumber == null ? false : client.PhoneNumber.Contains(search)) ||
 
-                (client.Email == null ? false :  client.Email.Contains(search))
-                
+                (client.Email == null ? false : client.Email.Contains(search))
+
             );
         }
 
