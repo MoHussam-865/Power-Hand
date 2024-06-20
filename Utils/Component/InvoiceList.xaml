@@ -10,8 +10,10 @@
              d:DesignHeight="450" d:DesignWidth="170">
 
 
-    <ListBox Margin="5"
-         Grid.Column="1">
+    <ListBox 
+        ItemsSource="{Binding Items}"
+        Margin="5"
+        Grid.Column="1">
 
 
         <DataTemplate

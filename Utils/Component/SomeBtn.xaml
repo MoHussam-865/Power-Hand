@@ -9,8 +9,8 @@
              Height="auto"
              d:DesignHeight="50" 
              d:DesignWidth="100">
-                
-   
+
+
     <Border BorderThickness="0.2"
             BorderBrush="Black"
             CornerRadius="20" 
@@ -23,7 +23,8 @@
                     FontSize="20"
                     TextWrapping="Wrap">
                 <Button Background="Transparent"
-                    BorderThickness="0"/>
+                    BorderThickness="0"
+                        Command="{Binding OnClick}"/>
         </TextBlock>
         
     </Border>

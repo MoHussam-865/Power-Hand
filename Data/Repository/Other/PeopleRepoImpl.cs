@@ -12,24 +12,24 @@ namespace Power_Hand.Data.Repository.Other
             _database = database;
         }
 
-        public async Task<Client?> GetClient(string search)
+        public Client? GetClient(string search)
         {
-            return await _database.Client.FirstOrDefaultAsync(client =>
+            return _database.Client.FirstOrDefault(client =>
 
-                 (client.Name == null ? false : client.Name.Contains(search)) ||
+                 (client.Name != null && client.Name.Contains(search)) ||
 
-                (client.Address == null ? false : client.Address.Contains(search)) ||
+                (client.Address != null && client.Address.Contains(search)) ||
 
-                (client.PhoneNumber == null ? false : client.PhoneNumber.Contains(search)) ||
+                (client.PhoneNumber != null && client.PhoneNumber.Contains(search)) ||
 
-                (client.Email == null ? false : client.Email.Contains(search))
+                (client.Email != null && client.Email.Contains(search))
 
             );
         }
 
-        public async Task<Emploee?> GetEmploee(string username, string password)
+        public Emploee? GetEmploee(string username, string password)
         {
-            return await _database.Emploee.FirstOrDefaultAsync(emploee =>
+            return _database.Emploee.FirstOrDefault(emploee =>
                 emploee.Name == username && emploee.Password == password
             );
         }

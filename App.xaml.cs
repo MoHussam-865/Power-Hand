@@ -10,6 +10,7 @@ using Power_Hand.DBContext;
 using Power_Hand.Interfaces;
 using Power_Hand.View;
 using Power_Hand.ViewModels;
+using Prism.Events;
 
 namespace Power_Hand
 {
@@ -20,8 +21,8 @@ namespace Power_Hand
     {
         private readonly IHost _host;
 
-        public App()
-        {
+        public App() 
+        {            
             _host = Host.CreateDefaultBuilder().ConfigureServices((context, services) =>
             {
                 // rigester to the dependance injection
@@ -33,17 +34,18 @@ namespace Power_Hand
 
                 services.AddTransient<CasherView>();
                 services.AddTransient<HomeView>();
+                services.AddTransient<ReservationView>();
 
                 // database context service goes here 
-                services.AddDbContext<DatabaseContext>(options =>
-                    options.UseSqlServer("Server=PowerServer; Database=MyDatabase.db; Integrated Security=True"));
-
+                services.AddDbContext<DatabaseContext>(options => 
+                options.UseSqlite(
+                    "E:\\My Projects\\PowerHand\\Power Hand\\PowerHand.db"
+                    ));
                 // add view models
                 services.AddSingleton<CasherVM>();
-
                 services.AddSingleton<HomeVM>();
-
                 services.AddSingleton<MainVM>();
+                services.AddSingleton<ReservationVM>();
 
 
                 // add other services
@@ -60,12 +62,12 @@ namespace Power_Hand
 
                 // shared data services acts like a service that has some data
                 // which ViewModel subscribe or publish to it 
+                services.AddSingleton<IEventAggregator>(provider => new EventAggregator());
+                
+
                 services.AddSingleton<EmploeeShare>();
 
-
                 // add the Refit Api for Http
-
-
 
             }).Build();
         }

@@ -1,9 +1,9 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows.Controls;
+using System.Diagnostics;
 using System.Windows.Input;
-using Microsoft.IdentityModel.Tokens;
 using Power_Hand.Commands;
 using Power_Hand.Data;
+using Power_Hand.Data.Other;
 using Power_Hand.Data.Repository.Invoices;
 using Power_Hand.Data.Repository.Items;
 using Power_Hand.Interfaces;
@@ -17,7 +17,7 @@ namespace Power_Hand.ViewModels
         // used to pass data between view models
         private readonly IEventAggregator _eventAggregator;
         // the current signed casher used to be added to the invoice
-        private Emploee _currentEmploee;
+        private Emploee? _currentEmploee;
         // used for navigation between viewmodels (views)
         private INavigationService _navigationService;
         public INavigationService MyNavigationService
@@ -42,14 +42,14 @@ namespace Power_Hand.ViewModels
         public double CurrentQty
         {
             get => _currentQty;
-            set { _currentQty = value;  OnPropertyChanged(); }
+            set { _currentQty = value; OnPropertyChanged(); }
         }
-        
+
         private InvoiceItem? _selectedItem;
         public InvoiceItem? SelectedItem
         {
             get => _selectedItem;
-            set { _selectedItem = value;  OnPropertyChanged(); }
+            set { _selectedItem = value; OnPropertyChanged(); }
         }
 
 
@@ -72,14 +72,19 @@ namespace Power_Hand.ViewModels
         public ObservableCollection<InvoiceItem> InvoiceItems
         {
             get => _invoiceItems;
-            set { _invoiceItems = value; OnPropertyChanged();}
+            set { _invoiceItems = value; OnPropertyChanged(); }
         }
 
 
         public ICommand ItemClickCommand { get; set; }
         public ICommand ItemEditCommand { get; set; }
         public ICommand ItemRemoveCommand { get; set; }
+        public ICommand DiscardCommand { get; set; }
+        public ICommand ItemSelectCommand { get; set; }
         public ICommand QtyChangeCommand { get; set; }
+        public ICommand SaveInvoiceCommand { get; set; }
+        public ICommand LogOutCommand { get; set; }
+        public ICommand ToReservastionCommand { get; set; }
 
 
         // constructor with dependancy injection
@@ -94,36 +99,53 @@ namespace Power_Hand.ViewModels
             _invoicesRepo = invoicesRepo;
 
             // just initialize them
-            _folders = new ObservableCollection<Item>();
-            _items = new ObservableCollection<Item>();
+            _folders = [];
+            _items = [];
             // geting them realy
             OpenFolder();
 
             // no invoice items yet
-            _invoiceItems = new ObservableCollection<InvoiceItem>();
+            _invoiceItems = [];
 
             // initiate commands here
-            ItemClickCommand = new RelayCommand<Item>((x)=> OnItemClicked(x));
-            ItemEditCommand = new RelayCommand<InvoiceItem>((x) => OnItemEdit(x));
-            ItemRemoveCommand = new RelayCommand<InvoiceItem>((x) => OnItemDelete(x));
-            QtyChangeCommand = new RelayCommand(OnQuantityChanged);
+            ItemClickCommand = new ClickCommand<Item>((x) => OnItemClicked(x));
+            ItemSelectCommand = new ClickCommand<InvoiceItem>((x) => OnItemSelected(x));
+
+
+            ItemRemoveCommand = new FunCommand(OnItemDelete);
+            ItemEditCommand = new FunCommand(OnItemEdit);
+            QtyChangeCommand = new FunCommand(OnQuantityChanged);
+            DiscardCommand = new FunCommand(OnDiscard);
+            SaveInvoiceCommand = new FunCommand(OnSaveInvoice);
+            LogOutCommand = new FunCommand(OnLogOutClicked);
+            ToReservastionCommand = new FunCommand(OnNavigateToReservationClicked);
 
             // gets the current emploee passed from the HomeVM 
             _eventAggregator = eventAggregator;
+
+            
             _eventAggregator.GetEvent<EmploeeShare>().Subscribe(OnEmploeeSigned);
         }
 
-        
+        private void OnLogOutClicked() => MyNavigationService.NavigateTo<HomeVM>();
+
+        private void OnNavigateToReservationClicked() => MyNavigationService.NavigateTo<ReservationVM>();
+
+        private void OnItemSelected(InvoiceItem item) => SelectedItem = item;
+
+
+        private void OnDiscard() => InvoiceItems.Clear();
+
         private async void OpenFolder()
         {
             List<Item> items = await _itemsRepo.GetItems(CurrentFolderId);
-            if (!items.IsNullOrEmpty())
+            if (items.Count != 0)
             {
                 Items = new ObservableCollection<Item>(items);
             }
 
             List<Item> folders = await _itemsRepo.GetFolders(CurrentFolderId);
-            if (!folders.IsNullOrEmpty())
+            if (folders.Count != 0)
             {
                 Folders = new ObservableCollection<Item>(folders);
             }
@@ -136,26 +158,28 @@ namespace Power_Hand.ViewModels
         {
             if (item.IsFolder)
             {
+                // open folder by changing the _currentFolderId
+                CurrentFolderId = item.Id;
+            }
+            else
+            {
                 // convert to invoice item
                 InvoiceItem myItem = item.ToInvoiceItem();
                 // add item to _invoiceItems
                 InvoiceItems.Add(myItem);
             }
-            else
+        }
+
+
+        private void OnItemDelete()
+        {
+            if (_selectedItem != null)
             {
-                // open folder by changing the _currentFolderId
-                CurrentFolderId = item.Id;
+                InvoiceItems.Remove(_selectedItem);
             }
         }
 
-
-        private void OnItemDelete(InvoiceItem item)
-        {
-            // remove from _invoiceItems
-            InvoiceItems.Remove(item);
-        }
-
-        private void OnItemEdit(InvoiceItem item)
+        private void OnItemEdit()
         {
             // first set the ui to get the new qty
 
@@ -169,19 +193,30 @@ namespace Power_Hand.ViewModels
 
         private void OnSaveInvoice()
         {
-            Invoice myInvoice = new Invoice(
-                date: DateTime.Now.Ticks,
-                type: 0,
-                emploeeId: _currentEmploee.Id,
-                payed: InvoiceItems.ToList().Sum(i=>i.Total),
-                remaining: 0,
-                items: InvoiceItems.ToList()
-                );
 
-            _invoicesRepo.AddInvoice(myInvoice);
+            if (InvoiceItems.Count > 0 && _currentEmploee != null)
+            {
+
+                Invoice myInvoice = new Invoice(
+                    date: DateTime.Now.Ticks,
+                    type: 0,
+                    emploeeId: _currentEmploee.Id,
+                    payed: InvoiceItems.ToList().Sum(i => i.Total),
+                    remaining: 0,
+                    items: [.. InvoiceItems]  // this makes it a list => InvoiceItems.ToList()
+                    );
+
+                _invoicesRepo.AddInvoice(myInvoice);
+                InvoiceItems.Clear();
+            }
+            else
+            {
+
+                Debug.WriteLine(_currentEmploee?.Id.ToString());
+            }
         }
 
-        
+
 
 
 

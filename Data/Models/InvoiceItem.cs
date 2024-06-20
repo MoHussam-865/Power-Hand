@@ -1,9 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Power_Hand.Models
 {
     public class InvoiceItem
     {
+        [Key]
+        public int Id { get; set; }
         [ForeignKey("Id")]
         public int InvoiceId { get; set; }
         [ForeignKey("Id")]
@@ -19,6 +22,10 @@ namespace Power_Hand.Models
 
 
         // constructor
+        
+        public InvoiceItem() { }
+
+
         public InvoiceItem(
             int itemId, string name,
             int parentId, bool isFolder,

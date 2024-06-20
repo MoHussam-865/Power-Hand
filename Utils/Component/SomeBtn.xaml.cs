@@ -24,8 +24,8 @@ namespace Power_Hand.View.Component
 
         public string MyText
         {
-            get { return (string) GetValue(MyTextProperty); }
-            set { SetValue(MyTextProperty, value); }
+            get => (string)GetValue(MyTextProperty); 
+            set => SetValue(MyTextProperty, value); 
         }
         public static readonly DependencyProperty MyTextProperty =
             DependencyProperty.Register("MyText", typeof(string), typeof(UserControl), new PropertyMetadata("Hello"));
@@ -34,11 +34,21 @@ namespace Power_Hand.View.Component
 
         public Color MyColor
         {
-            get { return (Color)GetValue(ColorProperty); }
-            set { SetValue(ColorProperty, value); }
+            get => (Color)GetValue(ColorProperty); 
+            set => SetValue(ColorProperty, value); 
         }
         public static readonly DependencyProperty ColorProperty =
             DependencyProperty.Register("MyColor", typeof(Color), typeof(UserControl), new PropertyMetadata(Colors.Black));
+
+
+
+        public ICommand OnClick
+        {
+            get => (ICommand)GetValue(OnClickProperty); 
+            set => SetValue(OnClickProperty, value); 
+        }
+        public static readonly DependencyProperty OnClickProperty =
+            DependencyProperty.Register("OnClick", typeof(ICommand), typeof(UserControl), new PropertyMetadata(() => { }));
 
 
 

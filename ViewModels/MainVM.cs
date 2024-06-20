@@ -6,6 +6,17 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Power_Hand.Interfaces;
 
+/*
+ * when adding new view (feature) 
+ * 
+ * add view & view model
+ * add them to App.xaml
+ * add them to the App.cs (dependancy injection)
+ * */
+
+
+
+
 namespace Power_Hand.ViewModels
 {
     class MainVM : ViewModel
@@ -17,13 +28,13 @@ namespace Power_Hand.ViewModels
             set
             {
                 _navigationService = value;
-                OnPropertyChanged(nameof(_navigationService));
+                OnPropertyChanged();
             }
         }
 
         public MainVM(INavigationService navigationService)
         {
-            MyNavigationService = navigationService;
+            _navigationService = navigationService;
             MyNavigationService.NavigateTo<HomeVM>();
         }
 

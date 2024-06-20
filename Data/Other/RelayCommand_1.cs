@@ -13,10 +13,8 @@ namespace Power_Hand.Commands
     {
         public delegate void ExecuteMethod();
         private Action _executeMethod;
-        public RelayCommand(Action method) 
-        {
-            _executeMethod = method;                
-        }
+        public RelayCommand(Action method) => _executeMethod = method;                
+        
 
         public bool CanExecute(object? para)
         {
@@ -31,7 +29,9 @@ namespace Power_Hand.Commands
         }
 
         public event EventHandler? CanExecuteChanged;
-       
-        
+
+        protected void OnCanExecuteChanged() => CanExecuteChanged?.Invoke(this, new EventArgs());
+
+
     }
 }

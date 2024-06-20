@@ -3,16 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Power_Hand"
              xmlns:vm="clr-namespace:Power_Hand.ViewModels"
-             xmlns:View="clr-namespace:Power_Hand.View">
+             xmlns:View="clr-namespace:Power_Hand.View" >
     <Application.Resources>
 
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="View/Styles/CalculatorBtn.xaml"/>
-                <ResourceDictionary Source="View/Styles/ControllBtns.xaml"/>
+                <ResourceDictionary Source="Utils/Styles/CalculatorBtn.xaml"/>
+                <ResourceDictionary Source="Utils/Styles/ControllBtns.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
-
 
 
             <DataTemplate DataType="{x:Type TypeName=vm:CasherVM}">
@@ -23,9 +21,13 @@
                 <View:HomeView/>
             </DataTemplate>
 
-        </ResourceDictionary>
+            <DataTemplate DataType="{x:Type TypeName=vm:ReservationVM}">
+                <View:ReservationView/>
+            </DataTemplate>
 
+        </ResourceDictionary>
         
-         
+        
+        
     </Application.Resources>
 </Application>

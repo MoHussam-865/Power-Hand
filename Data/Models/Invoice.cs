@@ -27,7 +27,11 @@ namespace Power_Hand.Models
 
         public double Total { get => Items.Sum(x => x.Total); }
 
-        public Invoice(
+        
+        public Invoice() { }
+
+        
+        internal Invoice(
             long date, int type, int emploeeId,
             double payed, List<InvoiceItem> items, int id = 0, long? dueDate = null,
             int? clientId = null, double? discount = null, double? vat = null,
@@ -47,6 +51,7 @@ namespace Power_Hand.Models
             InvoiceNote = invoiceNotes;
             Items = items;
         }
+
 
     }
 }
