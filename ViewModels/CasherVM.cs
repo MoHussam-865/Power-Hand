@@ -1,11 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Input;
-using Power_Hand.Commands;
-using Power_Hand.Data;
 using Power_Hand.Data.Other;
 using Power_Hand.Data.Repository.Invoices;
 using Power_Hand.Data.Repository.Items;
+using Power_Hand.Data.SharedData;
 using Power_Hand.Interfaces;
 using Power_Hand.Models;
 using Prism.Events;
@@ -18,24 +17,15 @@ namespace Power_Hand.ViewModels
         private readonly IEventAggregator _eventAggregator;
         // the current signed casher used to be added to the invoice
         private Emploee? _currentEmploee;
+         
+        private readonly IInvoicesRepo _invoicesRepo;
+
         // used for navigation between viewmodels (views)
         private INavigationService _navigationService;
         public INavigationService MyNavigationService
         {
             get => _navigationService;
             set { _navigationService = value; OnPropertyChanged(); }
-        }
-
-        // used for database operations
-        private readonly IItemsRepo _itemsRepo;
-        private readonly IInvoicesRepo _invoicesRepo;
-
-        // 
-        private int _currentFolderId = 0;
-        public int CurrentFolderId
-        {
-            get => _currentFolderId;
-            set { _currentFolderId = value; OnPropertyChanged(); OpenFolder(); }
         }
 
         private double _currentQty;
@@ -46,41 +36,36 @@ namespace Power_Hand.ViewModels
         }
 
         private InvoiceItem? _selectedItem;
-        public InvoiceItem? SelectedItem
-        {
-            get => _selectedItem;
-            set { _selectedItem = value; OnPropertyChanged(); }
-        }
-
-
-        private ObservableCollection<Item> _items;
-        public ObservableCollection<Item> Items
-        {
-            get => _items;
-            set { _items = value; OnPropertyChanged(); }
-        }
-
-
-        private ObservableCollection<Item> _folders;
-        public ObservableCollection<Item> Folders
-        {
-            get => _folders;
-            set { _folders = value; OnPropertyChanged(); }
-        }
 
         private ObservableCollection<InvoiceItem> _invoiceItems;
         public ObservableCollection<InvoiceItem> InvoiceItems
         {
             get => _invoiceItems;
-            set { _invoiceItems = value; OnPropertyChanged(); }
+            set { 
+                _invoiceItems = value; 
+                OnPropertyChanged(); 
+            }
+        }
+
+        private GridItems_SVM _gridItemsVM;
+        public GridItems_SVM GridItemsVM
+        {
+            get => _gridItemsVM; 
+            set { _gridItemsVM = value; OnPropertyChanged(); }
+        }
+
+        private InvoiceItemsList_SVM _invoiceListVM;
+        public InvoiceItemsList_SVM InvoiceListVM
+        {
+            get => _invoiceListVM;
+            set { _invoiceListVM = value; OnPropertyChanged(); }
         }
 
 
-        public ICommand ItemClickCommand { get; set; }
+
         public ICommand ItemEditCommand { get; set; }
         public ICommand ItemRemoveCommand { get; set; }
         public ICommand DiscardCommand { get; set; }
-        public ICommand ItemSelectCommand { get; set; }
         public ICommand QtyChangeCommand { get; set; }
         public ICommand SaveInvoiceCommand { get; set; }
         public ICommand LogOutCommand { get; set; }
@@ -89,27 +74,19 @@ namespace Power_Hand.ViewModels
 
         // constructor with dependancy injection
         public CasherVM(
-            IItemsRepo itemsRepo,
             IInvoicesRepo invoicesRepo,
             INavigationService navigationService,
-            IEventAggregator eventAggregator)
+            IEventAggregator eventAggregator,
+            GridItems_SVM gridItems_SVM,
+            InvoiceItemsList_SVM invoiceItemsList_SVM)
         {
+            _gridItemsVM = gridItems_SVM;
+            _invoiceListVM = invoiceItemsList_SVM;
             _navigationService = navigationService;
-            _itemsRepo = itemsRepo;
             _invoicesRepo = invoicesRepo;
-
-            // just initialize them
-            _folders = [];
-            _items = [];
-            // geting them realy
-            OpenFolder();
 
             // no invoice items yet
             _invoiceItems = [];
-
-            // initiate commands here
-            ItemClickCommand = new ClickCommand<Item>((x) => OnItemClicked(x));
-            ItemSelectCommand = new ClickCommand<InvoiceItem>((x) => OnItemSelected(x));
 
 
             ItemRemoveCommand = new FunCommand(OnItemDelete);
@@ -122,60 +99,38 @@ namespace Power_Hand.ViewModels
 
             // gets the current emploee passed from the HomeVM 
             _eventAggregator = eventAggregator;
-
-            
             _eventAggregator.GetEvent<EmploeeShare>().Subscribe(OnEmploeeSigned);
+            _eventAggregator.GetEvent<InvoiceItemsShare>().Subscribe(OnInvoiceItemsChanged);
+            _eventAggregator.GetEvent<SelectedInvoiceItemShare>().Subscribe(OnSelectedItemChanges);
         }
+
+        private void OnSelectedItemChanges(InvoiceItem? item)
+        {
+            _selectedItem = item;
+        }
+
+        private void OnInvoiceItemsChanged(ObservableCollection<InvoiceItem> list)
+        {
+            InvoiceItems = list;
+        }
+
+
+
+        // gets the passed emploee from the HomeVM.cs (Home view model)
+        private void OnEmploeeSigned(Emploee emploee) => _currentEmploee = emploee;
 
         private void OnLogOutClicked() => MyNavigationService.NavigateTo<HomeVM>();
 
         private void OnNavigateToReservationClicked() => MyNavigationService.NavigateTo<ReservationVM>();
-
-        private void OnItemSelected(InvoiceItem item) => SelectedItem = item;
-
-
-        private void OnDiscard() => InvoiceItems.Clear();
-
-        private async void OpenFolder()
-        {
-            List<Item> items = await _itemsRepo.GetItems(CurrentFolderId);
-            if (items.Count != 0)
-            {
-                Items = new ObservableCollection<Item>(items);
-            }
-
-            List<Item> folders = await _itemsRepo.GetFolders(CurrentFolderId);
-            if (folders.Count != 0)
-            {
-                Folders = new ObservableCollection<Item>(folders);
-            }
-        }
-
-
-        private void OnEmploeeSigned(Emploee emploee) => _currentEmploee = emploee;
-
-        private void OnItemClicked(Item item)
-        {
-            if (item.IsFolder)
-            {
-                // open folder by changing the _currentFolderId
-                CurrentFolderId = item.Id;
-            }
-            else
-            {
-                // convert to invoice item
-                InvoiceItem myItem = item.ToInvoiceItem();
-                // add item to _invoiceItems
-                InvoiceItems.Add(myItem);
-            }
-        }
-
 
         private void OnItemDelete()
         {
             if (_selectedItem != null)
             {
                 InvoiceItems.Remove(_selectedItem);
+                _selectedItem = null;
+
+                Update();
             }
         }
 
@@ -184,11 +139,23 @@ namespace Power_Hand.ViewModels
             // first set the ui to get the new qty
 
             // get the updated item and add it to the invoice items and remove the old one
+
+
+            Update();
         }
 
+
+        private void OnDiscard()
+        {
+            InvoiceItems.Clear();
+            _selectedItem = null;
+            Update();
+        }
         private void OnQuantityChanged()
         {
+            // Not implemented yet
 
+            Update();
         }
 
         private void OnSaveInvoice()
@@ -208,6 +175,8 @@ namespace Power_Hand.ViewModels
 
                 _invoicesRepo.AddInvoice(myInvoice);
                 InvoiceItems.Clear();
+                _selectedItem = null;
+                Update();
             }
             else
             {
@@ -216,19 +185,11 @@ namespace Power_Hand.ViewModels
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+        private void Update()
+        {
+            _eventAggregator.GetEvent<InvoiceItemsShare>().Publish(InvoiceItems);
+            _eventAggregator.GetEvent<SelectedInvoiceItemShare>().Publish(_selectedItem);
+        }
 
     }
 }

@@ -11,8 +11,8 @@ using Power_Hand.DBContext;
 namespace Power_Hand.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240619163140_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240620155711_InvoiceItemsID")]
+    partial class InvoiceItemsID
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -114,6 +114,9 @@ namespace Power_Hand.Migrations
                 {
                     b.Property<double>("Discount")
                         .HasColumnType("REAL");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("InvoiceId")
                         .HasColumnType("INTEGER");

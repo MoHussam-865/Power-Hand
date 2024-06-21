@@ -13,18 +13,23 @@ namespace Power_Hand.DBContext
         public DbSet<InvoiceItem> InvoiceItem { get; set; }
         public DbSet<Emploee> Emploee { get; set; }
 
-        
+
+        // needed 
+        public DatabaseContext() { }
+
         public DatabaseContext(
             DbContextOptions<DatabaseContext> options
         ) : base(options) { }
-        
 
+
+        /* not used because any entity needs a key to be tracked
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<InvoiceItem>().HasNoKey();
             base.OnModelCreating(modelBuilder);
-        }
+        }*/
 
+        // important 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             

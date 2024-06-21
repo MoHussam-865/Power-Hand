@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Windows.Input;
-using Power_Hand.Data;
 using Power_Hand.Data.Other;
 using Power_Hand.Data.Repository.Other;
+using Power_Hand.Data.SharedData;
 using Power_Hand.Interfaces;
 using Power_Hand.Models;
 using Prism.Events;

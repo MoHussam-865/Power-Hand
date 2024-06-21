@@ -2,10 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Power_Hand.Data;
 using Power_Hand.Data.Repository.Invoices;
 using Power_Hand.Data.Repository.Items;
 using Power_Hand.Data.Repository.Other;
+using Power_Hand.Data.SharedData;
 using Power_Hand.DBContext;
 using Power_Hand.Interfaces;
 using Power_Hand.View;
@@ -33,16 +33,19 @@ namespace Power_Hand
                 });
 
                 services.AddTransient<CasherView>();
+                services.AddTransient<ItemsGridView>();
+                services.AddTransient<InvoiceItemsListView>();
+
                 services.AddTransient<HomeView>();
                 services.AddTransient<ReservationView>();
 
                 // database context service goes here 
-                services.AddDbContext<DatabaseContext>(options => 
-                options.UseSqlite(
-                    "E:\\My Projects\\PowerHand\\Power Hand\\PowerHand.db"
-                    ));
+                services.AddDbContext<DatabaseContext>();
                 // add view models
                 services.AddSingleton<CasherVM>();
+                services.AddSingleton<GridItems_SVM>();
+                services.AddSingleton<InvoiceItemsList_SVM>();
+
                 services.AddSingleton<HomeVM>();
                 services.AddSingleton<MainVM>();
                 services.AddSingleton<ReservationVM>();

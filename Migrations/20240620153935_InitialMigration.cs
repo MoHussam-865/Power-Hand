@@ -69,6 +69,7 @@ namespace Power_Hand.Migrations
                 name: "InvoiceItem",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false),
                     InvoiceId = table.Column<int>(type: "INTEGER", nullable: false),
                     ItemId = table.Column<int>(type: "INTEGER", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),

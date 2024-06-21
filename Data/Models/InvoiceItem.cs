@@ -7,9 +7,9 @@ namespace Power_Hand.Models
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("Id")]
+        [ForeignKey("Invoice")]
         public int InvoiceId { get; set; }
-        [ForeignKey("Id")]
+        [ForeignKey("Item")]
         public int ItemId { get; set; }
         public string Name { get; set; } = string.Empty;
         public double Price { get; set; }
