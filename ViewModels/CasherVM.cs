@@ -20,13 +20,14 @@ namespace Power_Hand.ViewModels
          
         private readonly IInvoicesRepo _invoicesRepo;
 
-        // used for navigation between viewmodels (views)
-        private INavigationService _navigationService;
-        public INavigationService MyNavigationService
+        // 
+        private NavigationBarVM _navigationVM;
+        public NavigationBarVM NavigationVM
         {
-            get => _navigationService;
-            set { _navigationService = value; OnPropertyChanged(); }
+            get => _navigationVM;
+            set { _navigationVM = value; OnPropertyChanged(); }
         }
+        
 
         private double _currentQty;
         public double CurrentQty
@@ -68,22 +69,20 @@ namespace Power_Hand.ViewModels
         public ICommand DiscardCommand { get; set; }
         public ICommand QtyChangeCommand { get; set; }
         public ICommand SaveInvoiceCommand { get; set; }
-        public ICommand LogOutCommand { get; set; }
-        public ICommand ToReservastionCommand { get; set; }
-
+        
 
         // constructor with dependancy injection
         public CasherVM(
             IInvoicesRepo invoicesRepo,
-            INavigationService navigationService,
             IEventAggregator eventAggregator,
             GridItems_SVM gridItems_SVM,
-            InvoiceItemsList_SVM invoiceItemsList_SVM)
+            InvoiceItemsList_SVM invoiceItemsList_SVM,
+            NavigationBarVM navigationBarVM)
         {
             _gridItemsVM = gridItems_SVM;
             _invoiceListVM = invoiceItemsList_SVM;
-            _navigationService = navigationService;
             _invoicesRepo = invoicesRepo;
+            _navigationVM = navigationBarVM;
 
             // no invoice items yet
             _invoiceItems = [];
@@ -94,9 +93,7 @@ namespace Power_Hand.ViewModels
             QtyChangeCommand = new FunCommand(OnQuantityChanged);
             DiscardCommand = new FunCommand(OnDiscard);
             SaveInvoiceCommand = new FunCommand(OnSaveInvoice);
-            LogOutCommand = new FunCommand(OnLogOutClicked);
-            ToReservastionCommand = new FunCommand(OnNavigateToReservationClicked);
-
+            
             // gets the current emploee passed from the HomeVM 
             _eventAggregator = eventAggregator;
             _eventAggregator.GetEvent<EmploeeShare>().Subscribe(OnEmploeeSigned);
@@ -118,10 +115,6 @@ namespace Power_Hand.ViewModels
 
         // gets the passed emploee from the HomeVM.cs (Home view model)
         private void OnEmploeeSigned(Emploee emploee) => _currentEmploee = emploee;
-
-        private void OnLogOutClicked() => MyNavigationService.NavigateTo<HomeVM>();
-
-        private void OnNavigateToReservationClicked() => MyNavigationService.NavigateTo<ReservationVM>();
 
         private void OnItemDelete()
         {

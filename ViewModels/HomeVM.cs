@@ -12,7 +12,7 @@ namespace Power_Hand.ViewModels
     class HomeVM : ViewModel
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IPeopleRepo _emploeeRepo;
+        private readonly IEmploeeRepo _emploeeRepo;
         private INavigationService _navigationService;
         public INavigationService NavigationService
         {
@@ -36,7 +36,7 @@ namespace Power_Hand.ViewModels
 
         public ICommand OnLoginCommand { get; set; }
 
-        public HomeVM(INavigationService navigationService, IPeopleRepo emploeeRepo, IEventAggregator eventAggregator)
+        public HomeVM(INavigationService navigationService, IEmploeeRepo emploeeRepo, IEventAggregator eventAggregator)
         {
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
@@ -63,6 +63,7 @@ namespace Power_Hand.ViewModels
 
                 if (emploee != null)
                 {
+                    NavigationService.SetParentView<AppShellVM>();
                     NavigationService.NavigateTo<CasherVM>();
                     Clear();
                     _eventAggregator.GetEvent<EmploeeShare>().Publish(emploee);

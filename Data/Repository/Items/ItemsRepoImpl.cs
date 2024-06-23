@@ -12,22 +12,20 @@ namespace Power_Hand.Data.Repository.Items
 {
 
 
-    public class ItemsRepoImpl : IItemsRepo
+    public class ItemsRepoImpl(DatabaseContext database) : IItemsRepo
     {
-        private DatabaseContext _dbContext;
-        public ItemsRepoImpl(DatabaseContext database)
-        {
-            _dbContext = database;
-        }
+        private readonly DatabaseContext _dbContext = database;
 
         public async Task<List<Item>> GetFolders(int parentId)
         {
-            return await _dbContext.Item.Where((item) => item.ParentId == parentId && item.IsFolder).ToListAsync();
+            return await _dbContext.Item.Where((item) => 
+            item.ParentId == parentId && item.IsFolder && !item.IsDeleted).ToListAsync();
         }
 
         public async Task<List<Item>> GetItems(int parentId)
         {
-            return await _dbContext.Item.Where((item) => item.ParentId == parentId && !item.IsFolder).ToListAsync();
+            return await _dbContext.Item.Where((item) => 
+            item.ParentId == parentId && !item.IsFolder && !item.IsDeleted).ToListAsync();
         }
 
         public async Task<Item> GetItemById(int id)
@@ -35,6 +33,16 @@ namespace Power_Hand.Data.Repository.Items
             return await _dbContext.Item.FirstAsync(item => item.Id == id);
         }
 
+        public async Task<int> AddItem(Item item)
+        {
+            _dbContext.Item.Add(item);
+            return await _dbContext.SaveChangesAsync();
+        }
 
+        public async Task<int> UpdateItem(Item item)
+        {
+            _dbContext.Item.Update(item);
+            return await _dbContext.SaveChangesAsync();
+        }
     }
 }

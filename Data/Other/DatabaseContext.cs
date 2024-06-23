@@ -22,12 +22,15 @@ namespace Power_Hand.DBContext
         ) : base(options) { }
 
 
-        /* not used because any entity needs a key to be tracked
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<InvoiceItem>().HasNoKey();
+            modelBuilder.Entity<Invoice>()
+                .HasMany(invoice => invoice.Items)
+                .WithOne(invoiceItem => invoiceItem.Invoice)
+                .HasForeignKey(InvoiceItem => InvoiceItem.InvoiceId);
+
             base.OnModelCreating(modelBuilder);
-        }*/
+        }
 
         // important 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

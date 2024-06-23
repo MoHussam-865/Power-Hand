@@ -16,7 +16,7 @@
 
 
         <ContentControl 
-            Content="{Binding MyNavigationService.CurrentView}"/>
+            Content="{Binding MyNavigationService.ParentView}"/>
 
 
     </Grid>

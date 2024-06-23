@@ -12,6 +12,9 @@
                 <ResourceDictionary Source="Utils/Styles/ControllBtns.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <DataTemplate DataType="{x:Type TypeName=vm:AppShellVM}">
+                <View:AppShellView/>
+            </DataTemplate>
 
             <DataTemplate DataType="{x:Type TypeName=vm:CasherVM}">
                 <View:CasherView/>
@@ -35,10 +38,47 @@
             </DataTemplate>
 
 
+            <DataTemplate DataType="{x:Type TypeName=vm:InvoicesListingPageVM}">
+                <View:InvoicesListingPage/>
+            </DataTemplate>
+
+
+            <DataTemplate DataType="{x:Type TypeName=vm:InvoicePreviewViewVM}">
+                <View:InvoicePreviewView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=vm:InvoicesListViewVM}">
+                <View:InvoicesListingView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=vm:AddEditItemPageVM}">
+                <View:AddEditItemsPageView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=vm:ItemFormVM}">
+                <View:ItemFormView/>
+            </DataTemplate>
+
+
+
+            <DataTemplate DataType="{x:Type TypeName=vm:AddEditClientPageVM}">
+                <View:AddEditClientPageView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=vm:ClientFormVM}">
+                <View:AddEditClientFormView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=vm:ClientListingVM}">
+                <View:ClientSearchListView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=vm:NavigationBarVM}">
+                <View:NavigationBarView/>
+            </DataTemplate>
+
 
         </ResourceDictionary>
-        
-        
-        
+                
     </Application.Resources>
 </Application>

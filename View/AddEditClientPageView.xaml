@@ -1,21 +1,24 @@
-﻿<UserControl x:Class="Power_Hand.View.ReservationView"
+﻿<UserControl x:Class="Power_Hand.View.AddEditClientPageView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:Views="clr-namespace:Power_Hand.View"
+             xmlns:viewmodels="clr-namespace:Power_Hand.ViewModels"
+            d:DataContext="{d:DesignInstance Type=viewmodels:AddEditClientPageVM}"
+            xmlns:components="clr-namespace:Power_Hand.Utils.Component"
+            xmlns:Views="clr-namespace:Power_Hand.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-
     
-        <Grid>
+        <Grid >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
 
-            
-            
-        </Grid>
+            <Views:AddEditClientFormView Grid.Column="0" DataContext="{Binding ClientFormVM}"/>
 
+            <Views:ClientSearchListView Grid.Column="1" DataContext="{Binding ClientListingVM}" />
+
+        </Grid>
 </UserControl>

@@ -107,6 +107,7 @@ namespace Power_Hand.ViewModels
                 _eventAggregator.GetEvent<InvoiceItemsShare>().Publish(InvoiceItems);
 
             }
+            UpdateCurrentItem(item);
         }
         // gets folder content 
         private async void OpenFolder()
@@ -134,8 +135,21 @@ namespace Power_Hand.ViewModels
                 _currentPath.Remove(currentFolder);
                 // change the current folder id to be it's parent id
                 CurrentFolderId = currentFolder.ParentId;
+
+                // TODO Update UpdateCurrentItem
             }
         }
 
+        private void UpdateCurrentItem(Item item)
+        {
+            if (item.IsFolder)
+            {
+                _eventAggregator.GetEvent<FolderShare>().Publish(item);
+            }
+            else
+            {
+                _eventAggregator.GetEvent<ItemShare>().Publish(item);
+            }
+        }
     }
 }

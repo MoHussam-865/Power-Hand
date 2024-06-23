@@ -7,9 +7,15 @@ namespace Power_Hand.Models
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("Invoice")]
+        [ForeignKey("Id")]
         public int InvoiceId { get; set; }
-        [ForeignKey("Item")]
+        [ForeignKey("Id")]
+
+        #region Invoice 
+        // just for query purpose
+        public Invoice? Invoice { get; set; }
+        #endregion
+
         public int ItemId { get; set; }
         public string Name { get; set; } = string.Empty;
         public double Price { get; set; }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -13,13 +14,9 @@ using Power_Hand.Models;
 
 namespace Power_Hand.Data.Repository.Invoices
 {
-    public class InvoicesRepoImpl : IInvoicesRepo
+    public class InvoicesRepoImpl(DatabaseContext database) : IInvoicesRepo
     {
-        private readonly DatabaseContext _database;
-        public InvoicesRepoImpl(DatabaseContext database) 
-        {
-            _database = database;
-        }
+        private readonly DatabaseContext _database = database;
 
         public async void AddInvoice(Invoice invoice)
         {

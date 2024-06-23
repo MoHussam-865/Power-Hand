@@ -35,7 +35,7 @@ namespace Power_Hand.ViewModels
         public MainVM(INavigationService navigationService)
         {
             _navigationService = navigationService;
-            MyNavigationService.NavigateTo<HomeVM>();
+            MyNavigationService.SetParentView<HomeVM>();
         }
 
     }

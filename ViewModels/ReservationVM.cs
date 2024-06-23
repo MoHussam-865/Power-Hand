@@ -14,27 +14,26 @@ namespace Power_Hand.ViewModels
     {
         private IInvoicesRepo _invoicesRepo;
         private IItemsRepo _itemsRepo;
-        private INavigationService _navigationService;
-        public INavigationService NavigationService
-        {
-            get => _navigationService;
-            set
-            {
-                _navigationService = value;
-                OnPropertyChanged();
-            }
-        }
+        
         private IEventAggregator _eventAggregator;
+
+        private NavigationBarVM _navigationVM;
+        public NavigationBarVM NavigationVM
+        {
+            get => _navigationVM;
+            set { _navigationVM = value; OnPropertyChanged(); }
+        }
+
 
         public ReservationVM(IItemsRepo itemsRepo,
             IInvoicesRepo invoicesRepo,
-            INavigationService navigationService,
-            IEventAggregator eventAggregator)
+            IEventAggregator eventAggregator,
+            NavigationBarVM navigationVM)
         {
             _invoicesRepo = invoicesRepo;
             _itemsRepo = itemsRepo;
-            _navigationService = navigationService;
             _eventAggregator = eventAggregator;
+            _navigationVM = navigationVM;
         }
 
     }
