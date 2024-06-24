@@ -35,7 +35,7 @@ namespace Power_Hand.DBContext
         // important 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+            optionsBuilder.EnableSensitiveDataLogging();
             string connectionString = new SqliteConnectionStringBuilder()
             {
                 DataSource= "E:\\My Projects\\PowerHand\\Power Hand\\PowerHand.db"

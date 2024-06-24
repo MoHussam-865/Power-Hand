@@ -19,7 +19,7 @@ namespace Power_Hand.ViewModels
         private List<Item> _currentPath = [];
         // used for database operations
         private readonly IItemsRepo _itemsRepo;
-        
+
 
         // 
         private int _currentFolderId;
@@ -47,7 +47,8 @@ namespace Power_Hand.ViewModels
         public ObservableCollection<InvoiceItem> InvoiceItems
         {
             get => _invoiceItems;
-            set { 
+            set
+            {
                 _invoiceItems = value;
                 OnPropertyChanged();
             }
@@ -81,7 +82,11 @@ namespace Power_Hand.ViewModels
             // gets the current emploee passed from the HomeVM 
             _eventAggregator = eventAggregator;
             _eventAggregator.GetEvent<InvoiceItemsShare>().Subscribe(OnInvoiceItemsChange);
+            _eventAggregator.GetEvent<ItemDatabaseUpdated>().Subscribe(OnDatabaseChanged);
         }
+
+        private void OnDatabaseChanged() => OpenFolder();
+
 
         private void OnInvoiceItemsChange(ObservableCollection<InvoiceItem> list)
         {
@@ -97,6 +102,7 @@ namespace Power_Hand.ViewModels
                 // open folder by changing the _currentFolderId
                 CurrentFolderId = item.Id;
                 _currentPath.Add(item);
+                _eventAggregator.GetEvent<ItemShare>().Publish(null);
             }
             else
             {
@@ -109,14 +115,12 @@ namespace Power_Hand.ViewModels
             }
             UpdateCurrentItem(item);
         }
+
         // gets folder content 
         private async void OpenFolder()
         {
             List<Item> items = await _itemsRepo.GetItems(CurrentFolderId);
-            if (items.Count != 0)
-            {
-                Items = new ObservableCollection<Item>(items);
-            }
+            Items = new ObservableCollection<Item>(items);
 
             List<Item> folders = await _itemsRepo.GetFolders(CurrentFolderId);
             if (folders.Count != 0)
@@ -124,6 +128,7 @@ namespace Power_Hand.ViewModels
                 Folders = new ObservableCollection<Item>(folders);
             }
         }
+
         // goes to the previous folder
         private void OnGoBackClicked()
         {
@@ -145,10 +150,12 @@ namespace Power_Hand.ViewModels
             if (item.IsFolder)
             {
                 _eventAggregator.GetEvent<FolderShare>().Publish(item);
+                _eventAggregator.GetEvent<ItemShare>().Publish(null);
             }
             else
             {
                 _eventAggregator.GetEvent<ItemShare>().Publish(item);
+                _eventAggregator.GetEvent<FolderShare>().Publish(null);
             }
         }
     }

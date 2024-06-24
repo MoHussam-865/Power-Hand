@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.Windows.Input;
-using System.Xml.Linq;
 using Power_Hand.Data.Other;
 using Power_Hand.Data.Repository.Items;
 using Power_Hand.Data.SharedData;
@@ -75,14 +69,25 @@ namespace Power_Hand.ViewModels
         {
             if (_currentItem != null)
             {
-                _name = _currentItem.Name;
-                _description = _currentItem.Description;
-                _price = _currentItem.Price.ToString();
-                _isDeleted = _currentItem.IsDeleted;
-                _isFolder = _currentItem.IsFolder;
-                _expence = _currentItem.Expence.ToString();
-                _note = _currentItem.Note;
-                _discount = _currentItem.Discount.ToString();
+                Name = _currentItem.Name;
+                Description = _currentItem.Description;
+                Price = _currentItem.Price.ToString();
+                IsDeleted = _currentItem.IsDeleted;
+                IsFolder = _currentItem.IsFolder;
+                Expence = _currentItem.Expence.ToString();
+                Note = _currentItem.Note;
+                Discount = _currentItem.Discount.ToString();
+            }
+            else
+            {
+                Name = null;
+                Description = null;
+                Price = null;
+                IsDeleted = false;
+                IsFolder = false;
+                Expence = null;
+                Note = null;
+                Discount = null;
             }
         }
 
@@ -110,14 +115,29 @@ namespace Power_Hand.ViewModels
 
         private async void OnSaveClicked()
         {
+            
+            int parentId = _currentFolder==null? 0 : _currentFolder.Id;
 
+            // adding Folders logic
+            /*if (!string.IsNullOrEmpty(Name) && IsFolder)
+            {
+                Item item = new(id:0, name:Name,
+                     parent: parentId,isFolder:true, price:0);
+                
+                await _itemsRepo.AddItem(item);
+                _eventAggregator.GetEvent<ItemDatabaseUpdated>().Publish();
+                Clear();
+            }*/
+
+            // Parsing values
             double price;
             double expence;
             double discount;
 
+            #region Handel Parseing values
             try
             {
-                price = Price == null ? 0 : double.Parse(Price);
+                price = string.IsNullOrEmpty(Price)? 0 : double.Parse(Price);
             }
             catch
             {
@@ -127,7 +147,7 @@ namespace Power_Hand.ViewModels
 
             try
             {
-                expence = Expence == null ? 0 : double.Parse(Expence);
+                expence = string.IsNullOrEmpty(Expence) ? 0 : double.Parse(Expence);
             }
             catch
             {
@@ -137,23 +157,26 @@ namespace Power_Hand.ViewModels
 
             try
             {
-                discount = Discount == null ? 0 : double.Parse(Discount);
+                discount = string.IsNullOrEmpty(Discount) ? 0 : double.Parse(Discount);
             }
             catch
             {
                 Debug.WriteLine("AddEditItems: Error while converting discount");
                 throw;
             }
+            #endregion
 
-            if (Name != null && price > 0 && _currentFolder != null)
+            // adding item logic
+            if (!string.IsNullOrEmpty(Name) && price > 0 && _currentFolder != null)
             {
                 int id = _currentItem == null ? 0 : _currentItem.Id;
 
 
                 Item myItem = new(id: id, name: Name,
-                        price: price, parent: _currentFolder.Id,
+                        price: price, parent: parentId,
                         description: Description,
                         expence: expence, note: Note,
+                        isDeleted: IsDeleted,
                         discount: discount);
 
                 if (_currentItem == null)
@@ -164,8 +187,11 @@ namespace Power_Hand.ViewModels
                 {
                     await _itemsRepo.UpdateItem(myItem);
                 }
+                _eventAggregator.GetEvent<ItemDatabaseUpdated>().Publish();
                 Clear();
             }
+
+            
         }
 
 

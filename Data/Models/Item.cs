@@ -23,7 +23,7 @@ namespace Power_Hand.Models
             double price, int parent,
             string? description = null,
             double? expence = null, string? note = null,
-            double discount = 0)
+            double discount = 0, bool isFolder = false, bool isDeleted = false)
         {
             Id = id;
             Name = name;
@@ -33,6 +33,8 @@ namespace Power_Hand.Models
             Expence = expence;
             Note = note;
             Discount = discount;
+            IsDeleted = isDeleted;
+            IsFolder = isFolder;
         }
 
         public Item() { }

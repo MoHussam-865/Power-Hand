@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Power_Hand.DBContext;
 using Power_Hand.Models;
 
@@ -18,13 +12,13 @@ namespace Power_Hand.Data.Repository.Items
 
         public async Task<List<Item>> GetFolders(int parentId)
         {
-            return await _dbContext.Item.Where((item) => 
+            return await _dbContext.Item.Where((item) =>
             item.ParentId == parentId && item.IsFolder && !item.IsDeleted).ToListAsync();
         }
 
         public async Task<List<Item>> GetItems(int parentId)
         {
-            return await _dbContext.Item.Where((item) => 
+            return await _dbContext.Item.Where((item) =>
             item.ParentId == parentId && !item.IsFolder && !item.IsDeleted).ToListAsync();
         }
 
@@ -41,6 +35,11 @@ namespace Power_Hand.Data.Repository.Items
 
         public async Task<int> UpdateItem(Item item)
         {
+            Item? myItem = await _dbContext.Item.FindAsync(item.Id);
+            if (myItem != null)
+            {
+                _dbContext.Entry(myItem).State = EntityState.Detached;
+            }
             _dbContext.Item.Update(item);
             return await _dbContext.SaveChangesAsync();
         }

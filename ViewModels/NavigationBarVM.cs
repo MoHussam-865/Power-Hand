@@ -55,7 +55,7 @@ namespace Power_Hand.ViewModels
         
         private void OnInvoiceListingViewClicked() => NavigationService.NavigateTo<InvoicesListingPageVM>();
         
-        private void OnLoginViewClicked() => NavigationService.NavigateTo<HomeVM>();
+        private void OnLoginViewClicked() => NavigationService.SetParentView<HomeVM>();
         
         private void OnReservationViewClicked() => NavigationService.NavigateTo<ReservationVM>();
         
