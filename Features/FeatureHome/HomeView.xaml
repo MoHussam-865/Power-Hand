@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="Power_Hand.Features.FeatureHome.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:feature="clr-namespace:Power_Hand.Features.FeatureHome"
+             d:DataContext="{d:DesignInstance Type=feature:HomeVM}"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="600"
+             Background="WhiteSmoke">
+
+
+
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="30*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid
+            
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            Margin="20">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80*" />
+                <RowDefinition Height="20*" />
+            </Grid.RowDefinitions>
+
+
+            <StackPanel 
+        Grid.Row="0" 
+        Orientation="Vertical">
+
+                <TextBlock Text="Section Type" 
+                Margin="10"
+                HorizontalAlignment="Center"
+                FontSize="20"/>
+
+
+                <TextBox x:Name="Name"
+                BorderThickness="1" 
+                BorderBrush="Black"
+                Padding="3"
+                Margin="10"
+                Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                />
+
+                <TextBox x:Name="PasswordBox"
+                BorderThickness="1" 
+                BorderBrush="Black"
+                Padding="3"
+                Margin="10"
+                Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                />
+
+                
+
+            </StackPanel>
+
+            <Button Grid.Row="1"
+                    Content="Login"
+                    Margin="10,0,10,0"
+                    Command="{Binding OnLoginCommand}"/>
+
+        </Grid>
+    </Grid>
+
+
+</UserControl>

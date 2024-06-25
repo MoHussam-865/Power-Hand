@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 using Microsoft.EntityFrameworkCore;
-using Power_Hand.DBContext;
+using Power_Hand.Data.Models;
 using Power_Hand.Models;
 
 namespace Power_Hand.Data.Repository.Other

@@ -1,15 +1,22 @@
 ﻿using System.Windows;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Power_Hand.Data.Models;
+using Power_Hand.Data.Other;
 using Power_Hand.Data.Repository.Invoices;
 using Power_Hand.Data.Repository.Items;
 using Power_Hand.Data.Repository.Other;
 using Power_Hand.Data.SharedData;
-using Power_Hand.DBContext;
+using Power_Hand.Features.FeatureApp;
+using Power_Hand.Features.FeatureApp.FeatureCasher;
+using Power_Hand.Features.FeatureApp.FeatureEditClient;
+using Power_Hand.Features.FeatureApp.FeatureEditItem;
+using Power_Hand.Features.FeatureApp.FeatureInvoicesPreview;
+using Power_Hand.Features.FeatureApp.FeatureReservation;
+using Power_Hand.Features.FeatureHome;
+using Power_Hand.Features.FeatureMain;
 using Power_Hand.Interfaces;
 using Power_Hand.View;
-using Power_Hand.ViewModels;
 using Prism.Events;
 
 namespace Power_Hand
@@ -22,8 +29,8 @@ namespace Power_Hand
         private readonly IHost _host;
 
         // The App    dependancy injection is here
-        public App() 
-        {            
+        public App()
+        {
             _host = Host.CreateDefaultBuilder().ConfigureServices((context, services) =>
             {
                 // rigester to the dependance injection
@@ -67,8 +74,8 @@ namespace Power_Hand
 
                 // Casher Make Invoices View
                 services.AddSingleton<CasherVM>();
-                services.AddSingleton<GridItems_SVM>();
-                services.AddSingleton<InvoiceItemsList_SVM>();
+                services.AddSingleton<CasherItemsNavigationVM>();
+                services.AddSingleton<InvoiceItemsListVM>();
 
                 // Invoices List View
                 services.AddSingleton<InvoicesListingPageVM>();
@@ -89,11 +96,13 @@ namespace Power_Hand
                 services.AddSingleton<ReservationVM>();
                 services.AddSingleton<NavigationBarVM>();
 
+                // shared store gets instantiated in the app start and save shared data
+                services.AddSingleton<SharedValuesStore>();
+
                 #endregion
 
                 // add other services
 
-                
                 #region Repositories
                 // repositories
                 services.AddSingleton<IInvoicesRepo, InvoicesRepoImpl>();
@@ -102,7 +111,7 @@ namespace Power_Hand
                 services.AddSingleton<IClientRepo, ClientsRepoImpl>();
                 #endregion
 
-                
+
                 #region Other Services
                 // database context service goes here 
                 services.AddDbContext<DatabaseContext>();
@@ -128,6 +137,8 @@ namespace Power_Hand
         {
             await _host.StartAsync();
 
+            _host.Services.GetRequiredService<SharedValuesStore>();
+            // start main window
             var mainWindow = _host.Services.GetRequiredService<MainWindow>();
             mainWindow.Show();
 

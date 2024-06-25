@@ -2,8 +2,14 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Power_Hand"
-             xmlns:vm="clr-namespace:Power_Hand.ViewModels"
-             xmlns:View="clr-namespace:Power_Hand.View" >
+             xmlns:feature_main="clr-namespace:Power_Hand.Features.FeatureMain"
+             xmlns:feature_app="clr-namespace:Power_Hand.Features.FeatureApp"
+             xmlns:feature_home="clr-namespace:Power_Hand.Features.FeatureHome"
+             xmlns:feature_casher="clr-namespace:Power_Hand.Features.FeatureApp.FeatureCasher"
+             xmlns:feature_reservation="clr-namespace:Power_Hand.Features.FeatureApp.FeatureReservation"
+             xmlns:feature_invoices="clr-namespace:Power_Hand.Features.FeatureApp.FeatureInvoicesPreview"
+             xmlns:feature_items="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEditItem"
+             xmlns:feature_client="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEditClient">
     <Application.Resources>
 
         <ResourceDictionary>
@@ -12,71 +18,71 @@
                 <ResourceDictionary Source="Utils/Styles/ControllBtns.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type TypeName=vm:AppShellVM}">
-                <View:AppShellView/>
+            <DataTemplate DataType="{x:Type TypeName=feature_app:AppShellVM}">
+                <feature_app:AppShellView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type TypeName=vm:CasherVM}">
-                <View:CasherView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=vm:HomeVM}">
-                <View:HomeView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=vm:ReservationVM}">
-                <View:ReservationView/>
+            <DataTemplate DataType="{x:Type TypeName=feature_app:NavigationBarVM}">
+                <feature_app:NavigationBarView/>
             </DataTemplate>
 
 
-            <DataTemplate DataType="{x:Type TypeName=vm:GridItems_SVM}">
-                <View:ItemsGridView/>
+            <DataTemplate DataType="{x:Type TypeName=feature_casher:CasherVM}">
+                <feature_casher:CasherView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type TypeName=vm:InvoiceItemsList_SVM}">
-                <View:InvoiceItemsListView/>
+            <DataTemplate DataType="{x:Type TypeName=feature_home:HomeVM}">
+                <feature_home:HomeView/>
             </DataTemplate>
 
-
-            <DataTemplate DataType="{x:Type TypeName=vm:InvoicesListingPageVM}">
-                <View:InvoicesListingPage/>
-            </DataTemplate>
-
-
-            <DataTemplate DataType="{x:Type TypeName=vm:InvoicePreviewViewVM}">
-                <View:InvoicePreviewView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=vm:InvoicesListViewVM}">
-                <View:InvoicesListingView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=vm:AddEditItemPageVM}">
-                <View:AddEditItemsPageView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=vm:ItemFormVM}">
-                <View:ItemFormView/>
+            <DataTemplate DataType="{x:Type TypeName=feature_reservation:ReservationVM}">
+                <feature_reservation:ReservationView/>
             </DataTemplate>
 
 
-
-            <DataTemplate DataType="{x:Type TypeName=vm:AddEditClientPageVM}">
-                <View:AddEditClientPageView/>
+            <DataTemplate DataType="{x:Type TypeName=feature_casher:CasherItemsNavigationVM}">
+                <feature_casher:ItemsGridView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type TypeName=vm:ClientFormVM}">
-                <View:AddEditClientFormView/>
+            <DataTemplate DataType="{x:Type TypeName=feature_casher:InvoiceItemsListVM}">
+                <feature_casher:InvoiceItemsListView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type TypeName=vm:ClientListingVM}">
-                <View:ClientSearchListView/>
+
+            <DataTemplate DataType="{x:Type TypeName=feature_invoices:InvoicesListingPageVM}">
+                <feature_invoices:InvoicesListingPage/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type TypeName=vm:NavigationBarVM}">
-                <View:NavigationBarView/>
+
+            <DataTemplate DataType="{x:Type TypeName=feature_invoices:InvoicePreviewViewVM}">
+                <feature_invoices:InvoicePreviewView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type TypeName=feature_invoices:InvoicesListViewVM}">
+                <feature_invoices:InvoicesListingView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=feature_items:AddEditItemPageVM}">
+                <feature_items:AddEditItemsPageView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=feature_items:ItemFormVM}">
+                <feature_items:ItemFormView/>
+            </DataTemplate>
+
+
+
+            <DataTemplate DataType="{x:Type TypeName=feature_client:AddEditClientPageVM}">
+                <feature_client:AddEditClientPageView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=feature_client:ClientFormVM}">
+                <feature_client:AddEditClientFormView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=feature_client:ClientListingVM}">
+                <feature_client:ClientSearchListView/>
+            </DataTemplate>
 
         </ResourceDictionary>
                 

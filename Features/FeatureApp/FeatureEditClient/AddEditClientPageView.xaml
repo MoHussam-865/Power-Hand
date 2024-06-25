@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="Power_Hand.Features.FeatureApp.FeatureEditClient.AddEditClientPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:feature="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEditClient"
+            d:DataContext="{d:DesignInstance Type=feature:}"
+            xmlns:components="clr-namespace:Power_Hand.Utils.Component"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <feature:AddEditClientFormView Grid.Column="0" DataContext="{Binding ClientFormVM}"/>
+
+            <feature:ClientSearchListView Grid.Column="1" DataContext="{Binding ClientListingVM}" />
+
+        </Grid>
+</UserControl>
