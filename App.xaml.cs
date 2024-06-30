@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Power_Hand.Data.Models;
@@ -16,6 +17,7 @@ using Power_Hand.Features.FeatureApp.FeatureReservation;
 using Power_Hand.Features.FeatureHome;
 using Power_Hand.Features.FeatureMain;
 using Power_Hand.Interfaces;
+using Power_Hand.Utils.Component;
 using Power_Hand.View;
 using Prism.Events;
 
@@ -90,6 +92,7 @@ namespace Power_Hand
                 // Add Edit items
                 services.AddSingleton<AddEditItemPageVM>();
                 services.AddSingleton<ItemFormVM>();
+                services.AddSingleton<EditItemsGridVM>();
                 // GridItems_SVM is used here too
 
                 services.AddSingleton<HomeVM>();
@@ -116,14 +119,15 @@ namespace Power_Hand
                 // database context service goes here 
                 services.AddDbContext<DatabaseContext>();
 
+
                 // data share
                 // shared data services acts like a service that has some data
                 // which ViewModel subscribe or publish to it 
-
                 services.AddSingleton<IEventAggregator>(provider => new EventAggregator());
+                
                 // navigation
                 services.AddSingleton<INavigationService, NavigationService>();
-
+                // 
                 services.AddSingleton<Func<Type, ViewModel>>(provider =>
                     viewModelType => (ViewModel)provider.GetRequiredService(viewModelType));
                 #endregion
@@ -137,7 +141,6 @@ namespace Power_Hand
         {
             await _host.StartAsync();
 
-            _host.Services.GetRequiredService<SharedValuesStore>();
             // start main window
             var mainWindow = _host.Services.GetRequiredService<MainWindow>();
             mainWindow.Show();

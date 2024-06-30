@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using Power_Hand.Data.Other;
 using Power_Hand.Data.Repository.Other;
-using Power_Hand.Data.SharedData;
+using Power_Hand.Features.FeatureApp.FeatureEditClient.Channels;
 using Power_Hand.Interfaces;
 using Power_Hand.Models;
 using Prism.Events;
@@ -13,6 +13,8 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
         private Client? _currentClient;
         private readonly IEventAggregator _eventAggregator;
         private readonly IClientRepo _clientRepo;
+
+        #region Client Properties
 
         private string? _name;
         public string? Name { get => _name; set { _name = value; OnPropertyChanged(); } }
@@ -32,6 +34,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
         private string? _notes;
         public string? Notes { get => _notes; set { _notes = value; OnPropertyChanged(); } }
 
+        #endregion
 
         public ICommand OnSaveCommand { get; set; }
         public ICommand OnDeleteCommand { get; set; }
@@ -46,14 +49,18 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
             OnDeleteCommand = new FunCommand(OnDeleteClicked);
             OnDiscardCommand = new FunCommand(OnCancelClicked);
             _eventAggregator = eventAggregator;
-            _eventAggregator.GetEvent<ClientShare>().Subscribe(OnClientSelected);
+            _eventAggregator.GetEvent<EditClientPageShareClientChannel>().Subscribe(OnClientSelected);
             FillIfCan();
         }
 
-        private void OnCancelClicked()
+        private void OnClientSelected(Client? client)
         {
-            Clear();
+            _currentClient = client;
+            FillIfCan();
         }
+
+        private void OnCancelClicked() => Clear();
+        
 
         private async void OnDeleteClicked()
         {
@@ -61,7 +68,14 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
             {
                 await _clientRepo.DeleteClient(_currentClient);
                 Clear();
+                PublishChanges();
             }
+        }
+
+        // refresh the list (on database changed)
+        private void PublishChanges()
+        {
+            _eventAggregator.GetEvent<EditClientPageUpdateDatabaseChannel>().Publish();
         }
 
         private async void OnSaveClicked()
@@ -74,51 +88,50 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
             }
             catch { }
 
-            int clientId = _currentClient == null ? 0 : _currentClient.Id;
-            Client client = new Client()
+            if (!(string.IsNullOrEmpty(Name) && string.IsNullOrEmpty(PhoneNumber) && string.IsNullOrEmpty(Address)))
             {
-                Id = clientId,
-                Name = Name,
-                Address = Address,
-                Email = Email,
-                PhoneNumber = PhoneNumber,
-                Discount = discount,
-                Notes = Notes,
+                int clientId = _currentClient == null ? 0 : _currentClient.Id;
+                Client client = new()
+                {
+                    Id = clientId,
+                    Name = Name,
+                    Address = Address,
+                    Email = Email,
+                    PhoneNumber = PhoneNumber,
+                    Discount = discount,
+                    Notes = Notes,
 
-            };
+                };
 
-            // then we are adding a new client
-            if (_currentClient == null)
-            {
-                await _clientRepo.AddClient(client);
+                // then we are adding a new client
+                if (_currentClient == null)
+                {
+                    await _clientRepo.AddClient(client);
+                }
+                else
+                {
+                    await _clientRepo.UpdateClient(client);
+                }
+                Clear();
+                PublishChanges();
             }
-            else
-            {
-                await _clientRepo.UpdateClient(client);
-            }
+            
         }
 
-        private void OnClientSelected(Client? client)
-        {
-            _currentClient = client;
-            FillIfCan();
-        }
 
 
-
+        // fill the form if there is a selected client (edit or delete)
         private void FillIfCan()
         {
-            if (_currentClient != null)
-            {
-                _name = _currentClient.Name;
-                _address = _currentClient.Address;
-                _email = _currentClient.Email;
-                _phoneNumber = _currentClient.PhoneNumber;
-                _discount = _currentClient.Discount.ToString();
-                _notes = _currentClient.Notes;
-            }
+            Name = _currentClient?.Name;
+            Address = _currentClient?.Address;
+            Email = _currentClient?.Email;
+            PhoneNumber = _currentClient?.PhoneNumber;
+            Discount = _currentClient?.Discount.ToString();
+            Notes = _currentClient?.Notes;
         }
 
+        // clear all entries for new process
         private void Clear()
         {
             Name = null;
@@ -128,7 +141,8 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
             Discount = null;
             Notes = null;
             _currentClient = null;
-            _eventAggregator.GetEvent<ClientShare>().Publish(_currentClient);
+            
+            _eventAggregator.GetEvent<EditClientPageShareClientChannel>().Publish(_currentClient);
         }
     }
 }

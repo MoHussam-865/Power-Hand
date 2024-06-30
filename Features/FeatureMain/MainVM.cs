@@ -36,9 +36,11 @@ namespace Power_Hand.Features.FeatureMain
         }
 
         public MainVM(
-            INavigationService navigationService)
+            INavigationService navigationService, 
+            SharedValuesStore store)
         {
             _navigationService = navigationService;
+            _ = store;
             MyNavigationService.SetParentView<HomeVM>();
         }
 

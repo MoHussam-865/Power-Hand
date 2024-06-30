@@ -63,7 +63,8 @@
             <Button Grid.Row="1"
                     Content="Login"
                     Margin="10,0,10,0"
-                    Command="{Binding OnLoginCommand}"/>
+                    Command="{Binding OnLoginCommand}"
+                    IsDefault="True"/>
 
         </Grid>
     </Grid>

@@ -5,6 +5,7 @@ using Power_Hand.Data.Other;
 using Power_Hand.Data.Repository.Invoices;
 using Power_Hand.Data.Repository.Items;
 using Power_Hand.Data.SharedData;
+using Power_Hand.Features.FeatureApp.FeatureCasher.Channels;
 using Power_Hand.Interfaces;
 using Power_Hand.Models;
 using Prism.Events;
@@ -103,8 +104,8 @@ namespace Power_Hand.Features.FeatureApp.FeatureCasher
             // gets the current emploee passed from the HomeVM 
             _eventAggregator = eventAggregator;
             _eventAggregator.GetEvent<EmploeeShare>().Subscribe(OnEmploeeSelected);
-            _eventAggregator.GetEvent<InvoiceItemsShare>().Subscribe(OnInvoiceItemsChanged);
-            _eventAggregator.GetEvent<SelectedInvoiceItemShare>().Subscribe(OnSelectedItemChanges);
+            _eventAggregator.GetEvent<CasherInvoiceItemsListChannel>().Subscribe(OnInvoiceItemsChanged);
+            _eventAggregator.GetEvent<SelectedInvoiceItemShareChannel>().Subscribe(OnSelectedItemChanges);
         }
 
         private void OnEmploeeSelected(Emploee emploee)
@@ -163,7 +164,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureCasher
             if (InvoiceItems.Count > 0 && _currentEmploee != null)
             {
 
-                Invoice myInvoice = new Invoice(
+                Invoice myInvoice = new(
                     date: DateTime.Now.Ticks,
                     type: 0,
                     emploeeId: _currentEmploee.Id,
@@ -186,8 +187,8 @@ namespace Power_Hand.Features.FeatureApp.FeatureCasher
 
         private void Update()
         {
-            _eventAggregator.GetEvent<InvoiceItemsShare>().Publish(InvoiceItems);
-            _eventAggregator.GetEvent<SelectedInvoiceItemShare>().Publish(_selectedItem);
+            _eventAggregator.GetEvent<CasherInvoiceItemsListChannel>().Publish(InvoiceItems);
+            _eventAggregator.GetEvent<SelectedInvoiceItemShareChannel>().Publish(_selectedItem);
         }
 
     }

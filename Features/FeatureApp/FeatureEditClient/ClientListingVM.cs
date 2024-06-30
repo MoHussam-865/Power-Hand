@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Power_Hand.Data.Other;
 using Power_Hand.Data.Repository.Other;
-using Power_Hand.Data.SharedData;
+using Power_Hand.Features.FeatureApp.FeatureEditClient.Channels;
 using Power_Hand.Interfaces;
 using Power_Hand.Models;
 using Prism.Events;
@@ -34,7 +34,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
             set
             {
                 _search = value;
-                GetClients(value);
+                GetClients();
                 OnPropertyChanged();
             }
         }
@@ -51,7 +51,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
 
 
 
-        ICommand SelectClientCommand { get; set; }
+        public ICommand SelectClientCommand { get; set; }
 
         public ClientListingVM(
             IEventAggregator eventAggregator,
@@ -60,25 +60,31 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
             _eventAggregator = eventAggregator;
             _clientsRepo = clientsRepo;
             _clients = [];
-            GetClients(_search);
+            GetClients();
 
             SelectClientCommand = new ClickCommand<Client>((c) => OnClientSelected(c));
+            _eventAggregator.GetEvent<EditClientPageUpdateDatabaseChannel>().Subscribe(OnDatabaseUpdated);
+        }
+
+        private void OnDatabaseUpdated()
+        {
+            GetClients();
         }
 
         private void OnClientSelected(Client client)
         {
             SelectedClient = client;
-            _eventAggregator.GetEvent<ClientShare>().Publish(client);
+            _eventAggregator.GetEvent<EditClientPageShareClientChannel>().Publish(client);
         }
 
-        private async void GetClients(string? search)
+        private async void GetClients()
         {
-            if (search == null)
+            if (_search == null)
             {
                 Clients = [];
                 return;
             }
-            List<Client>? clients = await _clientsRepo.SearchClients(search);
+            List<Client>? clients = await _clientsRepo.SearchClients(_search);
             Clients = clients != null ? new ObservableCollection<Client>(clients) : [];
         }
     }

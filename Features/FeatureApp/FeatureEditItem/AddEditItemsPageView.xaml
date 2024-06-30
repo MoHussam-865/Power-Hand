@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Power_Hand.View"
+             xmlns:feature_items_navigation="clr-namespace:Power_Hand.Features.FeatureApp.FeatureCasher"
              xmlns:feature="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEditItem"
             d:DataContext="{d:DesignInstance Type=feature:AddEditItemPageVM}"
             xmlns:components="clr-namespace:Power_Hand.Utils.Component"
@@ -19,8 +20,8 @@
 
             <feature:ItemFormView Grid.Column="0" DataContext="{Binding ItemFormVM}"/>
 
-            <!--feature:ItemsGridEdit Grid.Column="1" DataContext="{Binding GridItemsVM}" /-->
+            <feature_items_navigation:ItemsGridView Grid.Column="1" DataContext="{Binding GridItemsVM}" />
 
-        </Grid>
+    </Grid>
     
 </UserControl>

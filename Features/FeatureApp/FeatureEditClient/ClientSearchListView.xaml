@@ -4,8 +4,65 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             xmlns:feature="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEditClient"
+             d:DataContext="{d:DesignInstance Type=feature:ClientListingVM}"
+             xmlns:components="clr-namespace:Power_Hand.Utils.Component"
+             BorderThickness="0"
+             d:DesignHeight="450" 
+             d:DesignWidth="300">
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border Background="White" BorderBrush="DimGray" BorderThickness="0.5" CornerRadius="3" Margin="5 8" Padding="6">
+            <TextBox Background="Transparent" BorderThickness="0" Grid.Row="0" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+        </Border>
+        
+
+        <Border Margin="5" Grid.Row="1"
+                CornerRadius="10"
+                BorderBrush="DarkGray" 
+                Background="White"
+                BorderThickness="0.5">
+
+            <ItemsControl ItemsSource="{Binding Clients}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <components:DynamicGrid />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+
+                        <Border Margin="10" BorderThickness="0.5" BorderBrush="DimGray" CornerRadius="5" MaxHeight="100" MaxWidth="150" Background="White">
+                            
+                                
+                                <Button Background="Transparent" CommandParameter="{Binding}" BorderThickness="0" Command="{Binding DataContext.SelectClientCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" HorizontalAlignment="Left" Width="auto">
+                                    <StackPanel >
+                                        
+                                        <TextBlock FontSize="10" Grid.Row="0" Text="{Binding Name}" Margin="10"/>
+                                        <TextBlock FontSize="10" Grid.Row="1" Text="{Binding PhoneNumber}" Margin="10"/>
+
+                                        <TextBlock FontSize="10" Grid.Row="2" Text="{Binding Address}" Margin="10"/>
+
+
+                                    </StackPanel>
+                                </Button>
+                        </Border>
+
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+            </ItemsControl>
+
+        </Border>
+
     </Grid>
+
+
 </UserControl>

@@ -8,8 +8,8 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditItem
     public class AddEditItemPageVM : ViewModel
     {
 
-        private CasherItemsNavigationVM _gridItemsVM;
-        public CasherItemsNavigationVM GridItemsVM
+        private EditItemsGridVM _gridItemsVM;
+        public EditItemsGridVM GridItemsVM
         {
             get => _gridItemsVM;
             set { _gridItemsVM = value; OnPropertyChanged(); }
@@ -19,7 +19,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditItem
         public ItemFormVM ItemFormVM
         {
             get => _itemFormVM;
-            set { ItemFormVM = value; OnPropertyChanged(); }
+            set { _itemFormVM = value; OnPropertyChanged(); }
         }
 
         private NavigationBarVM _navigationVM;
@@ -29,24 +29,16 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditItem
             set { _navigationVM = value; OnPropertyChanged(); }
         }
 
-
-        ICommand NavigateBackCommand { get; set; }
-
-
         public AddEditItemPageVM(
-            CasherItemsNavigationVM gridItemsVM,
+            EditItemsGridVM gridItemsVM,
             ItemFormVM itemFormVM,
             NavigationBarVM navigationBarVM)
         {
             _itemFormVM = itemFormVM;
             _gridItemsVM = gridItemsVM;
             _navigationVM = navigationBarVM;
-            NavigateBackCommand = new FunCommand(OnNavigateBackClicked);
         }
 
-        private void OnNavigateBackClicked()
-        {
-            // _navigationService.NavigateTo<.....> ();
-        }
+        
     }
 }

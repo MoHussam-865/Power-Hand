@@ -3,9 +3,55 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:feature="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEditClient"
+             d:DataContext="{d:DesignInstance Type=feature:ClientFormVM}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             Background="White"
+             d:DesignHeight="850" d:DesignWidth="350">
+
+    <Border BorderThickness="0"  Padding="15" Margin="5">
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Vertical"
+                        HorizontalAlignment="Stretch">
+
+
+                <TextBlock Text="Name" Margin="0 5" />
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+
+
+                <TextBlock Text="Phone Number" Margin="0 5" />
+                <TextBox Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+
+                <TextBlock Text="Email" Margin="0 5" />
+                <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+
+                <TextBlock Text="Address" Margin="0 5" />
+                <TextBox Text="{Binding Address, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+
+                <TextBlock Text="Notes" Margin="0 5"/>
+                <TextBox Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+
+                <TextBlock Text="Special Discount" Margin="0 5"/>
+                <TextBox Text="{Binding Discount, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+
+                <StackPanel 
+                    Margin="0 10"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+
+
+                    <Button Content="Save" Command="{Binding OnSaveCommand}" Margin="0 0 10 0" Padding="6"/>
+                    <Button Content="Delete" Command="{Binding OnDeleteCommand}" Padding="6"/>
+                    <Button Content="Cancel" Command="{Binding OnDiscardCommand}" Margin="10 0 0 0" Padding="6"/>
+                </StackPanel>
+
+            </StackPanel>
+
+        </Grid>
+    </Border>
 </UserControl>

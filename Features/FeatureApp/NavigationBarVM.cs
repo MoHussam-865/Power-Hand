@@ -1,6 +1,5 @@
 ﻿using System.Windows.Input;
 using Power_Hand.Data.Other;
-using Power_Hand.Data.SharedData;
 using Power_Hand.Features.FeatureApp.FeatureCasher;
 using Power_Hand.Features.FeatureApp.FeatureEditClient;
 using Power_Hand.Features.FeatureApp.FeatureEditItem;
@@ -14,6 +13,9 @@ namespace Power_Hand.Features.FeatureApp
 {
     public class NavigationBarVM : ViewModel
     {
+        /// <summary>
+        /// handles the tool bar at the top that is responseble of navigation between view (sections)
+        /// </summary>
         private readonly IEventAggregator _eventAggregator;
         private INavigationService _navigationService;
         public INavigationService NavigationService
@@ -63,10 +65,7 @@ namespace Power_Hand.Features.FeatureApp
 
         private void OnCasherViewClicked() => NavigationService.NavigateTo<CasherVM>();
 
-        private void CurrentViewChanged()
-        {
-            _eventAggregator.GetEvent<NavigationShare>().Publish(0);
-        }
+        
 
     }
 }

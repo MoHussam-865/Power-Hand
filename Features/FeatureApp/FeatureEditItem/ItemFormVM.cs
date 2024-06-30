@@ -3,6 +3,8 @@ using System.Windows.Input;
 using Power_Hand.Data.Other;
 using Power_Hand.Data.Repository.Items;
 using Power_Hand.Data.SharedData;
+using Power_Hand.Features.FeatureApp.FeatureCasher.Channels;
+using Power_Hand.Features.FeatureApp.FeatureEditItem.Channels;
 using Power_Hand.Interfaces;
 using Power_Hand.Models;
 using Prism.Events;
@@ -69,8 +71,8 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditItem
             _appStore = store;
             // observe items that get selected for edit
             _currentFolder = _appStore.SharedFolder;
-            _eventAggregator.GetEvent<ItemShare>().Subscribe(OnItemPublished);
-            _eventAggregator.GetEvent<FolderShare>().Subscribe(OnParentPublished);
+            _eventAggregator.GetEvent<EditItemCurrentFolderShareChannel>().Subscribe(OnParentPublished);
+            _eventAggregator.GetEvent<EditSelectedItemShareChannel>().Subscribe(OnItemPublished);
             // if item is selected we fill its data
             FillIfCan();
         }
@@ -173,7 +175,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditItem
                 {
                     await _itemsRepo.UpdateItem(myItem);
                 }
-                _eventAggregator.GetEvent<ItemDatabaseUpdated>().Publish();
+                _eventAggregator.GetEvent<EditItemDatabaseUpdatedChannel>().Publish();
                 Clear();
             }
 
@@ -208,7 +210,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditItem
             Expence = null;
             Note = null;
             Discount = null;
-            _eventAggregator.GetEvent<ItemShare>().Publish(_currentItem);
+            _eventAggregator.GetEvent<EditSelectedItemShareChannel>().Publish(_currentItem);
         }
     }
 }

@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Power_Hand.Data.Models;
-using Power_Hand.Data.Repository.Invoices;
 using Power_Hand.Models;
 
 
@@ -28,8 +20,6 @@ namespace Power_Hand.Data.Repository.Invoices
             invoice.Items.ForEach(item =>
             {
                 item.InvoiceId = invoice.Id;
-
-                Debug.WriteLine(invoice.Id.ToString());
 
                 _database.InvoiceItem.Add(item);
 

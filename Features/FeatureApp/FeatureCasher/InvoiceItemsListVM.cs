@@ -12,7 +12,7 @@ using System.Windows.Input;
 using Power_Hand.Interfaces;
 using Power_Hand.Models;
 using Prism.Events;
-using Power_Hand.Data.SharedData;
+using Power_Hand.Features.FeatureApp.FeatureCasher.Channels;
 
 namespace Power_Hand.Features.FeatureApp.FeatureCasher
 {
@@ -47,8 +47,8 @@ namespace Power_Hand.Features.FeatureApp.FeatureCasher
             _eventAggregator = eventAggregator;
 
 
-            _eventAggregator.GetEvent<ItemShare>().Subscribe(OnItemSelected);
-            _eventAggregator.GetEvent<InvoiceItemsShare>().Subscribe(OnInvoiceItemsChanged);
+            _eventAggregator.GetEvent<CasherItemListChannel>().Subscribe(OnItemSelected);
+            _eventAggregator.GetEvent<CasherInvoiceItemsListChannel>().Subscribe(OnInvoiceItemsChanged);
         }
 
         private void OnItemSelected(Item? item)
@@ -56,7 +56,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureCasher
             if (item != null)
             {
                 InvoiceItems.Add(item.ToInvoiceItem());
-                _eventAggregator.GetEvent<InvoiceItemsShare>().Publish(InvoiceItems);
+                _eventAggregator.GetEvent<CasherInvoiceItemsListChannel>().Publish(InvoiceItems);
             }
         }
         private void OnInvoiceItemsChanged(ObservableCollection<InvoiceItem> list)
@@ -67,7 +67,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureCasher
         // the selected item is then used for edit or delete one item
         private void OnItemSelected(InvoiceItem item)
         {
-            _eventAggregator?.GetEvent<SelectedInvoiceItemShare>().Publish(item);
+            _eventAggregator?.GetEvent<SelectedInvoiceItemShareChannel>().Publish(item);
         }
 
     }

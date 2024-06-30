@@ -36,7 +36,7 @@ namespace Power_Hand.Features.FeatureApp
             eventAggregator.GetEvent<NavigationShare>().Subscribe(OnViewChanged);
         }
 
-        private void OnViewChanged(int obj)
+        private void OnViewChanged()
         {
             if (NavigationService.PopupView != null || NavigationService.CurrentView != null)
             {

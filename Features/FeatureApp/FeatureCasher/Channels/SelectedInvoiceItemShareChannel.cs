@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Power_Hand.Models;
 using Prism.Events;
 
-namespace Power_Hand.Data.SharedData
+namespace Power_Hand.Features.FeatureApp.FeatureCasher.Channels
 {
-    public class SelectedInvoiceItemShare : PubSubEvent<InvoiceItem?>
+    public class SelectedInvoiceItemShareChannel : PubSubEvent<InvoiceItem?>
     {
     }
 }
