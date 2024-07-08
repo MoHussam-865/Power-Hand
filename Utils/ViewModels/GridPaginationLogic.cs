@@ -168,10 +168,10 @@ namespace Power_Hand.Utils.ViewModels
         /// the page will be reset to 1
         /// </summary>
         /// <param name="items"></param>
-        public virtual void OnAllItemsChanged(ObservableCollection<T> items)
+        public virtual void OnAllItemsChanged(ObservableCollection<T> items, bool databaseChanged)
         {
             AllItems = new ObservableCollection<T>(items);
-            CurrentPage = 1;
+            CurrentPage = databaseChanged? TotalPages() : 1;
         }
 
 

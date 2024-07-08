@@ -9,7 +9,10 @@
              xmlns:feature_reservation="clr-namespace:Power_Hand.Features.FeatureApp.FeatureReservation"
              xmlns:feature_invoices="clr-namespace:Power_Hand.Features.FeatureApp.FeatureInvoicesPreview"
              xmlns:feature_items="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEditItem"
-             xmlns:feature_client="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEditClient">
+             xmlns:feature_client="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEditClient"
+             xmlns:feature_emploee="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEmploee"
+             xmlns:feature_popupsvm="clr-namespace:Power_Hand.Features.Popups.ViewModels"
+             xmlns:feature_popupsv="clr-namespace:Power_Hand.Features.Popups.Views">
     <Application.Resources>
 
         <ResourceDictionary>
@@ -18,19 +21,22 @@
                 <ResourceDictionary Source="Utils/Styles/ControllBtns.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <!-- The Main Page Shell -->
             <DataTemplate DataType="{x:Type TypeName=feature_app:AppShellVM}">
                 <feature_app:AppShellView/>
             </DataTemplate>
 
+            <!-- task bar -->
+            <DataTemplate DataType="{x:Type TypeName=feature_app:TaskBarVM}">
+                <feature_app:TaskBarView/>
+            </DataTemplate>
+
+            <!-- ToolBar -->
             <DataTemplate DataType="{x:Type TypeName=feature_app:NavigationBarVM}">
                 <feature_app:NavigationBarView/>
             </DataTemplate>
 
-
-            <DataTemplate DataType="{x:Type TypeName=feature_casher:CasherVM}">
-                <feature_casher:CasherView/>
-            </DataTemplate>
-
+            <!-- The Login Page -->
             <DataTemplate DataType="{x:Type TypeName=feature_home:HomeVM}">
                 <feature_home:HomeView/>
             </DataTemplate>
@@ -39,16 +45,21 @@
                 <feature_reservation:ReservationView/>
             </DataTemplate>
 
-
-            <DataTemplate DataType="{x:Type TypeName=feature_casher:CasherItemsNavigationVM}">
-                <feature_casher:ItemsGridView/>
+            <!-- Takeaway -->
+            <DataTemplate DataType="{x:Type TypeName=feature_casher:CasherVM}">
+                <feature_casher:CasherView/>
             </DataTemplate>
+
+            <!--DataTemplate DataType="{x:Type TypeName=feature_casher:CasherItemsNavigationVM}">
+                <feature_casher:ItemsGridView/>
+            </DataTemplate-->
 
             <DataTemplate DataType="{x:Type TypeName=feature_casher:InvoiceItemsListVM}">
                 <feature_casher:InvoiceItemsListView/>
             </DataTemplate>
 
 
+            <!-- Invoices Listing -->
             <DataTemplate DataType="{x:Type TypeName=feature_invoices:InvoicesListingPageVM}">
                 <feature_invoices:InvoicesListingPage/>
             </DataTemplate>
@@ -61,7 +72,9 @@
             <DataTemplate DataType="{x:Type TypeName=feature_invoices:InvoicesListViewVM}">
                 <feature_invoices:InvoicesListingView/>
             </DataTemplate>
-
+            
+            
+            <!-- Items Database Controll -->
             <DataTemplate DataType="{x:Type TypeName=feature_items:AddEditItemPageVM}">
                 <feature_items:AddEditItemsPageView/>
             </DataTemplate>
@@ -71,7 +84,8 @@
             </DataTemplate>
 
 
-
+            <!-- Clients Database Controll -->
+            
             <DataTemplate DataType="{x:Type TypeName=feature_client:AddEditClientPageVM}">
                 <feature_client:AddEditClientPageView/>
             </DataTemplate>
@@ -82,6 +96,25 @@
 
             <DataTemplate DataType="{x:Type TypeName=feature_client:ClientListingVM}">
                 <feature_client:ClientSearchListView/>
+            </DataTemplate>
+
+            
+            <!-- Emploees Database Controll -->
+            <DataTemplate DataType="{x:Type TypeName=feature_emploee:AddEditEmploeePageVM}">
+                <feature_emploee:AddEditEmploeePageView/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type TypeName=feature_emploee:AddEditEmploeeFormVM}">
+                <feature_emploee:AddEditEmploeeForm/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type TypeName=feature_emploee:SearchEmploeesVM}">
+                <feature_emploee:SearchEmploeesListView/>
+            </DataTemplate>
+
+            <!-- PopUps -->
+            <DataTemplate DataType="{x:Type TypeName=feature_popupsvm:EditInvoiceItemPopupVM}">
+                <feature_popupsv:EditInvoiceItemPopupView/>
             </DataTemplate>
 
         </ResourceDictionary>

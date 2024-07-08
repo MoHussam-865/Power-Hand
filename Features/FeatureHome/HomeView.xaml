@@ -4,69 +4,74 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:feature="clr-namespace:Power_Hand.Features.FeatureHome"
+             xmlns:local="clr-namespace:Power_Hand.Data.Other"
              d:DataContext="{d:DesignInstance Type=feature:HomeVM}"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="600"
-             Background="WhiteSmoke">
+             Background="LightSkyBlue">
 
 
 
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30*"/>
-            <ColumnDefinition Width="40*"/>
-            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <Grid
-            
-            Grid.Column="1"
-            VerticalAlignment="Center"
-            Margin="20">
+        <Border Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Background="White" BorderBrush="Gray" BorderThickness="0.5" CornerRadius="10">
+            <Grid  VerticalAlignment="Center" Margin="20">
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="80*" />
-                <RowDefinition Height="20*" />
-            </Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Vertical" Margin="20 0">
+
+                    <TextBlock Text="Login" FontWeight="Bold" Margin="10" HorizontalAlignment="Center" FontSize="20"/>
+ 
+
+                    <Border CornerRadius="2" BorderThickness="0 0 0 0.5" BorderBrush="Gray" Margin="0 10"  >
+
+                        <TextBox x:Name="Name" BorderThickness="0" Padding="3" Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+/>
+                    </Border>
 
 
-            <StackPanel 
-        Grid.Row="0" 
-        Orientation="Vertical">
 
-                <TextBlock Text="Section Type" 
-                Margin="10"
-                HorizontalAlignment="Center"
-                FontSize="20"/>
+                    <Border CornerRadius="2" BorderThickness="0 0 0 0.5" BorderBrush="Gray" Margin="0 10"  >
+
+                        <PasswordBox BorderThickness="0"  Padding="3" local:PasswordBoxHelper.BoundPassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <!-- local:PasswordBoxHelper.BoundPassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" -->
+                    </Border>
 
 
-                <TextBox x:Name="Name"
-                BorderThickness="1" 
-                BorderBrush="Black"
-                Padding="3"
-                Margin="10"
-                Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                />
+                </StackPanel>
 
-                <TextBox x:Name="PasswordBox"
-                BorderThickness="1" 
-                BorderBrush="Black"
-                Padding="3"
-                Margin="10"
-                Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                />
 
-                
+                <Border HorizontalAlignment="Stretch" Grid.Row="1" BorderBrush="Gray" Margin="20 0" CornerRadius="5"  BorderThickness="0.5">
 
-            </StackPanel>
+                    <Grid>
 
-            <Button Grid.Row="1"
-                    Content="Login"
-                    Margin="10,0,10,0"
-                    Command="{Binding OnLoginCommand}"
-                    IsDefault="True"/>
+                        <Button Background="Transparent" Padding="5" HorizontalAlignment="Stretch" BorderThickness="0" Content="Login" Command="{Binding OnLoginCommand}" IsDefault="True"/>
 
-        </Grid>
+                    </Grid>
+
+                </Border>
+
+                <TextBlock Grid.Row="2" TextAlignment="Center" Padding="0 10" Foreground="Red" FontStyle="Oblique" Text="{Binding Error}" />
+
+            </Grid>
+
+        </Border>
     </Grid>
 
 

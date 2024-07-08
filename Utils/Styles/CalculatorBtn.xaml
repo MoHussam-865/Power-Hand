@@ -3,7 +3,7 @@
 
     <Style x:Key="CalculatorBtn"
            TargetType="Button">
-        <Setter Property="FontSize" Value="26"/>
+        <Setter Property="FontSize" Value="15"/>
         <Setter Property="FontStyle" Value="Italic"/>
         <Setter Property="Background" Value="FloralWhite"/>
         
@@ -14,7 +14,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
 
-                    <Border CornerRadius="5"
+                    <Border CornerRadius="2"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             >

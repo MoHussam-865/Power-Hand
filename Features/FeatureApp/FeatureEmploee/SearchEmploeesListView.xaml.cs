@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Power_Hand.View.Component
+namespace Power_Hand.Features.FeatureApp.FeatureEmploee
 {
     /// <summary>
-    /// Interaction logic for MyItemGrid.xaml
+    /// Interaction logic for SearchEmploeesListView.xaml
     /// </summary>
-    public partial class MyItemGrid : UserControl
+    public partial class SearchEmploeesListView : UserControl
     {
-        public MyItemGrid()
+        public SearchEmploeesListView()
         {
             InitializeComponent();
         }

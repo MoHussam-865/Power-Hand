@@ -25,6 +25,8 @@ namespace Power_Hand.Data.SharedData
 
         private InvoiceItem? _invoiceItem;
         public InvoiceItem? InvoiceItem { get => _invoiceItem; set { _invoiceItem = value; OnPropertyChanged(); } }
+        
+        public double CalculatorValue { get; set; }
 
         public SharedValuesStore(IEventAggregator eventAggregator)
         {
@@ -34,6 +36,8 @@ namespace Power_Hand.Data.SharedData
             _eventAggregator.GetEvent<EmploeeShare>().Subscribe(OnEmploeeLogin);
             _eventAggregator.GetEvent<SelectedInvoiceItemShareChannel>().Subscribe(OnInvoiceItemSelected);
         }
+
+        
 
         private void OnInvoiceItemSelected(InvoiceItem? item)
         {

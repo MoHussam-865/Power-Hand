@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Power_Hand.Data.Other;
 using Power_Hand.Data.Repository.Other;
 using Power_Hand.Features.FeatureApp.FeatureEditClient.Channels;
-using Power_Hand.Interfaces;
 using Power_Hand.Models;
+using Power_Hand.Utils.ViewModels;
 using Prism.Events;
 
 namespace Power_Hand.Features.FeatureApp.FeatureEditClient
 {
-    public class ClientListingVM : ViewModel
+    /// <summary>
+    /// implements SearchLogicVM takes a generic type and has two properties Search String & Search results
+    /// 
+    /// The abstract method OnSearchChanged Updates the Search results whenever the search changes
+    /// The GetItems(); is a public method that call OnSearchChanged To Refresh (Update the View) on Database Changes
+    /// </summary>
+    public class ClientListingVM : SearchLogicVM<Client>
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IClientRepo _clientsRepo;
@@ -26,30 +27,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
             set { _selectedClient = value; OnPropertyChanged(); }
         }
 
-        private string? _search;
-
-        public string? Search
-        {
-            get => _search;
-            set
-            {
-                _search = value;
-                GetClients();
-                OnPropertyChanged();
-            }
-        }
-
-
-        private ObservableCollection<Client> _clients;
-
-        public ObservableCollection<Client> Clients
-        {
-            get => _clients;
-            set { _clients = value; OnPropertyChanged(); }
-        }
-
-
-
+      
 
         public ICommand SelectClientCommand { get; set; }
 
@@ -59,17 +37,13 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
         {
             _eventAggregator = eventAggregator;
             _clientsRepo = clientsRepo;
-            _clients = [];
-            GetClients();
-
+            
             SelectClientCommand = new ClickCommand<Client>((c) => OnClientSelected(c));
             _eventAggregator.GetEvent<EditClientPageUpdateDatabaseChannel>().Subscribe(OnDatabaseUpdated);
         }
 
-        private void OnDatabaseUpdated()
-        {
-            GetClients();
-        }
+        private void OnDatabaseUpdated() => GetItems();
+       
 
         private void OnClientSelected(Client client)
         {
@@ -77,15 +51,12 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
             _eventAggregator.GetEvent<EditClientPageShareClientChannel>().Publish(client);
         }
 
-        private async void GetClients()
+        public async override Task<List<Client>> OnSearchChanged(string? search)
         {
-            if (_search == null)
-            {
-                Clients = [];
-                return;
-            }
-            List<Client>? clients = await _clientsRepo.SearchClients(_search);
-            Clients = clients != null ? new ObservableCollection<Client>(clients) : [];
+            if (search == null) return [];
+            
+            List<Client>? clients = await _clientsRepo.SearchClients(search);
+            return clients ?? [];
         }
     }
 }

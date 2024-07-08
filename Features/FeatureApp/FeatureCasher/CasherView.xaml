@@ -8,47 +8,63 @@
              xmlns:components="clr-namespace:Power_Hand.Utils.Component"
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:behavior="clr-namespace:Power_Hand.Data.Other"
+             x:Name="userControl"
+             PreviewKeyDown="UserControl_PreviewKeyDown"
              mc:Ignorable="d"
              d:DesignHeight="450" 
              d:DesignWidth="800"
              Background="GhostWhite">
 
-        <!-- main body -->
+    <i:Interaction.Behaviors>
+        <behavior:KeyPressBehavior Command="{Binding PhysicalKeyPressedCommand}" />
+    </i:Interaction.Behaviors>
+
+    <!-- main body -->
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="20*"/>
                 <ColumnDefinition Width="70*"/>
-            </Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*" />
+        </Grid.ColumnDefinitions>
 
             <!-- the controll (delete all, delete one, close) view -->
 
-            <Border BorderBrush="DarkGray"
-                Margin="3"
-                BorderThickness="0.5"
-                Grid.Column="0">
+            <feature:InvoiceItemsListView Grid.Column="0" DataContext="{Binding InvoiceItemsListVM}" />
+
+            <components:ItemsGridView Grid.Column="1" DataContext="{Binding GridItemsVM}"/>
+
+            <Grid Grid.Column="2">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <components:Calculator Focusable="True" x:Name="MyCalculator" KeyboardVisibility="{Binding DataContext.CalculatorVisibility, RelativeSource={RelativeSource AncestorType=UserControl}}"  DataContext="{Binding CalculatorVM}" />
+
+                <Border Grid.Row="1" BorderBrush="DarkGray" Margin="3" BorderThickness="0.5">
+
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="80*"/>
-                        <RowDefinition Height="20*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
-                    <StackPanel Orientation="Vertical"
-                            Grid.Row="0">
+                    <StackPanel Orientation="Vertical" Grid.Row="0">
 
-                        <Button 
-                            Margin="10"
-                            Content="Delete"
-                            Command="{Binding ItemRemoveCommand}"/>
-                        <Button Margin="10" Command="{Binding DiscardCommand}" Content="Discard"/>
+                        <Button Margin="10 10 10 2" Padding="3" Content="Edit" Command="{Binding ItemEditCommand}"/>
+                        <Button Margin="10 2" Padding="3" Content="Delete" Command="{Binding ItemRemoveCommand}"/>
+                        <Button Margin="10 2" Padding="3" Command="{Binding DiscardCommand}" Content="Discard"/>
                     </StackPanel>
 
 
                     <StackPanel Grid.Row="1" 
-                            Orientation="Vertical">
+                    Orientation="Vertical">
 
-                        <Button Content="Close"  />
-                        <Button Content="Fast Close" Command="{Binding SaveInvoiceCommand}" />
+                        <Button Margin="10 2" Padding="3" Content="Close"  />
+                        <Button Margin="10 2" Padding="3" Content="Fast Close" Command="{Binding SaveInvoiceCommand}" />
 
 
 
@@ -58,10 +74,7 @@
                 </Grid>
             </Border>
 
-            <feature:InvoiceItemsListView Grid.Column="1" DataContext="{Binding InvoiceItemsListVM}" />
-
-            <feature:ItemsGridView Grid.Column="2" DataContext="{Binding GridItemsVM}"/>
-
-        </Grid>
+            </Grid>
+    </Grid>
 
 </UserControl>

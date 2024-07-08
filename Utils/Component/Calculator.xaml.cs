@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Microsoft.Xaml.Behaviors;
+using Power_Hand.Data.Other;
 
-namespace Power_Hand.View
+namespace Power_Hand.Utils.Component
 {
     /// <summary>
     /// Interaction logic for Calculator.xaml
@@ -21,20 +14,27 @@ namespace Power_Hand.View
     public partial class Calculator : UserControl
     {
 
+        /// <summary>
+        /// this used to change the visibility of the NumberPad if the user preferer
+        /// to use the keyboard
+        /// </summary>
+        public Visibility KeyboardVisibility
 
-        public Visibility Visability
         {
-            get { return (Visibility)GetValue(VisabilityProperty); }
-            set { SetValue(VisabilityProperty, value); }
+            get { return (Visibility)GetValue(KeyboardVisibilityProperty); }
+            set { SetValue(KeyboardVisibilityProperty, value); }
         }
-        public static readonly DependencyProperty VisabilityProperty =
-            DependencyProperty.Register("Visability", typeof(Visibility), typeof(UserControl), new PropertyMetadata(0));
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty KeyboardVisibilityProperty =
+            DependencyProperty.Register(nameof(KeyboardVisibility), typeof(Visibility), typeof(UserControl), 
+                new PropertyMetadata(Visibility.Collapsed));
 
 
         public Calculator()
         {
             InitializeComponent();
-            this.DataContext = this;
         }
+
     }
 }

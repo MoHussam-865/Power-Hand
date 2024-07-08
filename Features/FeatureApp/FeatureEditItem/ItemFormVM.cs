@@ -175,7 +175,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditItem
                 {
                     await _itemsRepo.UpdateItem(myItem);
                 }
-                _eventAggregator.GetEvent<EditItemDatabaseUpdatedChannel>().Publish();
+                _eventAggregator.GetEvent<EditItemDatabaseUpdatedChannel>().Publish(typeof(EditItemsGridVM));
                 Clear();
             }
 

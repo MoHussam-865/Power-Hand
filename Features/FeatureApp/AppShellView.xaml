@@ -17,9 +17,21 @@
         <feature:NavigationBarView Grid.Row="0" DataContext="{Binding NavigationVM}"/>
 
         <Grid Grid.Row="1">
-            <ContentControl Visibility="Visible" Content="{Binding NavigationService.CurrentView}"/>
-            
-            <ContentControl Visibility="Collapsed" Content="{Binding NavigationService.PopupView}"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+
+            <feature:TaskBarView Visibility="{Binding DataContext.TaskBarVisibility, RelativeSource={RelativeSource AncestorType=UserControl}}" Grid.Column="0"  DataContext="{Binding MyTaskBar}" />
+
+            <Grid Grid.Column="1">
+                <ContentControl Visibility="Visible" Content="{Binding NavigationService.CurrentView}"/>
+
+                <ContentControl Visibility="{Binding PopupVisibility}" Content="{Binding NavigationService.PopupView}"/>
+            </Grid>
+
         </Grid>
+        
     </Grid>
 </UserControl>

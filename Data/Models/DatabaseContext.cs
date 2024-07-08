@@ -24,6 +24,10 @@ namespace Power_Hand.Data.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Emploee>().HasIndex(e => e.Name);
+            modelBuilder.Entity<Emploee>().HasIndex(e => e.Password);
+
+
             modelBuilder.Entity<Invoice>()
                 .HasMany(invoice => invoice.Items)
                 .WithOne(invoiceItem => invoiceItem.Invoice)

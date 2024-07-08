@@ -6,10 +6,11 @@ namespace Power_Hand.Data.Other
     {
         ViewModel CurrentView { get; }
         ViewModel ParentView { get; }
-        ViewModel PopupView { get; }
+        ViewModel? PopupView { get; }
         void NavigateTo<T>() where T : ViewModel;
         void SetParentView<T>() where T : ViewModel;
         void OpenPopup<T>() where T : ViewModel;
+        void ClosePopup();
 
     }
 
@@ -25,8 +26,8 @@ namespace Power_Hand.Data.Other
         private ViewModel _parentView;
         public ViewModel ParentView { get => _parentView; set { _parentView = value; OnPropertyChanged(); } }
 
-        private ViewModel _popupView;
-        public ViewModel PopupView { get => _popupView; set { _popupView = value; OnPropertyChanged(); } }
+        private ViewModel? _popupView;
+        public ViewModel? PopupView { get => _popupView; set { _popupView = value; OnPropertyChanged(); } }
 
 
 
@@ -48,5 +49,7 @@ namespace Power_Hand.Data.Other
             ViewModel viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
             PopupView = viewModel;
         }
+
+        public void ClosePopup() => PopupView = null;
     }
 }

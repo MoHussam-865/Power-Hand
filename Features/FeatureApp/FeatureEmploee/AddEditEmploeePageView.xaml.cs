@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Power_Hand.View.Component
+namespace Power_Hand.Features.FeatureApp.FeatureEmploee
 {
     /// <summary>
-    /// Interaction logic for CustomTextBox.xaml
+    /// Interaction logic for AddEditEmploeePageView.xaml
     /// </summary>
-    public partial class CustomTextBox : UserControl
+    public partial class AddEditEmploeePageView : UserControl
     {
-        public CustomTextBox()
+        public AddEditEmploeePageView()
         {
             InitializeComponent();
         }

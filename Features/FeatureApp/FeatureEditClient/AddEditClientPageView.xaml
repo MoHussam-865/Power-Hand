@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:feature="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEditClient"
-            d:DataContext="{d:DesignInstance Type=feature:}"
+            d:DataContext="{d:DesignInstance Type=feature:AddEditClientPageVM}"
             xmlns:components="clr-namespace:Power_Hand.Utils.Component"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">

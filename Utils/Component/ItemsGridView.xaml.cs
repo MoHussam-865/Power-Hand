@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Power_Hand.Features.FeatureApp.FeatureCasher
+namespace Power_Hand.Utils.Component
 {
     /// <summary>
     /// Interaction logic for ItemsGridView.xaml

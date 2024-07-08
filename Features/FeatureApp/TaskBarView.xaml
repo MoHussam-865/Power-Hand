@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="Power_Hand.Features.FeatureApp.TaskBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:feature="clr-namespace:Power_Hand.Features.FeatureApp"
+             mc:Ignorable="d" 
+             Width="auto"
+             Background="White"
+             d:MaxWidth="100"
+            d:DataContext="{d:DesignInstance Type=feature:TaskBarVM}"
+             d:DesignHeight="450" d:DesignWidth="100">
+
+    <StackPanel Orientation="Vertical">
+
+        <Button Margin="2 10"  Command="{Binding ToLoginView}" 
+            Content="Exit"/>
+
+        <Button Margin="2 10"  Command="{Binding ToAddEditItemsView}"
+            Content="Items"/>
+
+        <Button Margin="2 10" Command="{Binding ToAddEditEmploeeCommand}"
+Content="Emploees"/>
+
+        <Button Margin="2 10" Command="{Binding ToAddEditClientsView}"
+            Content="Clients"/>
+
+        <Button Margin="2 10" Command="{Binding ToInvoiceListingView}"
+            Content="Invoices"/>
+    </StackPanel>
+
+</UserControl>

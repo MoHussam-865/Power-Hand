@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Power_Hand.Data.Models;
@@ -12,13 +11,16 @@ using Power_Hand.Features.FeatureApp;
 using Power_Hand.Features.FeatureApp.FeatureCasher;
 using Power_Hand.Features.FeatureApp.FeatureEditClient;
 using Power_Hand.Features.FeatureApp.FeatureEditItem;
+using Power_Hand.Features.FeatureApp.FeatureEmploee;
 using Power_Hand.Features.FeatureApp.FeatureInvoicesPreview;
 using Power_Hand.Features.FeatureApp.FeatureReservation;
 using Power_Hand.Features.FeatureHome;
 using Power_Hand.Features.FeatureMain;
+using Power_Hand.Features.Popups.ViewModels;
+using Power_Hand.Features.Popups.Views;
 using Power_Hand.Interfaces;
 using Power_Hand.Utils.Component;
-using Power_Hand.View;
+using Power_Hand.Utils.ViewModels;
 using Prism.Events;
 
 namespace Power_Hand
@@ -45,26 +47,36 @@ namespace Power_Hand
                 #region Views
                 services.AddTransient<AppShellView>();
 
+                // takeaway
                 services.AddTransient<CasherView>();
                 services.AddTransient<ItemsGridView>();
                 services.AddTransient<InvoiceItemsListView>();
 
+                // Invoices
                 services.AddTransient<InvoicesListingPage>();
                 services.AddTransient<InvoicesListingView>();
                 services.AddTransient<InvoicePreviewView>();
 
+                // add edit  clients
                 services.AddTransient<AddEditClientPageView>();
                 services.AddTransient<AddEditClientFormView>();
                 services.AddTransient<ClientSearchListView>();
 
+                // Add edit items
                 services.AddTransient<AddEditItemsPageView>();
                 services.AddTransient<ItemFormView>();
+
+                // add edit emploees
+                services.AddTransient<AddEditEmploeePageView>();
+                services.AddTransient<AddEditEmploeeForm>();
+                services.AddTransient<SearchEmploeesListView>();
 
                 services.AddTransient<HomeView>();
                 services.AddTransient<ReservationView>();
 
 
                 services.AddTransient<NavigationBarView>();
+                services.AddTransient<TaskBarView>();
                 #endregion
 
                 #region ViewModels
@@ -89,6 +101,11 @@ namespace Power_Hand
                 services.AddSingleton<ClientFormVM>();
                 services.AddSingleton<ClientListingVM>();
 
+                // Add Edit emploees
+                services.AddSingleton<AddEditEmploeePageVM>();
+                services.AddSingleton<AddEditEmploeeFormVM>();
+                services.AddSingleton<SearchEmploeesVM>();
+
                 // Add Edit items
                 services.AddSingleton<AddEditItemPageVM>();
                 services.AddSingleton<ItemFormVM>();
@@ -98,9 +115,18 @@ namespace Power_Hand
                 services.AddSingleton<HomeVM>();
                 services.AddSingleton<ReservationVM>();
                 services.AddSingleton<NavigationBarVM>();
+                services.AddSingleton<TaskBarVM>();
 
                 // shared store gets instantiated in the app start and save shared data
                 services.AddSingleton<SharedValuesStore>();
+                services.AddSingleton<CalculatorVM>();
+
+                #endregion
+
+
+                #region Popups
+                services.AddTransient<EditInvoiceItemPopupView>();
+                services.AddSingleton<EditInvoiceItemPopupVM>();
 
                 #endregion
 

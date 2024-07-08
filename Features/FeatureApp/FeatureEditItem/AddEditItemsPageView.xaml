@@ -20,7 +20,7 @@
 
             <feature:ItemFormView Grid.Column="0" DataContext="{Binding ItemFormVM}"/>
 
-            <feature_items_navigation:ItemsGridView Grid.Column="1" DataContext="{Binding GridItemsVM}" />
+            <components:ItemsGridView Grid.Column="1" DataContext="{Binding GridItemsVM}" />
 
     </Grid>
     

@@ -13,6 +13,7 @@ using Power_Hand.Interfaces;
 using Power_Hand.Models;
 using Prism.Events;
 using Power_Hand.Features.FeatureApp.FeatureCasher.Channels;
+using Power_Hand.Utils.ViewModels;
 
 namespace Power_Hand.Features.FeatureApp.FeatureCasher
 {
@@ -21,6 +22,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureCasher
 
         // used to pass data between view models
         private readonly IEventAggregator _eventAggregator;
+        private readonly CalculatorVM _calculator;
 
         private ObservableCollection<InvoiceItem> _invoiceItems;
         public ObservableCollection<InvoiceItem> InvoiceItems
@@ -29,39 +31,45 @@ namespace Power_Hand.Features.FeatureApp.FeatureCasher
             set { _invoiceItems = value; OnPropertyChanged(); }
         }
 
-
         public ICommand ItemSelectCommand { get; set; }
 
-
-
-        // constructor with dependancy injection
-        public InvoiceItemsListVM(IEventAggregator eventAggregator)
+        // constructor with dependency injection
+        public InvoiceItemsListVM(IEventAggregator eventAggregator,CalculatorVM calculator)
         {
             // no invoice items yet
             _invoiceItems = [];
+            _calculator = calculator;
 
             // initiate commands here
             ItemSelectCommand = new ClickCommand<InvoiceItem>((x) => OnItemSelected(x));
 
-            // gets the current emploee passed from the HomeVM 
+
+            // gets the current employee passed from the HomeVM 
             _eventAggregator = eventAggregator;
 
-
-            _eventAggregator.GetEvent<CasherItemListChannel>().Subscribe(OnItemSelected);
+            _eventAggregator.GetEvent<CasherItemListChannel>().Subscribe(OnItemChosen);
             _eventAggregator.GetEvent<CasherInvoiceItemsListChannel>().Subscribe(OnInvoiceItemsChanged);
         }
 
-        private void OnItemSelected(Item? item)
+        
+        /// <summary>
+        /// whenever item Chosen to be added to the invoice this method listen for CasherItemListChannel
+        /// and add the item to the invoice
+        /// </summary>
+        /// <param name="item"></param>
+        private void OnItemChosen(Item? item)
         {
             if (item != null)
             {
-                InvoiceItems.Add(item.ToInvoiceItem());
+                var x = _calculator.GetValue();
+                InvoiceItems.Add(item.ToInvoiceItem(x));
                 _eventAggregator.GetEvent<CasherInvoiceItemsListChannel>().Publish(InvoiceItems);
             }
         }
+
         private void OnInvoiceItemsChanged(ObservableCollection<InvoiceItem> list)
         {
-            InvoiceItems = list;
+            InvoiceItems = new(list);
         }
 
         // the selected item is then used for edit or delete one item

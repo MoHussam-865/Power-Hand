@@ -1,14 +1,13 @@
-﻿<UserControl x:Class="Power_Hand.View.Calculator"
+﻿<UserControl x:Class="Power_Hand.Utils.Component.Calculator"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Power_Hand.View"
              mc:Ignorable="d" 
              Background="Transparent"
-             Visibility="{Binding Visibility}"
-             d:DesignHeight="300" d:DesignWidth="180">
-
+             Margin="5"
+             d:DesignHeight="300" 
+             d:DesignWidth="180">
 
     <Border Background="DarkSlateGray"
             BorderThickness="0"
@@ -17,60 +16,48 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="15*"/>
                 <RowDefinition Height="40*"/>
-                <RowDefinition Height="10*"/>
             </Grid.RowDefinitions>
 
 
-            <TextBlock 
-                Foreground="White"
-                FontStyle="Italic"
-                Grid.Row="0"
-                Background="Transparent"
+            <TextBlock x:Name="MyText" Foreground="White" FontStyle="Italic" Grid.Row="0" Background="Transparent"  Margin="5" Padding="6" TextAlignment="Center" VerticalAlignment="Center" FontSize="25" Text="{Binding DataContext.CurrentText, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+
+            <Grid Background="Transparent" Visibility="{Binding KeyboardVisibility, RelativeSource={RelativeSource AncestorType=UserControl}}" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80*"/>
+                    <RowDefinition Height="20*"/>
+                </Grid.RowDefinitions>
                 
-                Margin="5"
-                Padding="6"
-                TextAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="25"
-                Text="22.5"/>
+                <UniformGrid Grid.Row="0" Rows="4" Columns="3">
 
-            <UniformGrid 
-                Grid.Row="1"
-                Rows="4" 
-                Columns="3">
+                    <Button Content="1" Command="{Binding OnKeyPressCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}" Style="{StaticResource CalculatorBtn}" />
 
-                <Button Content="1"
-            Style="{StaticResource CalculatorBtn}"/>
+                    <Button Content="2" Command="{Binding OnKeyPressCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}" Style="{StaticResource CalculatorBtn}"/>
 
-                <Button Content="2"
-            Style="{StaticResource CalculatorBtn}"/>
-                <Button Content="3"
-            Style="{StaticResource CalculatorBtn}"/>
-                <Button Content="4"
-            Style="{StaticResource CalculatorBtn}"/>
-                <Button Content="5"
-            Style="{StaticResource CalculatorBtn}"/>
-                <Button Content="6"
-            Style="{StaticResource CalculatorBtn}"/>
-                <Button Content="7"
-            Style="{StaticResource CalculatorBtn}"/>
-                <Button Content="8"
-            Style="{StaticResource CalculatorBtn}"/>
-                <Button Content="9"
-            Style="{StaticResource CalculatorBtn}"/>
-                <Button Content="."
-            Style="{StaticResource CalculatorBtn}"/>
-                <Button Content="0"
-            Style="{StaticResource CalculatorBtn}"/>
-                <Button Content="&lt;"
-            Style="{StaticResource CalculatorBtn}"/>
+                    <Button Content="3" Command="{Binding OnKeyPressCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"  Style="{StaticResource CalculatorBtn}"/>
+
+                    <Button Content="4" Command="{Binding OnKeyPressCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}" Style="{StaticResource CalculatorBtn}"/>
+
+                    <Button Content="5" Command="{Binding OnKeyPressCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}" Style="{StaticResource CalculatorBtn}"/>
+
+                    <Button Content="6" Command="{Binding OnKeyPressCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}" Style="{StaticResource CalculatorBtn}"/>
+
+                    <Button Content="7" Command="{Binding OnKeyPressCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}" Style="{StaticResource CalculatorBtn}"/>
+
+                    <Button Content="8" Command="{Binding OnKeyPressCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}" Style="{StaticResource CalculatorBtn}"/>
+
+                    <Button Content="9" Command="{Binding OnKeyPressCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}" Style="{StaticResource CalculatorBtn}"/>
+
+                    <Button Content="." Command="{Binding OnKeyPressCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}" Style="{StaticResource CalculatorBtn}"/>
+
+                    <Button Content="0" Command="{Binding OnKeyPressCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}" Style="{StaticResource CalculatorBtn}"/>
+
+                    <Button Content="&lt;" Command="{Binding OnKeyPressCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}" Style="{StaticResource CalculatorBtn}"/>
 
 
-            </UniformGrid>
+                </UniformGrid>
 
-            <Button Content="C"
-                Grid.Row="3"
-                Style="{StaticResource CalculatorBtn}"/>
+                <Button Content="C" Grid.Row="1" Command="{Binding OnKeyPressCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}" Style="{StaticResource CalculatorBtn}"/>
+            </Grid>
 
         </Grid>
     </Border>

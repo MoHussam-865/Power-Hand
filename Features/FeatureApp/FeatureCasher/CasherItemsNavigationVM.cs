@@ -7,14 +7,24 @@ using Prism.Events;
 
 namespace Power_Hand.Features.FeatureApp.FeatureCasher
 {
+    /// <summary>
+    /// inherit from GridItemsNavigationLogic which gets products from different categories
+    /// and it inherit from GridPaginationLogic Responsable for pagination between pages of items
+    /// in the same category
+    /// 
+    /// </summary>
     public class CasherItemsNavigationVM(
         IItemsRepo itemsRepo,
-        IEventAggregator eventAggregator) : GridItemsNavigationLogic(itemsRepo, eventAggregator)
+        IEventAggregator eventAggregator,
+        CalculatorVM calculatorVM) : GridItemsNavigationLogic(itemsRepo, eventAggregator)
     {
-        
+        private readonly CalculatorVM _calculator = calculatorVM;
         private readonly IEventAggregator _eventAggregator = eventAggregator;
 
-
+        /// <summary>
+        /// the GridItemsNavigationLogic abstarct class handle the current products (items) in the 
+        /// category via this method
+        /// </summary>
         public override void ItemSelected(Item item)
         {
             if (item.IsFolder)

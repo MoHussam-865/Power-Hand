@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Power_Hand.Data.Other;
@@ -19,9 +20,10 @@ namespace Power_Hand.Utils.ViewModels
     /// 
     /// it keeps track of the current category (also refaered as folder) and gets all its content
     /// </summary>
-    public abstract class GridItemsNavigationLogic: GridPaginationLogic<Item>
-    { 
+    public abstract class GridItemsNavigationLogic : GridPaginationLogic<Item>
+    {
         #region Properties
+        private bool _databaseChanged = false;
         // used to pass data between view models as channels and listeners
         private readonly IEventAggregator _eventAggregator;
         // used to navigate back 
@@ -41,11 +43,13 @@ namespace Power_Hand.Utils.ViewModels
         public ObservableCollection<Item> Items
         {
             get => _items;
-            set { 
-                _items = value; 
-                OnPropertyChanged(); 
-                OnAllItemsChanged(value);
-                /*ItemsUpdated(value);*/
+            set
+            {
+                _items = value;
+                OnPropertyChanged();
+                // Reset the items  (if database changed just refresh without changing the page)
+                OnAllItemsChanged(value, _databaseChanged);
+                _databaseChanged = false;
             }
         }
 
@@ -90,8 +94,12 @@ namespace Power_Hand.Utils.ViewModels
         }
 
         // listen to database changes and refresh 
-        private void OnDatabaseChanged() => OpenFolder();
-
+        private void OnDatabaseChanged(Type me)
+        {
+            OpenFolder();
+            Type myType = this.GetType();
+            if (me ==   myType) { _databaseChanged = true; }
+        }
 
         #region navigation methods
         // adds item to the invoice or open the item (if IsFolder)

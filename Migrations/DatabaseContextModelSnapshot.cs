@@ -60,6 +60,10 @@ namespace Power_Hand.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name");
+
+                    b.HasIndex("Password");
+
                     b.ToTable("Emploee");
                 });
 

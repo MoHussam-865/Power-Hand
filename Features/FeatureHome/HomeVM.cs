@@ -14,7 +14,7 @@ namespace Power_Hand.Features.FeatureHome
     class HomeVM : ViewModel
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IEmploeeRepo _emploeeRepo;
+        private readonly IEmploeeRepo _employeeRepo;
         private INavigationService _navigationService;
         public INavigationService NavigationService
         {
@@ -22,7 +22,7 @@ namespace Power_Hand.Features.FeatureHome
             set { _navigationService = value; OnPropertyChanged(nameof(_navigationService)); }
         }
         private string? _name;
-        public string? Name
+        public string? UserName
         {
             get => _name;
             set { _name = value; OnPropertyChanged(); }
@@ -35,6 +35,15 @@ namespace Power_Hand.Features.FeatureHome
             set { _password = value; OnPropertyChanged(); }
         }
 
+        private string? _error;
+
+        public string? Error
+        {
+            get { return _error; }
+            set { _error = value; OnPropertyChanged(); }
+        }
+
+
 
         public ICommand OnLoginCommand { get; set; }
 
@@ -42,7 +51,7 @@ namespace Power_Hand.Features.FeatureHome
         {
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
-            _emploeeRepo = emploeeRepo;
+            _employeeRepo = emploeeRepo;
             OnLoginCommand = new FunCommand(OnLoginClicked);
         }
 
@@ -58,22 +67,22 @@ namespace Power_Hand.Features.FeatureHome
             if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
             {
                 //password = password.GetHashCode().ToString();
-                Emploee? emploee = _emploeeRepo.GetEmploee(userName, password);
+                Emploee? employee = _employeeRepo.GetEmploee(userName, password);
 
-                Debug.WriteLine("emploee" + emploee?.Name?.ToString());
+                Debug.WriteLine("employee" + employee?.Name?.ToString());
 
 
-                if (emploee != null)
+                if (employee != null)
                 {
-                    _eventAggregator.GetEvent<EmploeeShare>().Publish(emploee);
+                    Error = null;
+                    _eventAggregator.GetEvent<EmploeeShare>().Publish(employee);
                     NavigationService.SetParentView<AppShellVM>();
                     NavigationService.NavigateTo<CasherVM>();
                     Clear();
                 }
                 else
                 {
-                    // display a message of wrong userName or password
-                    Debug.WriteLine("wrong passwrd or user name");
+                    Error = "Wrong Username or Password";
                 }
             }
 
@@ -82,8 +91,8 @@ namespace Power_Hand.Features.FeatureHome
 
         private void Clear()
         {
-            Name = "";
-            Password = "";
+            UserName = null;
+            Password = null;
         }
 
     }

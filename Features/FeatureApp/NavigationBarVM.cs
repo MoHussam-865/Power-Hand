@@ -1,8 +1,11 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 using Power_Hand.Data.Other;
 using Power_Hand.Features.FeatureApp.FeatureCasher;
+using Power_Hand.Features.FeatureApp.FeatureCasher.Channels;
 using Power_Hand.Features.FeatureApp.FeatureEditClient;
 using Power_Hand.Features.FeatureApp.FeatureEditItem;
+using Power_Hand.Features.FeatureApp.FeatureEmploee;
 using Power_Hand.Features.FeatureApp.FeatureInvoicesPreview;
 using Power_Hand.Features.FeatureApp.FeatureReservation;
 using Power_Hand.Features.FeatureHome;
@@ -14,9 +17,11 @@ namespace Power_Hand.Features.FeatureApp
     public class NavigationBarVM : ViewModel
     {
         /// <summary>
-        /// handles the tool bar at the top that is responseble of navigation between view (sections)
+        /// handles the tool bar at the top that is responsible of navigation between view (sections)
         /// </summary>
         private readonly IEventAggregator _eventAggregator;
+        private bool _calculatorVisibility = false;
+        private bool _taskBarVisibility = false;
         private INavigationService _navigationService;
         public INavigationService NavigationService
         {
@@ -28,38 +33,41 @@ namespace Power_Hand.Features.FeatureApp
             }
         }
 
-
+        public ICommand CalculatorCommand { get; set; }
         public ICommand ToCasherView { get; set; }
-        public ICommand ToLoginView { get; set; }
         public ICommand ToReservationView { get; set; }
-        public ICommand ToAddEditItemsView { get; set; }
-        public ICommand ToAddEditClientsView { get; set; }
         public ICommand ToInvoiceListingView { get; set; }
-
+        public ICommand OpenTaskBarCommand { get; set; }
 
         public NavigationBarVM(
             INavigationService navigationService,
             IEventAggregator eventAggregator)
         {
-
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
 
+            OpenTaskBarCommand = new FunCommand(OnTaskBarOpen);
             ToCasherView = new FunCommand(OnCasherViewClicked);
             ToReservationView = new FunCommand(OnReservationViewClicked);
-            ToLoginView = new FunCommand(OnLoginViewClicked);
             ToInvoiceListingView = new FunCommand(OnInvoiceListingViewClicked);
-            ToAddEditClientsView = new FunCommand(OnClientsControllViewClicked);
-            ToAddEditItemsView = new FunCommand(OnItemsControllViewClicked);
+            CalculatorCommand = new FunCommand(OnCalculatorSelected);
+            _eventAggregator.GetEvent<OpenTaskBarChannel>().Subscribe(TaskBarVisibilityChanged);
         }
 
-        private void OnItemsControllViewClicked() => NavigationService.NavigateTo<AddEditItemPageVM>();
+        private void TaskBarVisibilityChanged(bool obj) => _taskBarVisibility = obj;
 
-        private void OnClientsControllViewClicked() => NavigationService.NavigateTo<AddEditClientPageVM>();
+        private void OnTaskBarOpen()
+        {
+            _taskBarVisibility = !_taskBarVisibility;
+            _eventAggregator.GetEvent<OpenTaskBarChannel>().Publish(_taskBarVisibility);
+        }
+        private void OnCalculatorSelected()
+        {
+            _calculatorVisibility = !_calculatorVisibility;
+            _eventAggregator.GetEvent<CalculatorVisibilityChannel>().Publish(_calculatorVisibility);
+        }
 
         private void OnInvoiceListingViewClicked() => NavigationService.NavigateTo<InvoicesListingPageVM>();
-
-        private void OnLoginViewClicked() => NavigationService.SetParentView<HomeVM>();
 
         private void OnReservationViewClicked() => NavigationService.NavigateTo<ReservationVM>();
 
