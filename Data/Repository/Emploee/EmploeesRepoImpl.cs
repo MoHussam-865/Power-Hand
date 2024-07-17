@@ -9,26 +9,26 @@ namespace Power_Hand.Data.Repository.Other
         private readonly DatabaseContext _database = database;
 
         #region Emploee
-        public Emploee? GetEmploee(string username, string password)
+        public Employee? GetEmploee(string username, string password)
         {
             return _database.Emploee.FirstOrDefault(emploee =>
                 emploee.Name == username && emploee.Password == password
             );
         }
 
-        public async Task<int> AddEmploee(Emploee emploee)
+        public async Task<int> AddEmploee(Employee emploee)
         {
             _database.Emploee.Add(emploee);
             return await _database.SaveChangesAsync();
         }
 
-        public async Task<int> UpdateEmploee(Emploee emploee)
+        public async Task<int> UpdateEmploee(Employee emploee)
         {
             _database.Emploee.Update(emploee);
             return await _database.SaveChangesAsync();
         }
 
-        public async Task<int> DeleteEmploee(Emploee emploee)
+        public async Task<int> DeleteEmploee(Employee emploee)
         {
             _database.Emploee.Remove(emploee);
             return await _database.SaveChangesAsync();

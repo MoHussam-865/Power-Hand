@@ -23,10 +23,10 @@
             </Grid.ColumnDefinitions>
 
 
-            <feature:TaskBarView Visibility="{Binding DataContext.TaskBarVisibility, RelativeSource={RelativeSource AncestorType=UserControl}}" Grid.Column="0"  DataContext="{Binding MyTaskBar}" />
+            <feature:TaskBarView Visibility="{Binding DataContext.TaskBarVisibility, RelativeSource={RelativeSource AncestorType=UserControl}}" Grid.Column="0"  DataContext="{Binding MyTaskBar}"/>
 
             <Grid Grid.Column="1">
-                <ContentControl Visibility="Visible" Content="{Binding NavigationService.CurrentView}"/>
+                <ContentControl Focusable="True" Visibility="Visible" Content="{Binding NavigationService.CurrentView}"/>
 
                 <ContentControl Visibility="{Binding PopupVisibility}" Content="{Binding NavigationService.PopupView}"/>
             </Grid>

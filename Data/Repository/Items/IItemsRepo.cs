@@ -19,6 +19,8 @@ namespace Power_Hand.Data.Repository.Items
         public Task<int> AddItem(Item item);
 
         public Task<int> UpdateItem(Item item);
+        public Task<int> DeleteItem(Item item);
+
 
 
     }

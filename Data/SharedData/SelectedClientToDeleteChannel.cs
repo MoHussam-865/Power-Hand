@@ -3,7 +3,7 @@ using Prism.Events;
 
 namespace Power_Hand.Data.SharedData
 {
-    public class EmploeeShare : PubSubEvent<Employee>
+    public class SelectedClientToDeleteChannel : PubSubEvent<Client>
     {
     }
 }

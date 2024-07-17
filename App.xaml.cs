@@ -128,6 +128,12 @@ namespace Power_Hand
                 services.AddTransient<EditInvoiceItemPopupView>();
                 services.AddSingleton<EditInvoiceItemPopupVM>();
 
+                services.AddTransient<DeletePopupView>();
+                services.AddSingleton<DeleteInvoiceItemPopupVM>();
+                services.AddSingleton<DeleteEmployeePopupVM>();
+                services.AddSingleton<DeleteClientPopupVM>();
+                services.AddSingleton<DeleteItemPopupVM>();
+
                 #endregion
 
                 // add other services

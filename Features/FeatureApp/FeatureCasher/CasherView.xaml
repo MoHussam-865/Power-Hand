@@ -9,7 +9,7 @@
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:behavior="clr-namespace:Power_Hand.Data.Other"
+             xmlns:behavior="clr-namespace:Power_Hand.Data.Other"               
              x:Name="userControl"
              PreviewKeyDown="UserControl_PreviewKeyDown"
              mc:Ignorable="d"
@@ -44,7 +44,7 @@
 
             <components:Calculator Focusable="True" x:Name="MyCalculator" KeyboardVisibility="{Binding DataContext.CalculatorVisibility, RelativeSource={RelativeSource AncestorType=UserControl}}"  DataContext="{Binding CalculatorVM}" />
 
-                <Border Grid.Row="1" BorderBrush="DarkGray" Margin="3" BorderThickness="0.5">
+                <Border Grid.Row="1" BorderBrush="{StaticResource NormalBorderColor}" Margin="3" BorderThickness="0.5">
 
                 <Grid>
                     <Grid.RowDefinitions>

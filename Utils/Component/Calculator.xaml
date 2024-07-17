@@ -4,12 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             Background="Transparent"
+             Background="{StaticResource TransparentColor}"
              Margin="5"
              d:DesignHeight="300" 
              d:DesignWidth="180">
 
-    <Border Background="DarkSlateGray"
+    <Border Background="{StaticResource CalculatorBackgroundColor}"
             BorderThickness="0"
             CornerRadius="10">
         <Grid>
@@ -19,9 +19,10 @@
             </Grid.RowDefinitions>
 
 
-            <TextBlock x:Name="MyText" Foreground="White" FontStyle="Italic" Grid.Row="0" Background="Transparent"  Margin="5" Padding="6" TextAlignment="Center" VerticalAlignment="Center" FontSize="25" Text="{Binding DataContext.CurrentText, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
-
-            <Grid Background="Transparent" Visibility="{Binding KeyboardVisibility, RelativeSource={RelativeSource AncestorType=UserControl}}" Grid.Row="1">
+            <TextBlock x:Name="MyText" Foreground="{StaticResource LightFontColor}" FontStyle="Italic" Grid.Row="0" Background="{StaticResource TransparentColor}"  Margin="5" Padding="6" TextAlignment="Center" VerticalAlignment="Center" FontSize="25" Text="{Binding DataContext.CurrentText, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <!---->
+            
+            <Grid  Grid.Row="1" Visibility="{Binding KeyboardVisibility, RelativeSource={RelativeSource AncestorType=UserControl}}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="80*"/>
                     <RowDefinition Height="20*"/>

@@ -1,10 +1,5 @@
-﻿
-
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using Microsoft.Xaml.Behaviors;
-using Power_Hand.Data.Other;
 
 namespace Power_Hand.Utils.Component
 {
@@ -28,7 +23,7 @@ namespace Power_Hand.Utils.Component
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty KeyboardVisibilityProperty =
             DependencyProperty.Register(nameof(KeyboardVisibility), typeof(Visibility), typeof(UserControl), 
-                new PropertyMetadata(Visibility.Collapsed));
+                new PropertyMetadata(Visibility.Visible));
 
 
         public Calculator()

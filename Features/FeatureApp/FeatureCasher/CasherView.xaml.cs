@@ -13,7 +13,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureCasher
         public CasherView()
         {
             InitializeComponent();
-            this.Loaded += (_, _) => { MyCalculator.Focus(); };
+            Loaded += (_, _) => { MyCalculator.Focus(); };
         }
 
 

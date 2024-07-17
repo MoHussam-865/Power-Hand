@@ -2,29 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="ControllBtns"
-           TargetType="Button">
-        <Setter Property="FontSize" Value="15"/>
+           TargetType="Button"
+           BasedOn="{StaticResource BaseButtonStyle}">
 
+        <Setter Property="Background" Value="Azure"/>
 
-        <Setter Property="Margin" Value="4"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="3"/>
-
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-
-                    <Border CornerRadius="5"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            >
-                        <ContentPresenter />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
-
-
 
 </ResourceDictionary>

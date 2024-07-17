@@ -11,15 +11,40 @@
              xmlns:feature_items="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEditItem"
              xmlns:feature_client="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEditClient"
              xmlns:feature_emploee="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEmploee"
+             xmlns:logics="clr-namespace:Power_Hand.Utils.ViewModels"
              xmlns:feature_popupsvm="clr-namespace:Power_Hand.Features.Popups.ViewModels"
              xmlns:feature_popupsv="clr-namespace:Power_Hand.Features.Popups.Views">
     <Application.Resources>
 
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Utils/Styles/CalculatorBtn.xaml"/>
-                <ResourceDictionary Source="Utils/Styles/ControllBtns.xaml"/>
+                <ResourceDictionary Source="Utils\Styles\Buttons\BaseButtonStyle.xaml"/>
+                <ResourceDictionary Source="Utils\Styles\ControllBtns.xaml"/>
+                <ResourceDictionary Source="Utils\Styles\Colors\Colors.xaml"/>
+                
+                <ResourceDictionary Source="Utils\Styles\CalculatorBtn.xaml"/>
+                <ResourceDictionary Source="Utils\Styles\Buttons\ButtonDangerStyle.xaml"/>
+                <ResourceDictionary Source="Utils\Styles\Buttons\ButtonOkStyle.xaml"/>
+                <ResourceDictionary Source="Utils\Styles\Buttons\ButtonWarningStyle.xaml"/>
+
             </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type TypeName=feature_popupsvm:DeleteInvoiceItemPopupVM}">
+                <feature_popupsv:DeletePopupView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=feature_popupsvm:DeleteClientPopupVM}">
+                <feature_popupsv:DeletePopupView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type TypeName=feature_popupsvm:DeleteEmployeePopupVM}">
+                <feature_popupsv:DeletePopupView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type TypeName=feature_popupsvm:DeleteInvoicePopupVM}">
+                <feature_popupsv:DeletePopupView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type TypeName=feature_popupsvm:DeleteItemPopupVM}">
+                <feature_popupsv:DeletePopupView/>
+            </DataTemplate>
 
             <!-- The Main Page Shell -->
             <DataTemplate DataType="{x:Type TypeName=feature_app:AppShellVM}">

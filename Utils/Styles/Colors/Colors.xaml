@@ -1,0 +1,71 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <!-- Normal Background -->
+    
+    <SolidColorBrush x:Key="ColorNormalLight" Color="White"/>
+    <SolidColorBrush x:Key="ColorNormalLightHover" Color="White"/>
+
+    <SolidColorBrush x:Key="ColorNormalDark" Color="DarkGray"/>
+    <SolidColorBrush x:Key="ColorNormalDarkHover" Color="DarkGray"/>
+
+    <!-- Actions (Buttons) -->
+
+    <SolidColorBrush x:Key="ColorDanger" Color="Red"/>
+    <SolidColorBrush x:Key="ColorDangerHover" Color="Tomato"/>
+
+    <SolidColorBrush x:Key="ColorWarning" Color="Yellow"/>
+    <SolidColorBrush x:Key="ColorWarningHover" Color="Yellow"/>
+
+    <SolidColorBrush x:Key="ColorOk" Color="ForestGreen"/>
+    <SolidColorBrush x:Key="ColorOkHover" Color="ForestGreen"/>
+
+    <SolidColorBrush x:Key="ColorFinal" Color="SkyBlue"/>
+    <SolidColorBrush x:Key="ColorFinalHover" Color="SkyBlue"/>
+
+    <SolidColorBrush x:Key="DisableColor" Color="LightGray"/>
+    <SolidColorBrush x:Key="DisableColorHover" Color="LightGray"/>
+
+    <SolidColorBrush x:Key="TransparentColor" Color="Transparent"/>
+    <!-- Border -->
+    
+    <SolidColorBrush x:Key="NormalBorderColor" Color="DarkGray"/>
+
+    <!-- List Items -->
+
+    <SolidColorBrush x:Key="ListItemBackgroundColor" Color="White"/>
+    <SolidColorBrush x:Key="ListItemBackgroundColorHover" Color="White"/>
+
+    <SolidColorBrush x:Key="ListFolderBackgroundColor" Color="White"/>
+    <SolidColorBrush x:Key="ListFolderBackgroundColorHover" Color="White"/>
+
+    <SolidColorBrush x:Key="ListPersonBackgroundColor" Color="White"/>
+    <SolidColorBrush x:Key="ListPersonBackgroundColorHover" Color="White"/>
+
+
+    <!-- Background -->
+
+    <SolidColorBrush x:Key="HomeBackgroundColor" Color="SkyBlue"/>
+    <SolidColorBrush x:Key="HomeLoginCardColor" Color="White"/>
+
+    <SolidColorBrush x:Key="GeneralAppBackgroundColor" Color="AliceBlue"/>
+    
+    <!-- Calculator -->
+
+    <SolidColorBrush x:Key="CalculatorBackgroundColor" Color="DarkOliveGreen"/>
+
+    <SolidColorBrush x:Key="CalculatorBtnsBackgroundColor" Color="FloralWhite"/>
+
+    <!-- Fonts -->
+    <SolidColorBrush x:Key="DarkFontColor" Color="Black"/>
+    
+    <SolidColorBrush x:Key="DisableFontColor" Color="DarkGray"/>
+
+    <SolidColorBrush x:Key="LightFontColor" Color="White"/>
+
+    <SolidColorBrush x:Key="FontColorDanger" Color="Red"/>
+
+    <SolidColorBrush x:Key="FontColorTitle" Color="DarkOliveGreen"/>
+
+</ResourceDictionary>

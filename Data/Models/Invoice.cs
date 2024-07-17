@@ -12,7 +12,7 @@ namespace Power_Hand.Models
         public int Type { get; set; }
         public int? ClientId { get; set; }
 
-        public int EmploeeId { get; set; }
+        public int EmployeeId { get; set; }
         public double? Discount { get; set; }
         public double? VAT { get; set; }
         public double Payed { get; set; }
@@ -21,6 +21,7 @@ namespace Power_Hand.Models
 
         // this is a note to the staff does not get printed
         public string? InvoiceNote { get; set; }
+        public bool IsDeleted { get; set; } = false;
 
         [NotMapped]
         public List<InvoiceItem> Items { get; set; } = new List<InvoiceItem>();
@@ -32,7 +33,7 @@ namespace Power_Hand.Models
 
         
         internal Invoice(
-            long date, int type, int emploeeId,
+            long date, int type, int employeeId,
             double payed, List<InvoiceItem> items, int id = 0, long? dueDate = null,
             int? clientId = null, double? discount = null, double? vat = null,
             double remaining = 0, string? note = null, string? invoiceNotes = null)
@@ -42,7 +43,7 @@ namespace Power_Hand.Models
             DueDate = dueDate;
             Type = type;
             ClientId = clientId;
-            EmploeeId = emploeeId;
+            EmployeeId = employeeId;
             Discount = discount;
             VAT = vat;
             Payed = payed;

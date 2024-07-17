@@ -24,13 +24,13 @@ namespace Power_Hand.Features.Popups.ViewModels
             set {  
                 _invoiceItem = value;  
                 OnPropertyChanged();
-                Itemname = value?.Name;
+                ItemName = value?.Name;
                 ItemQty = value?.Quantity.ToString();
             }
         }
 
         private string? _itemName;
-        public string? Itemname
+        public string? ItemName
         {
             get => _itemName;
             set { _itemName = value; OnPropertyChanged(); }

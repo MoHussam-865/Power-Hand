@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Power_Hand.Models
 {
-    public class Emploee
+    public class Employee
     {
         [Key]
         public int Id { get; set; }

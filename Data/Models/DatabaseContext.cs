@@ -11,7 +11,7 @@ namespace Power_Hand.Data.Models
         public DbSet<Client> Client { get; set; }
         public DbSet<Invoice> Invoice { get; set; }
         public DbSet<InvoiceItem> InvoiceItem { get; set; }
-        public DbSet<Emploee> Emploee { get; set; }
+        public DbSet<Employee> Emploee { get; set; }
 
 
         // needed 
@@ -24,8 +24,8 @@ namespace Power_Hand.Data.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Emploee>().HasIndex(e => e.Name);
-            modelBuilder.Entity<Emploee>().HasIndex(e => e.Password);
+            modelBuilder.Entity<Employee>().HasIndex(e => e.Name);
+            modelBuilder.Entity<Employee>().HasIndex(e => e.Password);
 
 
             modelBuilder.Entity<Invoice>()

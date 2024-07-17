@@ -67,7 +67,7 @@ namespace Power_Hand.Features.FeatureHome
             if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
             {
                 //password = password.GetHashCode().ToString();
-                Emploee? employee = _employeeRepo.GetEmploee(userName, password);
+                Employee? employee = _employeeRepo.GetEmploee(userName, password);
 
                 Debug.WriteLine("employee" + employee?.Name?.ToString());
 

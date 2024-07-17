@@ -52,7 +52,6 @@
     <Folder Include="Features\FeatureApp\FeatureEmploee\Channels\" />
     <Folder Include="Features\FeatureApp\FeatureSettings\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Assets\" />
   </ItemGroup>
 
 </Project>

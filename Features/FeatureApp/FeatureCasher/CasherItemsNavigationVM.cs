@@ -15,14 +15,12 @@ namespace Power_Hand.Features.FeatureApp.FeatureCasher
     /// </summary>
     public class CasherItemsNavigationVM(
         IItemsRepo itemsRepo,
-        IEventAggregator eventAggregator,
-        CalculatorVM calculatorVM) : GridItemsNavigationLogic(itemsRepo, eventAggregator)
+        IEventAggregator eventAggregator) : GridItemsNavigationLogic(itemsRepo, eventAggregator)
     {
-        private readonly CalculatorVM _calculator = calculatorVM;
         private readonly IEventAggregator _eventAggregator = eventAggregator;
 
         /// <summary>
-        /// the GridItemsNavigationLogic abstarct class handle the current products (items) in the 
+        /// the GridItemsNavigationLogic abstract class handle the current products (items) in the 
         /// category via this method
         /// </summary>
         public override void ItemSelected(Item item)

@@ -44,37 +44,33 @@ namespace Power_Hand.Data.Repository.Invoices
         }
 
 
-        public async void DeleteInvoice(Invoice invoice)
+        public async Task<int> DeleteInvoice(Invoice invoice)
         {
-            foreach (InvoiceItem item in invoice.Items)
-            {
-                _database.InvoiceItem.Remove(item);
-            }
-            _database.Invoice.Remove(invoice);
-            await _database.SaveChangesAsync();
+            // foreach (InvoiceItem item in invoice.Items) { _database.InvoiceItem.Remove(item); }
+            // _database.Invoice.Remove(invoice);
+            // await _database.SaveChangesAsync();
+            invoice.IsDeleted = true;
+            return await EditInvoice(invoice);
         }
 
 
-        public async void EditInvoice(Invoice invoice)
+        public async Task<int> EditInvoice(Invoice invoice)
         {
-            foreach (InvoiceItem item in invoice.Items)
-            {
-                _database.InvoiceItem.Update(item);
-            }
+            // foreach (InvoiceItem item in invoice.Items) { _database.InvoiceItem.Update(item);}
             _database.Invoice.Update(invoice);
-            await _database.SaveChangesAsync();
+            return await _database.SaveChangesAsync();
         }
 
 
         public async Task<Invoice> GetInvoiceById(int id)
         {
-            return await _database.Invoice.Include(invoice => invoice.Items)
+            return await _database.Invoice.Where(invoice => !invoice.IsDeleted).Include(invoice => invoice.Items)
                 .FirstAsync(invoice => invoice.Id == id);
         }
 
         public async Task<List<Invoice>> GetInvoices(long? startDate = null, long? endDate = null)
         {
-            return await _database.Invoice.Include(invoice => invoice.Items).ToListAsync();
+            return await _database.Invoice.Where(invoice => !invoice.IsDeleted).Include(invoice => invoice.Items).ToListAsync();
         }
     }
 }

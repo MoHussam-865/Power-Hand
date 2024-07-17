@@ -7,9 +7,9 @@ namespace Power_Hand.Data.Repository.Invoices
     {
         public void AddInvoice(Invoice invoice);
 
-        public void EditInvoice(Invoice invoice);
+        public Task<int> EditInvoice(Invoice invoice);
 
-        public void DeleteInvoice(Invoice invoice);
+        public Task<int> DeleteInvoice(Invoice invoice);
 
         // open spicific invoice
         public Task<Invoice> GetInvoiceById(int id);

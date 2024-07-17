@@ -43,5 +43,11 @@ namespace Power_Hand.Data.Repository.Items
             _dbContext.Item.Update(item);
             return await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<int> DeleteItem(Item item)
+        {
+            item.IsDeleted = true;
+            return await UpdateItem(item);
+        }
     }
 }

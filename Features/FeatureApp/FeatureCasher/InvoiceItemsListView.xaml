@@ -10,7 +10,7 @@
              d:DesignHeight="800" d:DesignWidth="450">
   
     
-    <Border Background="White" BorderBrush="DarkGray" BorderThickness="0.5" CornerRadius="5" Margin="2" Padding="3">
+    <Border Background="{StaticResource ColorNormalLight}" BorderBrush="{StaticResource NormalBorderColor}" BorderThickness="0.5" CornerRadius="5" Margin="2" Padding="3">
         
 
         <ItemsControl Grid.Row="1" ItemsSource="{Binding InvoiceItems}" Margin="5">
@@ -18,7 +18,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
 
-                    <Button Background="Transparent" CommandParameter="{Binding}" Command="{Binding DataContext.ItemSelectCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
+                    <Button Background="{StaticResource TransparentColor}" CommandParameter="{Binding}" Command="{Binding DataContext.ItemSelectCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
 
                         <StackPanel Orientation="Horizontal">
                             <TextBlock  Text="{Binding Name}"/>

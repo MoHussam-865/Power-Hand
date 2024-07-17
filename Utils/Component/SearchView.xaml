@@ -17,15 +17,15 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Border Background="White" BorderBrush="DimGray" BorderThickness="0.5" CornerRadius="3" Margin="5 8" Padding="6">
-            <TextBox Background="Transparent" BorderThickness="0" Grid.Row="0" Text="{Binding DataContext.Search, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+        <Border Background="{StaticResource ColorNormalLight}" BorderBrush="{StaticResource NormalBorderColor}" BorderThickness="0.5" CornerRadius="3" Margin="5 8" Padding="6">
+            <TextBox Background="{StaticResource TransparentColor}" BorderThickness="0" Grid.Row="0" Text="{Binding DataContext.Search, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
         </Border>
 
 
         <Border Margin="5" Grid.Row="1"
                 CornerRadius="10"
-                BorderBrush="DarkGray" 
-                Background="White"
+                BorderBrush="{StaticResource NormalBorderColor}" 
+                Background="{StaticResource ColorNormalLight}"
                 BorderThickness="0.5">
 
             <ItemsControl ItemsSource="{Binding DataContext.SearchItems}" ItemTemplate="{Binding MyDataTemplate, RelativeSource={RelativeSource AncestorType=UserControl}}">

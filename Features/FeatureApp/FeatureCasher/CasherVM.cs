@@ -21,7 +21,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureCasher
         // used to pass data between view models
         private readonly IEventAggregator _eventAggregator;
         // the current signed casher used to be added to the invoice
-        private Emploee? _currentEmploee;
+        private Employee? _currentEmployee;
         // 
         private readonly IInvoicesRepo _invoicesRepo;
         //
@@ -109,7 +109,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureCasher
             _navigationService = navigationService;
             _currentQty = "";
             _appStore = store;
-            _currentEmploee = _appStore.Emploee;
+            _currentEmployee = _appStore.Employee;
             _calculatorVisibility = Visibility.Collapsed;
 
             // no invoice items yet
@@ -130,6 +130,21 @@ namespace Power_Hand.Features.FeatureApp.FeatureCasher
             _eventAggregator.GetEvent<SelectedInvoiceItemShareChannel>().Subscribe(OnSelectedItemChanges);
             _eventAggregator.GetEvent<ItemQuantityEditedChannel>().Subscribe(OnSelectedItemQuantityChanges);
             _eventAggregator.GetEvent<CalculatorVisibilityChannel>().Subscribe(OnCalculatorVisibilityChanged);
+            _eventAggregator.GetEvent<RemoveInvoiceItemFromListChannel>().Subscribe(RemoveInvoiceItem);
+        }
+
+        private void RemoveInvoiceItem(InvoiceItem? item)
+        {
+            if (item == null)
+            {
+                _selectedItem = null;
+            }
+            else
+            {
+                InvoiceItems.Remove(item);
+                _selectedItem = null;
+            }
+            Update();
         }
 
         private void OnPhysicalKeyPressed(KeyEventArgs e)
@@ -168,12 +183,13 @@ namespace Power_Hand.Features.FeatureApp.FeatureCasher
         {
             if (_selectedItem != null)
             {
-                InvoiceItems.Remove(_selectedItem);
-                _selectedItem = null;
-
-                Update();
+                _appStore.InvoiceItemToDelete = _selectedItem;
+                _navigationService.OpenPopup<DeleteInvoiceItemPopupVM>();
+                _eventAggregator.GetEvent<PopupCloseChannel>().Publish(false);
             }
         }
+
+        
 
         private void OnItemEdit()
         {
@@ -199,13 +215,13 @@ namespace Power_Hand.Features.FeatureApp.FeatureCasher
         private void OnSaveInvoice()
         {
             // the invoice must have items and casher 
-            if (InvoiceItems.Count > 0 && _currentEmploee != null)
+            if (InvoiceItems.Count > 0 && _currentEmployee != null)
             {
                 // create the invoice
                 Invoice myInvoice = new(
                     date: DateTime.Now.Ticks,
                     type: 0,
-                    emploeeId: _currentEmploee.Id,
+                    employeeId: _currentEmployee.Id,
                     payed: InvoiceItems.ToList().Sum(i => i.Total),
                     remaining: 0,
                     items: [.. InvoiceItems]  // this makes it a list => InvoiceItems.ToList()
@@ -219,7 +235,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureCasher
             }
             else
             {
-                Debug.WriteLine(_currentEmploee?.Id.ToString());
+                Debug.WriteLine(_currentEmployee?.Id.ToString());
             }
         }
 
