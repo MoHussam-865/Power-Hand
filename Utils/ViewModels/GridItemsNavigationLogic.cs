@@ -81,14 +81,14 @@ namespace Power_Hand.Utils.ViewModels
             // just initialize them
             _items = [];
             _folders = [];
-            // geting them realy
+            // getting them really
             CurrentFolderId = 0;
 
             // initiate commands here
             ItemClickCommand = new ClickCommand<Item>((x) => OnItemClicked(x));
             OnBackClickedCommand = new FunCommand(OnGoBackClicked);
 
-            // gets the current emploee passed from the HomeVM 
+            // gets the current employee passed from the HomeVM 
             _eventAggregator = eventAggregator;
             _eventAggregator.GetEvent<EditItemDatabaseUpdatedChannel>().Subscribe(OnDatabaseChanged);
         }

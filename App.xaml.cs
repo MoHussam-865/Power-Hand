@@ -11,7 +11,7 @@ using Power_Hand.Features.FeatureApp;
 using Power_Hand.Features.FeatureApp.FeatureCasher;
 using Power_Hand.Features.FeatureApp.FeatureEditClient;
 using Power_Hand.Features.FeatureApp.FeatureEditItem;
-using Power_Hand.Features.FeatureApp.FeatureEmploee;
+using Power_Hand.Features.FeatureApp.FeatureEmployee;
 using Power_Hand.Features.FeatureApp.FeatureInvoicesPreview;
 using Power_Hand.Features.FeatureApp.FeatureReservation;
 using Power_Hand.Features.FeatureHome;
@@ -66,7 +66,8 @@ namespace Power_Hand
                 services.AddTransient<AddEditItemsPageView>();
                 services.AddTransient<ItemFormView>();
 
-                // add edit emploees
+                // add edit employees
+                services.AddTransient<SearchView>();
                 services.AddTransient<AddEditEmploeePageView>();
                 services.AddTransient<AddEditEmploeeForm>();
                 services.AddTransient<SearchEmploeesListView>();
@@ -102,9 +103,9 @@ namespace Power_Hand
                 services.AddSingleton<ClientListingVM>();
 
                 // Add Edit emploees
-                services.AddSingleton<AddEditEmploeePageVM>();
-                services.AddSingleton<AddEditEmploeeFormVM>();
-                services.AddSingleton<SearchEmploeesVM>();
+                services.AddSingleton<AddEditEmployeePageVM>();
+                services.AddSingleton<AddEditEmployeeFormVM>();
+                services.AddSingleton<SearchEmployeesVM>();
 
                 // Add Edit items
                 services.AddSingleton<AddEditItemPageVM>();
@@ -142,7 +143,7 @@ namespace Power_Hand
                 // repositories
                 services.AddSingleton<IInvoicesRepo, InvoicesRepoImpl>();
                 services.AddSingleton<IItemsRepo, ItemsRepoImpl>();
-                services.AddSingleton<IEmploeeRepo, EmploeesRepoImpl>();
+                services.AddSingleton<IEmployeeRepo, EmployeesRepoImpl>();
                 services.AddSingleton<IClientRepo, ClientsRepoImpl>();
                 #endregion
 

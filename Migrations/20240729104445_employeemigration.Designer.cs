@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Power_Hand.Data.Models;
 
@@ -10,34 +11,14 @@ using Power_Hand.Data.Models;
 namespace Power_Hand.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240729104445_employeemigration")]
+    partial class employeemigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.6");
-
-            modelBuilder.Entity("Power_Hand.Data.Models.Settings", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Name")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Value")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("Settings");
-                });
 
             modelBuilder.Entity("Power_Hand.Models.Client", b =>
                 {
@@ -75,13 +56,12 @@ namespace Power_Hand.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("Rule")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -89,7 +69,7 @@ namespace Power_Hand.Migrations
 
                     b.HasIndex("Password");
 
-                    b.ToTable("Employee");
+                    b.ToTable("Emploee");
                 });
 
             modelBuilder.Entity("Power_Hand.Models.Invoice", b =>
@@ -219,17 +199,6 @@ namespace Power_Hand.Migrations
                     b.ToTable("Item");
                 });
 
-            modelBuilder.Entity("Power_Hand.Data.Models.Settings", b =>
-                {
-                    b.HasOne("Power_Hand.Models.Employee", "Employee")
-                        .WithMany("Settings")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
             modelBuilder.Entity("Power_Hand.Models.InvoiceItem", b =>
                 {
                     b.HasOne("Power_Hand.Models.Invoice", "Invoice")
@@ -239,11 +208,6 @@ namespace Power_Hand.Migrations
                         .IsRequired();
 
                     b.Navigation("Invoice");
-                });
-
-            modelBuilder.Entity("Power_Hand.Models.Employee", b =>
-                {
-                    b.Navigation("Settings");
                 });
 
             modelBuilder.Entity("Power_Hand.Models.Invoice", b =>

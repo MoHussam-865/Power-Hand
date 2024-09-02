@@ -1,15 +1,17 @@
 ﻿using Power_Hand.Data.Repository.Other;
 using Power_Hand.Data.SharedData;
+using Power_Hand.Features.FeatureApp.FeatureEmployee.Channels;
 using Power_Hand.Models;
 using Power_Hand.Utils.ViewModels;
 using Prism.Events;
 
 namespace Power_Hand.Features.Popups.ViewModels
 {
-    public class DeleteEmployeePopupVM(IEmploeeRepo employeeRepo, IEventAggregator eventAggregator, SharedValuesStore store) 
+    public class DeleteEmployeePopupVM(IEmployeeRepo employeeRepo, IEventAggregator eventAggregator, SharedValuesStore store) 
         : DeletePopupLogicVM<Employee>(eventAggregator)
     {
-        private readonly IEmploeeRepo _employeeRepo = employeeRepo;
+        private readonly IEmployeeRepo _employeeRepo = employeeRepo;
+        private readonly IEventAggregator _eventAggregator = eventAggregator;
 
         public override string Title => "Action Can't be Undo";
 
@@ -21,7 +23,8 @@ namespace Power_Hand.Features.Popups.ViewModels
 
         public override void OnDelete(Employee employee)
         {
-            _employeeRepo.DeleteEmploee(employee);
+            _employeeRepo.DeleteEmployee(employee);
+            _eventAggregator.GetEvent<AddEditEmployeeDatabaseChangedChannel>().Publish();
         }
     }
 }

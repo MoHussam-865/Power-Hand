@@ -5,7 +5,7 @@ using Power_Hand.Features.FeatureApp.FeatureCasher;
 using Power_Hand.Features.FeatureApp.FeatureCasher.Channels;
 using Power_Hand.Features.FeatureApp.FeatureEditClient;
 using Power_Hand.Features.FeatureApp.FeatureEditItem;
-using Power_Hand.Features.FeatureApp.FeatureEmploee;
+using Power_Hand.Features.FeatureApp.FeatureEmployee;
 using Power_Hand.Features.FeatureApp.FeatureInvoicesPreview;
 using Power_Hand.Features.FeatureApp.FeatureReservation;
 using Power_Hand.Features.FeatureHome;

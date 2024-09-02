@@ -1,7 +1,11 @@
 ﻿using System.Windows.Input;
+using System.Windows.Navigation;
 using Power_Hand.Data.Other;
 using Power_Hand.Data.Repository.Other;
+using Power_Hand.Data.SharedData;
 using Power_Hand.Features.FeatureApp.FeatureEditClient.Channels;
+using Power_Hand.Features.Popups.ViewModels;
+using Power_Hand.Features.Popups;
 using Power_Hand.Interfaces;
 using Power_Hand.Models;
 using Prism.Events;
@@ -13,6 +17,8 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
         private Client? _currentClient;
         private readonly IEventAggregator _eventAggregator;
         private readonly IClientRepo _clientRepo;
+        private readonly SharedValuesStore _valuesStore;
+        private readonly INavigationService _navigationService;
 
         #region Client Properties
 
@@ -42,6 +48,8 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
 
         public ClientFormVM(
             IEventAggregator eventAggregator,
+            SharedValuesStore sharedValuesStore,
+            INavigationService navigationService,
             IClientRepo clientRepo)
         {
             _clientRepo = clientRepo;
@@ -49,6 +57,8 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
             OnDeleteCommand = new FunCommand(OnDeleteClicked);
             OnDiscardCommand = new FunCommand(OnCancelClicked);
             _eventAggregator = eventAggregator;
+            _valuesStore = sharedValuesStore;
+            _navigationService = navigationService;
             _eventAggregator.GetEvent<EditClientPageShareClientChannel>().Subscribe(OnClientSelected);
             FillIfCan();
         }
@@ -62,21 +72,17 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
         private void OnCancelClicked() => Clear();
         
 
-        private async void OnDeleteClicked()
+        private void OnDeleteClicked()
         {
             if (_currentClient != null)
             {
-                await _clientRepo.DeleteClient(_currentClient);
+                _valuesStore.ClientToDelete = _currentClient;
+                _navigationService.OpenPopup<DeleteClientPopupVM>();
+                _eventAggregator.GetEvent<PopupCloseChannel>().Publish(false);
                 Clear();
-                PublishChanges();
             }
         }
 
-        // refresh the list (on database changed)
-        private void PublishChanges()
-        {
-            _eventAggregator.GetEvent<EditClientPageUpdateDatabaseChannel>().Publish();
-        }
 
         private async void OnSaveClicked()
         {
@@ -113,7 +119,6 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
                     await _clientRepo.UpdateClient(client);
                 }
                 Clear();
-                PublishChanges();
             }
             
         }
@@ -141,7 +146,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
             Discount = null;
             Notes = null;
             _currentClient = null;
-            
+            _eventAggregator.GetEvent<EditClientPageUpdateDatabaseChannel>().Publish();
             _eventAggregator.GetEvent<EditClientPageShareClientChannel>().Publish(_currentClient);
         }
     }

@@ -10,7 +10,7 @@
              xmlns:feature_invoices="clr-namespace:Power_Hand.Features.FeatureApp.FeatureInvoicesPreview"
              xmlns:feature_items="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEditItem"
              xmlns:feature_client="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEditClient"
-             xmlns:feature_emploee="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEmploee"
+             xmlns:feature_emploee="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEmployee"
              xmlns:logics="clr-namespace:Power_Hand.Utils.ViewModels"
              xmlns:feature_popupsvm="clr-namespace:Power_Hand.Features.Popups.ViewModels"
              xmlns:feature_popupsv="clr-namespace:Power_Hand.Features.Popups.Views">
@@ -125,17 +125,17 @@
 
             
             <!-- Emploees Database Controll -->
-            <DataTemplate DataType="{x:Type TypeName=feature_emploee:AddEditEmploeePageVM}">
+            <DataTemplate DataType="{x:Type TypeName=feature_emploee:AddEditEmployeePageVM}">
                 <feature_emploee:AddEditEmploeePageView/>
             </DataTemplate>
             
-            <DataTemplate DataType="{x:Type TypeName=feature_emploee:AddEditEmploeeFormVM}">
+            <DataTemplate DataType="{x:Type TypeName=feature_emploee:AddEditEmployeeFormVM}">
                 <feature_emploee:AddEditEmploeeForm/>
             </DataTemplate>
             
-            <DataTemplate DataType="{x:Type TypeName=feature_emploee:SearchEmploeesVM}">
+            <!--DataTemplate DataType="{x:Type TypeName=feature_emploee:SearchEmployeesVM}">
                 <feature_emploee:SearchEmploeesListView/>
-            </DataTemplate>
+            </DataTemplate-->
 
             <!-- PopUps -->
             <DataTemplate DataType="{x:Type TypeName=feature_popupsvm:EditInvoiceItemPopupVM}">

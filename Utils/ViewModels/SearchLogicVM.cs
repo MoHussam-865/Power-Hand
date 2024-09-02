@@ -1,9 +1,11 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
+using Power_Hand.Data.Other;
 using Power_Hand.Interfaces;
 
 namespace Power_Hand.Utils.ViewModels
 {
-    public abstract  class SearchLogicVM<T> : ViewModel
+    public abstract class SearchLogicVM<T> : ViewModel
     {
         private string? _search;
         public string? Search
@@ -15,13 +17,17 @@ namespace Power_Hand.Utils.ViewModels
         private ObservableCollection<T> _searchItems = [];
         public ObservableCollection<T> SearchItems
         {
-            get => _searchItems; 
+            get => _searchItems;
             set { _searchItems = value; OnPropertyChanged(); }
         }
 
-        public SearchLogicVM() => GetItems();
-        
-        
+        public ICommand ItemClickCommand { get; set; }
+
+        public SearchLogicVM()
+        {
+            ItemClickCommand = new ClickCommand<T>((i) => OnItemClicked(i));
+        }     
+
         public async void GetItems()
         {
             List<T> results = await OnSearchChanged(_search);
@@ -29,5 +35,7 @@ namespace Power_Hand.Utils.ViewModels
         }
 
         public abstract Task<List<T>> OnSearchChanged(string? search);
+        public abstract void OnItemClicked(T? item);
+
     }
 }

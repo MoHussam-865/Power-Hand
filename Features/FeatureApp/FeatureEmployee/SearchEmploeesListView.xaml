@@ -1,42 +1,38 @@
-﻿<UserControl x:Class="Power_Hand.Features.FeatureApp.FeatureEditClient.ClientSearchListView"
+﻿<UserControl x:Class="Power_Hand.Features.FeatureApp.FeatureEmployee.SearchEmploeesListView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             xmlns:feature="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEditClient"
-             xmlns:vm="clr-namespace:Power_Hand.Utils.ViewModels"
-             d:DataContext="{d:DesignInstance Type=feature:ClientListingVM}"
+             xmlns:local="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEmployee"
+             mc:Ignorable="d"             
              xmlns:components="clr-namespace:Power_Hand.Utils.Component"
-             BorderThickness="0"
-             d:DesignHeight="450" 
-             d:DesignWidth="300">
-
-    <Grid Margin="1">
+             d:DesignHeight="450" d:DesignWidth="800">
+    <!-- d:DataContext="{d:DesignInstance Type=local:SearchEmployeesVM}" -->
+    
+    <Grid>
         <components:SearchView DataContext="{Binding}">
             <components:SearchView.MyDataTemplate>
                 <DataTemplate>
 
                     <Border Margin="10" BorderThickness="0.5" BorderBrush="DimGray" CornerRadius="5" MaxHeight="100" MaxWidth="150" Background="White">
 
-
+                        <!--  here we set the list of items  -->
                         <Button Background="Transparent" CommandParameter="{Binding}" BorderThickness="0" Command="{Binding DataContext.ItemClickCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" HorizontalAlignment="Left" Width="auto">
-                            <StackPanel >
+                            <StackPanel>
 
-                                <TextBlock FontSize="10" Grid.Row="0" Text="{Binding Name}" Margin="10"/>
-                                <TextBlock FontSize="10" Grid.Row="1" Text="{Binding PhoneNumber}" Margin="10"/>
-
-                                <TextBlock FontSize="10" Grid.Row="2" Text="{Binding Address}" Margin="10"/>
+                                <!--  Here we set the item data  -->
+                                <!--TextBlock FontSize="10" Grid.Row="0" Text="{Binding Id}" Margin="10"/-->
+                                <TextBlock FontSize="10" Grid.Row="1" Text="{Binding Name}" Margin="10"/>
 
                             </StackPanel>
                         </Button>
+
                     </Border>
                 </DataTemplate>
 
             </components:SearchView.MyDataTemplate>
 
         </components:SearchView>
+
     </Grid>
-
-
 </UserControl>

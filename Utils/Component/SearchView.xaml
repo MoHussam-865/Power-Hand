@@ -8,9 +8,8 @@
              mc:Ignorable="d" 
              DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}"
              d:DesignHeight="650" d:DesignWidth="450">
-   
-    <!--:DataContext="{d:DesignInstance Type=vm:SearchLogicVM}"-->
-
+    <!-- DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" -->
+    
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -18,7 +17,7 @@
         </Grid.RowDefinitions>
 
         <Border Background="{StaticResource ColorNormalLight}" BorderBrush="{StaticResource NormalBorderColor}" BorderThickness="0.5" CornerRadius="3" Margin="5 8" Padding="6">
-            <TextBox Background="{StaticResource TransparentColor}" BorderThickness="0" Grid.Row="0" Text="{Binding DataContext.Search, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+            <TextBox Background="{StaticResource TransparentColor}" BorderThickness="0" Grid.Row="0" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
         </Border>
 
 
@@ -28,7 +27,7 @@
                 Background="{StaticResource ColorNormalLight}"
                 BorderThickness="0.5">
 
-            <ItemsControl ItemsSource="{Binding DataContext.SearchItems}" ItemTemplate="{Binding MyDataTemplate, RelativeSource={RelativeSource AncestorType=UserControl}}">
+            <ItemsControl ItemsSource="{Binding SearchItems}" ItemTemplate="{Binding MyDataTemplate, RelativeSource={RelativeSource AncestorType=UserControl}}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <components:DynamicGrid Rows="5" Columns="5" />

@@ -20,16 +20,12 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
         private readonly IEventAggregator _eventAggregator;
         private readonly IClientRepo _clientsRepo;
 
-        private Client? _selectedClient;
+        /*private Client? _selectedClient;
         public Client? SelectedClient
         {
             get => _selectedClient;
             set { _selectedClient = value; OnPropertyChanged(); }
-        }
-
-      
-
-        public ICommand SelectClientCommand { get; set; }
+        }*/
 
         public ClientListingVM(
             IEventAggregator eventAggregator,
@@ -37,26 +33,24 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
         {
             _eventAggregator = eventAggregator;
             _clientsRepo = clientsRepo;
-            
-            SelectClientCommand = new ClickCommand<Client>((c) => OnClientSelected(c));
+            // inherited method from SearchLogicVM
+            GetItems();
             _eventAggregator.GetEvent<EditClientPageUpdateDatabaseChannel>().Subscribe(OnDatabaseUpdated);
         }
 
         private void OnDatabaseUpdated() => GetItems();
        
 
-        private void OnClientSelected(Client client)
-        {
-            SelectedClient = client;
-            _eventAggregator.GetEvent<EditClientPageShareClientChannel>().Publish(client);
-        }
-
         public async override Task<List<Client>> OnSearchChanged(string? search)
         {
-            if (search == null) return [];
-            
             List<Client>? clients = await _clientsRepo.SearchClients(search);
             return clients ?? [];
+        }
+
+        public override void OnItemClicked(Client? client)
+        {
+            //SelectedClient = client;
+            _eventAggregator.GetEvent<EditClientPageShareClientChannel>().Publish(client);
         }
     }
 }

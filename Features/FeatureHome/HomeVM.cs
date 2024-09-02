@@ -14,7 +14,7 @@ namespace Power_Hand.Features.FeatureHome
     class HomeVM : ViewModel
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IEmploeeRepo _employeeRepo;
+        private readonly IEmployeeRepo _employeeRepo;
         private INavigationService _navigationService;
         public INavigationService NavigationService
         {
@@ -47,11 +47,11 @@ namespace Power_Hand.Features.FeatureHome
 
         public ICommand OnLoginCommand { get; set; }
 
-        public HomeVM(INavigationService navigationService, IEmploeeRepo emploeeRepo, IEventAggregator eventAggregator)
+        public HomeVM(INavigationService navigationService, IEmployeeRepo employeeRepo, IEventAggregator eventAggregator)
         {
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
-            _employeeRepo = emploeeRepo;
+            _employeeRepo = employeeRepo;
             OnLoginCommand = new FunCommand(OnLoginClicked);
         }
 
@@ -67,7 +67,7 @@ namespace Power_Hand.Features.FeatureHome
             if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
             {
                 //password = password.GetHashCode().ToString();
-                Employee? employee = _employeeRepo.GetEmploee(userName, password);
+                Employee? employee = _employeeRepo.GetEmployee(userName, password);
 
                 Debug.WriteLine("employee" + employee?.Name?.ToString());
 

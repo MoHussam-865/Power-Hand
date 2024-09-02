@@ -38,5 +38,10 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditClient
             _navigationVM = navigationBarVM;
         }
 
+
+
+
+
+
     }
 }

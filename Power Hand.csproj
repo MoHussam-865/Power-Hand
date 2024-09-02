@@ -49,7 +49,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\FeatureApp\FeatureEmploee\Channels\" />
     <Folder Include="Features\FeatureApp\FeatureSettings\" />
     <Folder Include="Migrations\" />
   </ItemGroup>

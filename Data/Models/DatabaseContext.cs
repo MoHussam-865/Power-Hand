@@ -11,7 +11,8 @@ namespace Power_Hand.Data.Models
         public DbSet<Client> Client { get; set; }
         public DbSet<Invoice> Invoice { get; set; }
         public DbSet<InvoiceItem> InvoiceItem { get; set; }
-        public DbSet<Employee> Emploee { get; set; }
+        public DbSet<Employee> Employee { get; set; }
+        public DbSet<Settings> Settings { get; set; }
 
 
         // needed 
@@ -26,7 +27,10 @@ namespace Power_Hand.Data.Models
         {
             modelBuilder.Entity<Employee>().HasIndex(e => e.Name);
             modelBuilder.Entity<Employee>().HasIndex(e => e.Password);
-
+            modelBuilder.Entity<Employee>()
+                .HasMany(e => e.Settings)
+                .WithOne(setting => setting.Employee)
+                .HasForeignKey(setting => setting.EmployeeId);
 
             modelBuilder.Entity<Invoice>()
                 .HasMany(invoice => invoice.Items)

@@ -10,20 +10,25 @@ namespace Power_Hand.Data.Repository.Other
 
 
         #region Client
-        public async Task<List<Client>?> SearchClients(string search)
+        public async Task<List<Client>?> SearchClients(string? search)
         {
-            search = search.ToLower();
-            return await _database.Client.Where(client => 
+            if (search != null)
+            {
+                search = search.ToLower();
+                return await _database.Client.Where(client =>
 
-                 (client.Name != null && client.Name.ToLower().Contains(search)) ||
+                     (client.Name != null && client.Name.ToLower().Contains(search)) ||
 
-                (client.Address != null && client.Address.ToLower().Contains(search)) ||
+                    (client.Address != null && client.Address.ToLower().Contains(search)) ||
 
-                (client.PhoneNumber != null && client.PhoneNumber.ToLower().Contains(search)) ||
+                    (client.PhoneNumber != null && client.PhoneNumber.ToLower().Contains(search)) ||
 
-                (client.Email != null && client.Email.ToLower().Contains(search))
+                    (client.Email != null && client.Email.ToLower().Contains(search))
 
-            ).ToListAsync();
+                ).ToListAsync();
+            }
+            
+            return await _database.Client.OrderByDescending(client => client.Id).Take(50).ToListAsync();   
         }
         public async Task<int> AddClient(Client client)
         {

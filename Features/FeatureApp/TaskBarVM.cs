@@ -2,7 +2,7 @@
 using Power_Hand.Data.Other;
 using Power_Hand.Features.FeatureApp.FeatureEditClient;
 using Power_Hand.Features.FeatureApp.FeatureEditItem;
-using Power_Hand.Features.FeatureApp.FeatureEmploee;
+using Power_Hand.Features.FeatureApp.FeatureEmployee;
 using Power_Hand.Features.FeatureApp.FeatureInvoicesPreview;
 using Power_Hand.Features.FeatureHome;
 using Power_Hand.Interfaces;
@@ -50,7 +50,7 @@ namespace Power_Hand.Features.FeatureApp
 
         private void OnEmploeeControlViewClicked()
         {
-            NavigationService.NavigateTo<AddEditEmploeePageVM>();
+            NavigationService.NavigateTo<AddEditEmployeePageVM>();
             CloseTaskBar();
         }
         private void OnItemsControllViewClicked()
