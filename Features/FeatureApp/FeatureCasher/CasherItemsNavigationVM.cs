@@ -8,30 +8,36 @@ using Prism.Events;
 namespace Power_Hand.Features.FeatureApp.FeatureCasher
 {
     /// <summary>
-    /// inherit from GridItemsNavigationLogic which gets products from different categories
+    /// inherit from ___ which gets products from different categories
     /// and it inherit from GridPaginationLogic Responsable for pagination between pages of items
     /// in the same category
     /// 
     /// </summary>
-    public class CasherItemsNavigationVM(
-        IItemsRepo itemsRepo,
-        IEventAggregator eventAggregator) : GridItemsNavigationLogic(itemsRepo, eventAggregator)
+    public class CasherItemsNavigationVM
     {
-        private readonly IEventAggregator _eventAggregator = eventAggregator;
 
-        /// <summary>
-        /// the GridItemsNavigationLogic abstract class handle the current products (items) in the 
-        /// category via this method
-        /// </summary>
-        public override void ItemSelected(Item item)
+        private GridFoldersNavigationLogic _folderNavigationVM;
+        public GridFoldersNavigationLogic FolderNavigationVM
         {
-            if (item.IsFolder)
-            {
-                _eventAggregator.GetEvent<CasherFolderShareChannel>().Publish(item);
-            }
-            _eventAggregator.GetEvent<CasherItemListChannel>().Publish(!item.IsFolder? item: null);
+            get { return _folderNavigationVM; }
+            set { _folderNavigationVM = value; }
         }
 
-       
+
+        private GridItemsNavigationLogic _itemsNavigationVM;
+        public GridItemsNavigationLogic ItemsNavigationVM
+        {
+            get { return _itemsNavigationVM; }
+            set { _itemsNavigationVM = value; }
+        }
+
+        public CasherItemsNavigationVM(
+            GridItemsNavigationLogic itemsNavigationVM,
+            GridFoldersNavigationLogic folderNavigationVM)
+        {
+            _itemsNavigationVM = itemsNavigationVM;
+            _folderNavigationVM = folderNavigationVM;
+        }
+
     }
 }

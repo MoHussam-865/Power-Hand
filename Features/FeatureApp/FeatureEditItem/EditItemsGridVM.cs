@@ -7,20 +7,33 @@ using Prism.Events;
 
 namespace Power_Hand.Features.FeatureApp.FeatureEditItem
 {
-    public class EditItemsGridVM(IItemsRepo itemsRepo, IEventAggregator eventAggregator) : GridItemsNavigationLogic(itemsRepo, eventAggregator)
+    public class EditItemsGridVM
     {
-        private readonly IEventAggregator _eventAggregator = eventAggregator;
+        private readonly IEventAggregator _eventAggregator;
 
-        
 
-        public override void ItemSelected(Item item)
+        private GridFoldersNavigationLogic _folderNavigationVM;
+        public GridFoldersNavigationLogic FolderNavigationVM
         {
-            if (item.IsFolder)
-            {
-                _eventAggregator.GetEvent<EditItemCurrentFolderShareChannel>().Publish(item);
-                return;
-            }
-            _eventAggregator.GetEvent<EditSelectedItemShareChannel>().Publish(item);
+            get { return _folderNavigationVM; }
+            set { _folderNavigationVM = value; }
+        }
+
+
+        private GridItemsNavigationLogic _itemsNavigationVM;
+        public GridItemsNavigationLogic ItemsNavigationVM
+        {
+            get { return _itemsNavigationVM; }
+            set { _itemsNavigationVM = value; }
+        }
+
+        public EditItemsGridVM(IEventAggregator eventAggregator,
+            GridFoldersNavigationLogic folderNavigationVM,
+            GridItemsNavigationLogic itemsNavigationVM)
+        {
+            _eventAggregator = eventAggregator;
+            _folderNavigationVM = folderNavigationVM;
+            _itemsNavigationVM = itemsNavigationVM;
         }
 
 

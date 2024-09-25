@@ -90,6 +90,8 @@ namespace Power_Hand
                 // Casher Make Invoices View
                 services.AddSingleton<CasherVM>();
                 services.AddSingleton<CasherItemsNavigationVM>();
+                services.AddSingleton<GridFoldersNavigationLogic>();
+                services.AddSingleton<GridItemsNavigationLogic>();
                 services.AddSingleton<InvoiceItemsListVM>();
 
                 // Invoices List View

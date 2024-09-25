@@ -7,6 +7,7 @@ using Power_Hand.Features.FeatureApp.FeatureCasher.Channels;
 using Power_Hand.Features.FeatureApp.FeatureEditItem.Channels;
 using Power_Hand.Interfaces;
 using Power_Hand.Models;
+using Microsoft.Win32;
 using Prism.Events;
 
 namespace Power_Hand.Features.FeatureApp.FeatureEditItem
@@ -49,12 +50,21 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditItem
 
         private string? _discount;
         public string? Discount { get => _discount; set { _discount = value; OnPropertyChanged(); } }
+
+        private string _imagePath = "";
+        public string ImagePath
+        {
+            get => _imagePath;
+            set { _imagePath = value; OnPropertyChanged(); }
+        }
+
         #endregion
 
         // commands
         public ICommand OnSaveCommand { get; set; }
         public ICommand OnDiscardCommand { get; set; }
         public ICommand OnDeleteCommand { get; set; }
+        public ICommand ChooseImageCommand { get; set; }
 
         // constructor
         public ItemFormVM(
@@ -67,6 +77,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditItem
             OnSaveCommand = new FunCommand(OnSaveClicked);
             OnDiscardCommand = new FunCommand(OnDiscardClicked);
             OnDeleteCommand = new FunCommand(OnDeleteClicked);
+            ChooseImageCommand = new FunCommand(OnImageChooseClicked);
 
             _appStore = store;
             // observe items that get selected for edit
@@ -75,6 +86,17 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditItem
             _eventAggregator.GetEvent<EditSelectedItemShareChannel>().Subscribe(OnItemPublished);
             // if item is selected we fill its data
             FillIfCan();
+        }
+
+        private void OnImageChooseClicked()
+        {
+            OpenFileDialog dialog = new();
+
+            if (dialog.ShowDialog() == true)
+            {
+                ImagePath = dialog.FileName;
+            }
+
         }
 
 
@@ -165,7 +187,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditItem
                         description: Description,
                         expence: expence, note: Note,
                         isDeleted: IsDeleted,
-                        discount: discount);
+                        discount: discount, imagePath: ImagePath);
 
                 if (_currentItem == null)
                 {
@@ -210,6 +232,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditItem
             Expence = null;
             Note = null;
             Discount = null;
+            ImagePath = null;
             _eventAggregator.GetEvent<EditSelectedItemShareChannel>().Publish(_currentItem);
         }
     }

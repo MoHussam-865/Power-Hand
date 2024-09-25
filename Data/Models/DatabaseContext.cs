@@ -46,7 +46,7 @@ namespace Power_Hand.Data.Models
             optionsBuilder.EnableSensitiveDataLogging();
             string connectionString = new SqliteConnectionStringBuilder()
             {
-                DataSource = "E:\\My Projects\\PowerHand\\Power Hand\\PowerHand.db"
+                DataSource = "C:\\Projects\\PowerHand\\Power Hand\\PowerHand.db"
             }.ToString();
             optionsBuilder.UseSqlite(connectionString);
 

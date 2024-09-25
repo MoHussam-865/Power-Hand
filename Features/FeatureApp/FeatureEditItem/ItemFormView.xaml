@@ -47,6 +47,19 @@
                 <TextBlock Text="Notes" Margin="0 5"/>
                 <TextBox Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
 
+
+                <Grid Margin="0 10 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Content="Choose Image" Command="{Binding ChooseImageCommand}" Background="AntiqueWhite" Padding="2" Margin="0 0 10 0"/>
+
+                    <TextBlock Grid.Column="1" Text="{Binding ImagePath, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+
+                </Grid>
+                
                 <StackPanel 
                     Margin="0 10"
                     HorizontalAlignment="Center"

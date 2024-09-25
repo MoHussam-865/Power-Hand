@@ -1,5 +1,4 @@
 ﻿
-using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Windows.Input;
 using Power_Hand.Data.Other;
 using Power_Hand.Features.Popups;

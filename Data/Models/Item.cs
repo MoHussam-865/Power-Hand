@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Power_Hand.Models
 {
@@ -16,6 +17,11 @@ namespace Power_Hand.Models
         public double? Expence { get; set; }
         public string? Note { get; set; }
         public double Discount { get; set; } = 0;
+        public int LastUpdate { get; set; } = 0;
+        public string? ImagePath { get; set; } = null;
+
+        [NotMapped]
+        public bool IsSelected { get; set; } = false;
 
         // constructor
         public Item(int id,
@@ -23,7 +29,8 @@ namespace Power_Hand.Models
             double price, int parent,
             string? description = null,
             double? expence = null, string? note = null,
-            double discount = 0, bool isFolder = false, bool isDeleted = false)
+            double discount = 0, bool isFolder = false, bool isDeleted = false,
+            string? imagePath = null)
         {
             Id = id;
             Name = name;
@@ -35,6 +42,7 @@ namespace Power_Hand.Models
             Discount = discount;
             IsDeleted = isDeleted;
             IsFolder = isFolder;
+            ImagePath = imagePath;
         }
 
         public Item() { }
@@ -45,7 +53,7 @@ namespace Power_Hand.Models
             // set The Quantity directly
             return new InvoiceItem(itemId: Id, name: Name,
             price: Price, parentId: ParentId, discount: Discount,
-            quantity: qty, isFolder: IsFolder);
+            quantity: qty, isFolder: IsFolder, imagePath: ImagePath);
             // notes, total & InvoiceId to be set later
         }
     }

@@ -1,7 +1,8 @@
 ﻿
+
 namespace Power_Hand.Features.FeatureApp.FeatureCasher.Channels
 {
-    public class BarcodeChannel: PubSubEvent<string?>
+    public class FolderIdChangedChannel: PubSubEvent<int>
     {
     }
 }

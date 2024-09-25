@@ -29,6 +29,9 @@ namespace Power_Hand.Data.Repository.Items
 
         public async Task<int> AddItem(Item item)
         {
+            int lastUpdate = _dbContext.Item.Max(item => item.LastUpdate) + 1;
+            item.LastUpdate = lastUpdate;
+
             _dbContext.Item.Add(item);
             return await _dbContext.SaveChangesAsync();
         }
@@ -40,6 +43,10 @@ namespace Power_Hand.Data.Repository.Items
             {
                 _dbContext.Entry(myItem).State = EntityState.Detached;
             }
+            
+            int lastUpdate = _dbContext.Item.Max(item => item.LastUpdate) + 1;
+            item.LastUpdate = lastUpdate;
+
             _dbContext.Item.Update(item);
             return await _dbContext.SaveChangesAsync();
         }

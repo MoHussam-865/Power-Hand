@@ -29,6 +29,7 @@ namespace Power_Hand.Models
         public double Discount { get; set; } = 0;
         public double Total { get => Price * Quantity * (1 - Discount); }
         public bool IsFolder { get; set; }
+        public string? ImagePath { get; set; } = null;
 
 
         // constructor
@@ -40,7 +41,7 @@ namespace Power_Hand.Models
             int itemId, string name,
             int parentId, bool isFolder,
             double price,int id = 0, double discount = 0, int invoiceId = 0,
-            double quantity = 1, string? notes = null)
+            double quantity = 1, string? notes = null, string? imagePath = null)
         {
             Id = id;
             InvoiceId = invoiceId;
@@ -52,6 +53,7 @@ namespace Power_Hand.Models
             ParentId = parentId;
             Discount = discount;
             IsFolder = isFolder;
+            ImagePath = imagePath;
         }
 
         // convert to Item
