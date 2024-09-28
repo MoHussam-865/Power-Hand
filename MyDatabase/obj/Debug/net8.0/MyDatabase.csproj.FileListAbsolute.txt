@@ -1,0 +1,14 @@
+C:\Projects\Server\MyDatabase\bin\Debug\net8.0\MyDatabase.deps.json
+C:\Projects\Server\MyDatabase\bin\Debug\net8.0\MyDatabase.runtimeconfig.json
+C:\Projects\Server\MyDatabase\bin\Debug\net8.0\MyDatabase.dll
+C:\Projects\Server\MyDatabase\bin\Debug\net8.0\MyDatabase.pdb
+C:\Projects\Server\MyDatabase\obj\Debug\net8.0\MyDatabase.csproj.AssemblyReference.cache
+C:\Projects\Server\MyDatabase\obj\Debug\net8.0\MyDatabase.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Server\MyDatabase\obj\Debug\net8.0\MyDatabase.AssemblyInfoInputs.cache
+C:\Projects\Server\MyDatabase\obj\Debug\net8.0\MyDatabase.AssemblyInfo.cs
+C:\Projects\Server\MyDatabase\obj\Debug\net8.0\MyDatabase.csproj.CoreCompileInputs.cache
+C:\Projects\Server\MyDatabase\obj\Debug\net8.0\MyDatabase.dll
+C:\Projects\Server\MyDatabase\obj\Debug\net8.0\refint\MyDatabase.dll
+C:\Projects\Server\MyDatabase\obj\Debug\net8.0\MyDatabase.pdb
+C:\Projects\Server\MyDatabase\obj\Debug\net8.0\MyDatabase.genruntimeconfig.cache
+C:\Projects\Server\MyDatabase\obj\Debug\net8.0\ref\MyDatabase.dll
