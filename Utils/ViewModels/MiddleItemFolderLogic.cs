@@ -1,6 +1,7 @@
-﻿using Power_Hand.Data.Other;
+﻿using MyDatabase.Models;
+using Power_Hand.Features.FeatureApp.FeatureEditItem;
 using Power_Hand.Features.FeatureApp.FeatureEditItem.Channels;
-using Power_Hand.Models;
+using Power_Hand.Other.Other;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -14,7 +15,6 @@ namespace Power_Hand.Utils.ViewModels
         public ICommand ItemClickCommand { get; set; }
 
 
-
         public MiddleItemFolderLogic(IEventAggregator eventAggregator)
         {
             ItemClickCommand = new ClickCommand<Item>((x) => OnItemClicked(x));
@@ -24,8 +24,12 @@ namespace Power_Hand.Utils.ViewModels
         // listen to database changes and refresh 
         void OnDatabaseChanged(Type me)
         {
-            Type myType = this.GetType();
-            if (me == myType) { _databaseChanged = true; }
+            Type myType = typeof(EditItemsGridVM);
+            if (me == myType)
+            {
+                _databaseChanged = true;
+                RefreshPage(OnDatabaseChanged());
+            }
         }
 
         public void RefreshPage(ObservableCollection<Item> items)
@@ -39,6 +43,7 @@ namespace Power_Hand.Utils.ViewModels
         public abstract void OnItemClicked(Item item);
         public abstract int MyRows();
         public abstract int MyColums();
+        public abstract ObservableCollection<Item> OnDatabaseChanged();
 
 
 

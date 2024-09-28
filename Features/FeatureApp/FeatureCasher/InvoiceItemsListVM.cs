@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Power_Hand.Data.Other;
-using Power_Hand.Data.Repository.Invoices;
-using Power_Hand.Data.Repository.Items;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Power_Hand.Interfaces;
-using Power_Hand.Models;
 using Prism.Events;
 using Power_Hand.Features.FeatureApp.FeatureCasher.Channels;
 using Power_Hand.Utils.ViewModels;
+using MyDatabase.Models;
+using Power_Hand.Other.Other;
 
 namespace Power_Hand.Features.FeatureApp.FeatureCasher
 {

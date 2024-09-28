@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Power_Hand.Data.Repository.Invoices;
-using Power_Hand.Data.Repository.Items;
-using Power_Hand.Interfaces;
-using Prism.Events;
+﻿
+using MyDatabase.Repository.Invoices;
+using MyDatabase.Repository.Items;
+using Power_Hand.Other.Other;
 
 namespace Power_Hand.Features.FeatureApp.FeatureReservation
 {

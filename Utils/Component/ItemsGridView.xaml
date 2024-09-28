@@ -14,15 +14,18 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="70*"/>
             <RowDefinition Height="30*"/>
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" CornerRadius="3" Background="White" BorderBrush="Gray" BorderThickness="0.5"   Margin="5 3 5 0" >
-            <TextBox Padding="5" BorderThickness="0" Background="Transparent"/>
+            <TextBox Padding="5" BorderThickness="0" Background="Transparent" />
         </Border>
 
-        <Border Grid.Row="1" Background="White" Margin="5" CornerRadius="3" BorderBrush="DarkGray"  BorderThickness="0.5">
+        <TextBlock Grid.Row="1" Text="{Binding CurrentPath, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 0 5 0" Background="White" />
+
+        <Border Grid.Row="2" Background="White" Margin="5" CornerRadius="3" BorderBrush="DarkGray"  BorderThickness="0.5">
 
             <components:GridPaginationView DataContext="{Binding ItemsNavigationVM}" ItemsSource="{Binding CurrentPageItems}" PaginationVisibility="{Binding IsPaginationVisible}" NextCommand="{Binding NextPageCommand}" PreviousCommand="{Binding PrevoiusPageCommand}" MyRows="{Binding Rows}" MyColumns="{Binding Columns}" NextPageButtonVisibility="{Binding IsNextPageButtonVisible}" PreviousButtonVisibility="{Binding IsPreviousPageButtonVisible}">
                 <components:GridPaginationView.ItemTemplate>
@@ -52,7 +55,7 @@
 
         </Border>
 
-        <Border Grid.Row="2"
+        <Border Grid.Row="3"
                      Margin="5,5,5,8"
                      CornerRadius="3"
                      BorderBrush="DarkGray" 

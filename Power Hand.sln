@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Power Hand", "Power Hand.csproj", "{24D33B91-0839-4473-A877-CF2E5255264E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyDatabase", "..\..\MyDatabase\MyDatabase.csproj", "{EAA5E88D-EA34-4F49-B9F7-565BC78F3E00}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{24D33B91-0839-4473-A877-CF2E5255264E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24D33B91-0839-4473-A877-CF2E5255264E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24D33B91-0839-4473-A877-CF2E5255264E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAA5E88D-EA34-4F49-B9F7-565BC78F3E00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAA5E88D-EA34-4F49-B9F7-565BC78F3E00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAA5E88D-EA34-4F49-B9F7-565BC78F3E00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAA5E88D-EA34-4F49-B9F7-565BC78F3E00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,5 @@
-﻿using System.Windows.Controls;
-using Power_Hand.Data.Repository.Items;
-using Power_Hand.Features.FeatureApp.FeatureCasher.Channels;
-using Power_Hand.Models;
+﻿using Power_Hand.Features.FeatureApp.FeatureCasher.Channels;
+using Power_Hand.Other.Other;
 using Power_Hand.Utils.ViewModels;
 using Prism.Events;
 
@@ -13,8 +11,14 @@ namespace Power_Hand.Features.FeatureApp.FeatureCasher
     /// in the same category
     /// 
     /// </summary>
-    public class CasherItemsNavigationVM
+    public class CasherItemsNavigationVM : ViewModel
     {
+        private string _path = "";
+        public string CurrentPath
+        {
+            get { return _path; }
+            set { _path = value; OnPropertyChanged(); }
+        }
 
         private GridFoldersNavigationLogic _folderNavigationVM;
         public GridFoldersNavigationLogic FolderNavigationVM
@@ -32,12 +36,17 @@ namespace Power_Hand.Features.FeatureApp.FeatureCasher
         }
 
         public CasherItemsNavigationVM(
+            IEventAggregator eventAggregator,
             GridItemsNavigationLogic itemsNavigationVM,
             GridFoldersNavigationLogic folderNavigationVM)
         {
             _itemsNavigationVM = itemsNavigationVM;
             _folderNavigationVM = folderNavigationVM;
+
+            eventAggregator.GetEvent<CurrentPathChannel>().Subscribe(OnPathChanged);
         }
 
-    }
+        private void OnPathChanged(string obj) => CurrentPath = obj;
+        
+}
 }

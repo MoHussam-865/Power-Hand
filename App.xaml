@@ -13,6 +13,7 @@
              xmlns:feature_emploee="clr-namespace:Power_Hand.Features.FeatureApp.FeatureEmployee"
              xmlns:logics="clr-namespace:Power_Hand.Utils.ViewModels"
              xmlns:feature_popupsvm="clr-namespace:Power_Hand.Features.Popups.ViewModels"
+             xmlns:feature_settings="clr-namespace:Power_Hand.Features.FeatureApp.FeatureSettings"
              xmlns:feature_popupsv="clr-namespace:Power_Hand.Features.Popups.Views">
     <Application.Resources>
 
@@ -49,6 +50,11 @@
             <!-- The Main Page Shell -->
             <DataTemplate DataType="{x:Type TypeName=feature_app:AppShellVM}">
                 <feature_app:AppShellView/>
+            </DataTemplate>
+
+            <!-- Settings -->
+            <DataTemplate DataType="{x:Type TypeName=feature_settings:SettingsVM}">
+                <feature_settings:SettingsView/>
             </DataTemplate>
 
             <!-- task bar -->

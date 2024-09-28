@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Power_Hand.Data.Other;
+﻿using System.Windows.Input;
+using MyDatabase.Models;
 using Power_Hand.Data.SharedData;
 using Power_Hand.Features.FeatureApp.FeatureCasher.Channels;
-using Power_Hand.Interfaces;
-using Power_Hand.Models;
-using Prism.Events;
+using Power_Hand.Other.Other;
 
 namespace Power_Hand.Features.Popups.ViewModels
 {

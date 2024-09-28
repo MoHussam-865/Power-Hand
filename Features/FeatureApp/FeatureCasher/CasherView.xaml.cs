@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Xaml.Behaviors;
-using Power_Hand.Data.Other;
+using Power_Hand.Other.Other;
 
 namespace Power_Hand.Features.FeatureApp.FeatureCasher
 {

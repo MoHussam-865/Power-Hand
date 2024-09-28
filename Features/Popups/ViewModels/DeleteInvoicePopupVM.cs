@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Power_Hand.Data.Repository.Invoices;
+﻿using MyDatabase.Models;
+using MyDatabase.Repository.Invoices;
 using Power_Hand.Data.SharedData;
-using Power_Hand.Models;
 using Power_Hand.Utils.ViewModels;
-using Prism.Events;
 
 namespace Power_Hand.Features.Popups.ViewModels
 {

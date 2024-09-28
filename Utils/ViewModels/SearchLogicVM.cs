@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Power_Hand.Data.Other;
-using Power_Hand.Interfaces;
+using Power_Hand.Other.Other;
 
 namespace Power_Hand.Utils.ViewModels
 {

@@ -1,14 +1,13 @@
 ﻿using System.Diagnostics;
 using System.Windows.Input;
-using Power_Hand.Data.Other;
-using Power_Hand.Data.Repository.Items;
 using Power_Hand.Data.SharedData;
 using Power_Hand.Features.FeatureApp.FeatureCasher.Channels;
 using Power_Hand.Features.FeatureApp.FeatureEditItem.Channels;
-using Power_Hand.Interfaces;
-using Power_Hand.Models;
 using Microsoft.Win32;
 using Prism.Events;
+using MyDatabase.Repository.Items;
+using MyDatabase.Models;
+using Power_Hand.Other.Other;
 
 namespace Power_Hand.Features.FeatureApp.FeatureEditItem
 {
@@ -21,7 +20,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditItem
         // current item that gets updated (is null if we are adding new item no item selected)
         private Item? _currentItem;
         // item will be added to it
-        private Item? _currentFolder;
+        private int? _currentFolderId;
         // get previous shared data
         private readonly SharedValuesStore _appStore;
 
@@ -81,8 +80,8 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditItem
 
             _appStore = store;
             // observe items that get selected for edit
-            _currentFolder = _appStore.SharedFolder;
-            _eventAggregator.GetEvent<EditItemCurrentFolderShareChannel>().Subscribe(OnParentPublished);
+            _currentFolderId = _appStore.SharedFolder?.Id;
+            _eventAggregator.GetEvent<FolderChangedChannel>().Subscribe(OnParentPublished);
             _eventAggregator.GetEvent<EditSelectedItemShareChannel>().Subscribe(OnItemPublished);
             // if item is selected we fill its data
             FillIfCan();
@@ -102,7 +101,7 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditItem
 
         #region Observe Values
         // observe current folder
-        private void OnParentPublished(Item? folder) => _currentFolder = folder;
+        private void OnParentPublished(int folderId) => _currentFolderId = folderId;
 
         // observe shared (selected) item
         private void OnItemPublished(Item? item)
@@ -127,9 +126,6 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditItem
 
         private async void OnSaveClicked()
         {
-
-            int currentFolderId = _currentFolder == null ? 0 : _currentFolder.Id;
-
             // adding Folders logic
             /*if (!string.IsNullOrEmpty(Name) && IsFolder)
             {
@@ -179,14 +175,14 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditItem
             #endregion
 
             // adding item logic
-            if (!string.IsNullOrEmpty(Name) && price > 0 && _currentFolder != null)
+            if (!string.IsNullOrEmpty(Name) && (price > 0 || IsFolder))
             {
                 int id = _currentItem == null ? 0 : _currentItem.Id;
                 Item myItem = new(id: id, name: Name,
-                        price: price, parent: currentFolderId,
+                        price: price, parent: _currentFolderId ?? 0,
                         description: Description,
                         expence: expence, note: Note,
-                        isDeleted: IsDeleted,
+                        isDeleted: IsDeleted,isFolder: IsFolder,
                         discount: discount, imagePath: ImagePath);
 
                 if (_currentItem == null)

@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Input;
-using Power_Hand.Data.Other;
+﻿using System.Windows.Input;
 using Power_Hand.Features.FeatureApp.FeatureCasher;
 using Power_Hand.Features.FeatureApp.FeatureCasher.Channels;
 using Power_Hand.Features.FeatureApp.FeatureEditClient;
@@ -9,7 +7,7 @@ using Power_Hand.Features.FeatureApp.FeatureEmployee;
 using Power_Hand.Features.FeatureApp.FeatureInvoicesPreview;
 using Power_Hand.Features.FeatureApp.FeatureReservation;
 using Power_Hand.Features.FeatureHome;
-using Power_Hand.Interfaces;
+using Power_Hand.Other.Other;
 using Prism.Events;
 
 namespace Power_Hand.Features.FeatureApp

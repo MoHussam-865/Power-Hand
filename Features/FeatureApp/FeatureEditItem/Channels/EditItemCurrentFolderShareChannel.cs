@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Power_Hand.Models;
-using Prism.Events;
+﻿using MyDatabase.Models;
 
 namespace Power_Hand.Features.FeatureApp.FeatureEditItem.Channels
 {

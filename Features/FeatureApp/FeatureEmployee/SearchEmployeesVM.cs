@@ -1,11 +1,7 @@
-﻿using System.Windows.Input;
-using Power_Hand.Data.Other;
-using Power_Hand.Data.Repository.Other;
+﻿using MyDatabase.Models;
+using MyDatabase.Repository.Emploee;
 using Power_Hand.Features.FeatureApp.FeatureEmployee.Channels;
-using Power_Hand.Interfaces;
-using Power_Hand.Models;
 using Power_Hand.Utils.ViewModels;
-using Prism.Events;
 
 namespace Power_Hand.Features.FeatureApp.FeatureEmployee
 {

@@ -3,14 +3,13 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Power_Hand.Data.Other;
-using Power_Hand.Data.Repository.Invoices;
+using MyDatabase.Models;
+using MyDatabase.Repository.Invoices;
 using Power_Hand.Data.SharedData;
 using Power_Hand.Features.FeatureApp.FeatureCasher.Channels;
 using Power_Hand.Features.Popups;
 using Power_Hand.Features.Popups.ViewModels;
-using Power_Hand.Interfaces;
-using Power_Hand.Models;
+using Power_Hand.Other.Other;
 using Power_Hand.Utils.ViewModels;
 using Prism.Events;
 

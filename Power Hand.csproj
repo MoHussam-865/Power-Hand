@@ -50,8 +50,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\FeatureApp\FeatureSettings\" />
-    <Folder Include="Migrations\" />
+    <ProjectReference Include="..\..\MyDatabase\MyDatabase.csproj" />
   </ItemGroup>
 
 </Project>

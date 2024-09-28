@@ -1,4 +1,4 @@
-﻿using Power_Hand.Models;
+﻿using MyDatabase.Models;
 using Prism.Events;
 
 namespace Power_Hand.Features.FeatureApp.FeatureCasher.Channels

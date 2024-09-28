@@ -1,11 +1,7 @@
 ﻿using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Power_Hand.Data.Models;
-using Power_Hand.Data.Other;
-using Power_Hand.Data.Repository.Invoices;
-using Power_Hand.Data.Repository.Items;
-using Power_Hand.Data.Repository.Other;
+using MyDatabase.Repository.Items;
 using Power_Hand.Data.SharedData;
 using Power_Hand.Features.FeatureApp;
 using Power_Hand.Features.FeatureApp.FeatureCasher;
@@ -14,14 +10,19 @@ using Power_Hand.Features.FeatureApp.FeatureEditItem;
 using Power_Hand.Features.FeatureApp.FeatureEmployee;
 using Power_Hand.Features.FeatureApp.FeatureInvoicesPreview;
 using Power_Hand.Features.FeatureApp.FeatureReservation;
+using Power_Hand.Features.FeatureApp.FeatureSettings;
 using Power_Hand.Features.FeatureHome;
 using Power_Hand.Features.FeatureMain;
 using Power_Hand.Features.Popups.ViewModels;
 using Power_Hand.Features.Popups.Views;
-using Power_Hand.Interfaces;
 using Power_Hand.Utils.Component;
 using Power_Hand.Utils.ViewModels;
 using Prism.Events;
+using MyDatabase.Repository.Invoices;
+using MyDatabase.Repository.Emploee;
+using MyDatabase.Repository.Clients;
+using MyDatabase;
+using Power_Hand.Other.Other;
 
 namespace Power_Hand
 {
@@ -78,6 +79,9 @@ namespace Power_Hand
 
                 services.AddTransient<NavigationBarView>();
                 services.AddTransient<TaskBarView>();
+
+                // settings
+                services.AddTransient<SettingsView>();
                 #endregion
 
                 #region ViewModels
@@ -123,6 +127,9 @@ namespace Power_Hand
                 // shared store gets instantiated in the app start and save shared data
                 services.AddSingleton<SharedValuesStore>();
                 services.AddSingleton<CalculatorVM>();
+
+                // Settings
+                services.AddSingleton<SettingsVM>();
 
                 #endregion
 

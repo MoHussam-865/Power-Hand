@@ -1,10 +1,6 @@
-﻿
-using System.Windows.Input;
-using Power_Hand.Data.Other;
+﻿using System.Windows.Input;
 using Power_Hand.Features.Popups;
-using Power_Hand.Interfaces;
-using Power_Hand.Models;
-using Prism.Events;
+using Power_Hand.Other.Other;
 
 namespace Power_Hand.Utils.ViewModels
 {

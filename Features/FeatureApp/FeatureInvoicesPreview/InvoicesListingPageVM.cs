@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Power_Hand.Interfaces;
-using Prism.Events;
+﻿using Power_Hand.Other.Other;
 
 namespace Power_Hand.Features.FeatureApp.FeatureInvoicesPreview
 {

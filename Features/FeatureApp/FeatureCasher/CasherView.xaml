@@ -9,7 +9,7 @@
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:behavior="clr-namespace:Power_Hand.Data.Other"               
+             xmlns:behavior="clr-namespace:Power_Hand.Other.Other"               
              x:Name="userControl"
              PreviewKeyDown="UserControl_PreviewKeyDown"
              mc:Ignorable="d"

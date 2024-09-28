@@ -13,20 +13,19 @@
 
     <StackPanel Orientation="Vertical">
 
-        <Button Margin="2 10"  Command="{Binding ToLoginView}" 
-            Content="Exit"/>
+        <Button Margin="2 10"  Command="{Binding ToLoginView}"  Content="Exit"/>
 
-        <Button Margin="2 10"  Command="{Binding ToAddEditItemsView}"
-            Content="Items"/>
+        <Button Margin="2 10"  Command="{Binding ToAddEditItemsView}" Content="Items"/>
 
-        <Button Margin="2 10" Command="{Binding ToAddEditEmploeeCommand}"
-Content="Emploees"/>
+        <Button Margin="2 10" Command="{Binding ToAddEditEmploeeCommand}" Content="Emploees"/>
 
-        <Button Margin="2 10" Command="{Binding ToAddEditClientsView}"
-            Content="Clients"/>
+        <Button Margin="2 10" Command="{Binding ToAddEditClientsView}" Content="Clients"/>
 
-        <Button Margin="2 10" Command="{Binding ToInvoiceListingView}"
-            Content="Invoices"/>
+        <Button Margin="2 10" Command="{Binding ToInvoiceListingView}" Content="Invoices"/>
+
+        <Button Margin="2 10" Command="{Binding ToSettingsCommand}" Content="Settings"/>
+        
+        
     </StackPanel>
 
 </UserControl>

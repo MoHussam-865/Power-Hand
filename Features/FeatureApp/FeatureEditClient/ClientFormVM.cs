@@ -1,14 +1,13 @@
 ﻿using System.Windows.Input;
 using System.Windows.Navigation;
-using Power_Hand.Data.Other;
-using Power_Hand.Data.Repository.Other;
 using Power_Hand.Data.SharedData;
 using Power_Hand.Features.FeatureApp.FeatureEditClient.Channels;
 using Power_Hand.Features.Popups.ViewModels;
 using Power_Hand.Features.Popups;
-using Power_Hand.Interfaces;
-using Power_Hand.Models;
 using Prism.Events;
+using MyDatabase.Models;
+using MyDatabase.Repository.Clients;
+using Power_Hand.Other.Other;
 
 namespace Power_Hand.Features.FeatureApp.FeatureEditClient
 {

@@ -1,14 +1,9 @@
 ﻿using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Controls;
-using System.Windows.Input;
-using Power_Hand.Data.Other;
-using Power_Hand.Data.Repository.Items;
+using MyDatabase.Models;
+using MyDatabase.Repository.Items;
 using Power_Hand.Features.FeatureApp.FeatureCasher.Channels;
 using Power_Hand.Features.FeatureApp.FeatureEditItem.Channels;
-using Power_Hand.Interfaces;
-using Power_Hand.Models;
-using Prism.Events;
+
 
 // Note ToDo keep in mind that categories that containes sub-categories (folders) cannot have products
 // in them directly
@@ -28,6 +23,7 @@ namespace Power_Hand.Utils.ViewModels
         private readonly IEventAggregator _eventAggregator;
         // used for database operations getting categories and products
         private readonly IItemsRepo _itemsRepo;
+        private int _currentFolder = 0;
 
 
         // items list
@@ -38,8 +34,8 @@ namespace Power_Hand.Utils.ViewModels
             set
             {
                 _items = value;
-                OnPropertyChanged();
                 RefreshPage(value);
+                OnPropertyChanged();
             }
         }
 
@@ -57,13 +53,14 @@ namespace Power_Hand.Utils.ViewModels
 
             // gets the current employee passed from the HomeVM 
             _eventAggregator = eventAggregator;
-            _eventAggregator.GetEvent<FolderIdChangedChannel>().Subscribe(OnFolderOpened);
+            _eventAggregator.GetEvent<FolderChangedChannel>().Subscribe(OnFolderOpened);
         }
 
 
 
         private async void OnFolderOpened(int folderId)
         {
+            _currentFolder = folderId;
             List<Item> items = await _itemsRepo.GetItems(folderId);
             Items = new ObservableCollection<Item>(items);
         }
@@ -74,13 +71,20 @@ namespace Power_Hand.Utils.ViewModels
 
         public override void OnItemClicked(Item item)
         {
-            throw new NotImplementedException();
+            _eventAggregator.GetEvent<EditSelectedItemShareChannel>().Publish(item);
+            _eventAggregator.GetEvent<CasherItemListChannel>().Publish(item);
         }
 
 
         public override int MyRows() => 3;
 
         public override int MyColums() => 4;
+
+        public override ObservableCollection<Item> OnDatabaseChanged()
+        {
+            OnFolderOpened(_currentFolder);
+            return Items;
+        }
         #endregion
 
 

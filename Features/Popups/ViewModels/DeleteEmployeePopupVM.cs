@@ -1,9 +1,8 @@
-﻿using Power_Hand.Data.Repository.Other;
+﻿using MyDatabase.Models;
+using MyDatabase.Repository.Emploee;
 using Power_Hand.Data.SharedData;
 using Power_Hand.Features.FeatureApp.FeatureEmployee.Channels;
-using Power_Hand.Models;
 using Power_Hand.Utils.ViewModels;
-using Prism.Events;
 
 namespace Power_Hand.Features.Popups.ViewModels
 {

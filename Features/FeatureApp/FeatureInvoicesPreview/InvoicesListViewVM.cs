@@ -1,10 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Power_Hand.Data.Other;
-using Power_Hand.Data.Repository.Invoices;
-using Power_Hand.Data.SharedData;
-using Power_Hand.Interfaces;
-using Power_Hand.Models;
+using MyDatabase.Models;
+using MyDatabase.Repository.Invoices;
+using Power_Hand.Other.Other;
+using Power_Hand.Other.SharedData;
 using Prism.Events;
 
 namespace Power_Hand.Features.FeatureApp.FeatureInvoicesPreview

@@ -1,12 +1,11 @@
 ﻿using System.Diagnostics;
 using System.Windows.Input;
-using Power_Hand.Data.Other;
-using Power_Hand.Data.Repository.Other;
-using Power_Hand.Data.SharedData;
+using MyDatabase.Models;
+using MyDatabase.Repository.Emploee;
 using Power_Hand.Features.FeatureApp;
 using Power_Hand.Features.FeatureApp.FeatureCasher;
-using Power_Hand.Interfaces;
-using Power_Hand.Models;
+using Power_Hand.Other.Other;
+using Power_Hand.Other.SharedData;
 using Prism.Events;
 
 namespace Power_Hand.Features.FeatureHome

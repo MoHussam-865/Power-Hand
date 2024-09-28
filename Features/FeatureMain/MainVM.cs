@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Power_Hand.Data.Other;
-using Power_Hand.Data.SharedData;
+﻿using Power_Hand.Data.SharedData;
 using Power_Hand.Features.FeatureHome;
-using Power_Hand.Interfaces;
+using Power_Hand.Other.Other;
 
 /*
  * when adding new view (feature) 

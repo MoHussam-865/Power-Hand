@@ -1,8 +1,7 @@
 ﻿using System.Windows;
-using Power_Hand.Data.Other;
-using Power_Hand.Data.SharedData;
 using Power_Hand.Features.Popups;
-using Power_Hand.Interfaces;
+using Power_Hand.Other.Other;
+using Power_Hand.Other.SharedData;
 using Prism.Events;
 
 namespace Power_Hand.Features.FeatureApp

@@ -1,9 +1,6 @@
-﻿using System.Globalization;
-using System.Windows.Input;
-using Power_Hand.Data.Other;
+﻿using System.Windows.Input;
 using Power_Hand.Features.FeatureApp.FeatureCasher.Channels;
-using Power_Hand.Interfaces;
-using Prism.Events;
+using Power_Hand.Other.Other;
 
 namespace Power_Hand.Utils.ViewModels
 {

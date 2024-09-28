@@ -1,15 +1,22 @@
 ﻿using System.Windows.Controls;
-using Power_Hand.Data.Repository.Items;
+using Power_Hand.Features.FeatureApp.FeatureCasher.Channels;
 using Power_Hand.Features.FeatureApp.FeatureEditItem.Channels;
-using Power_Hand.Models;
+using Power_Hand.Other.Other;
 using Power_Hand.Utils.ViewModels;
 using Prism.Events;
 
 namespace Power_Hand.Features.FeatureApp.FeatureEditItem
 {
-    public class EditItemsGridVM
+    public class EditItemsGridVM: ViewModel
     {
         private readonly IEventAggregator _eventAggregator;
+
+        private string _path = "";
+        public string CurrentPath
+        {
+            get { return _path; }
+            set { _path = value; OnPropertyChanged(); }
+        }
 
 
         private GridFoldersNavigationLogic _folderNavigationVM;
@@ -34,8 +41,13 @@ namespace Power_Hand.Features.FeatureApp.FeatureEditItem
             _eventAggregator = eventAggregator;
             _folderNavigationVM = folderNavigationVM;
             _itemsNavigationVM = itemsNavigationVM;
+            _eventAggregator.GetEvent<CurrentPathChannel>().Subscribe(OnPathChanged);
         }
 
+        private void OnPathChanged(string obj)
+        {
+            CurrentPath = obj;
+        }
 
     }
 }

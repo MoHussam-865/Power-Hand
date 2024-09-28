@@ -1,11 +1,11 @@
 ﻿using System.Windows.Input;
-using Power_Hand.Data.Other;
 using Power_Hand.Features.FeatureApp.FeatureEditClient;
 using Power_Hand.Features.FeatureApp.FeatureEditItem;
 using Power_Hand.Features.FeatureApp.FeatureEmployee;
 using Power_Hand.Features.FeatureApp.FeatureInvoicesPreview;
+using Power_Hand.Features.FeatureApp.FeatureSettings;
 using Power_Hand.Features.FeatureHome;
-using Power_Hand.Interfaces;
+using Power_Hand.Other.Other;
 using Prism.Events;
 
 namespace Power_Hand.Features.FeatureApp
@@ -30,6 +30,7 @@ namespace Power_Hand.Features.FeatureApp
         public ICommand ToAddEditClientsView { get; set; }
         public ICommand ToInvoiceListingView { get; set; }
         public ICommand ToAddEditEmploeeCommand { get; set; }
+        public ICommand ToSettingsCommand { get; set; }
 
 
         public TaskBarVM(
@@ -44,9 +45,14 @@ namespace Power_Hand.Features.FeatureApp
             ToAddEditClientsView = new FunCommand(OnClientsControllViewClicked);
             ToAddEditItemsView = new FunCommand(OnItemsControllViewClicked);
             ToAddEditEmploeeCommand = new FunCommand(OnEmploeeControlViewClicked);
+            ToSettingsCommand = new FunCommand(OnSettingsViewClicked);
         }
 
-
+        private void OnSettingsViewClicked()
+        {
+            NavigationService.NavigateTo<SettingsVM>();
+            CloseTaskBar();
+        }
 
         private void OnEmploeeControlViewClicked()
         {

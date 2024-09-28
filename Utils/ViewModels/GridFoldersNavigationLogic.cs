@@ -1,8 +1,8 @@
-﻿using Power_Hand.Data.Other;
-using Power_Hand.Data.Repository.Items;
+﻿using MyDatabase.Models;
+using MyDatabase.Repository.Items;
 using Power_Hand.Features.FeatureApp.FeatureCasher.Channels;
 using Power_Hand.Features.FeatureApp.FeatureEditItem.Channels;
-using Power_Hand.Models;
+using Power_Hand.Other.Other;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -31,8 +31,8 @@ namespace Power_Hand.Utils.ViewModels
             set
             {
                 _folders = value;
-                OnPropertyChanged();
                 RefreshPage(value);
+                OnPropertyChanged();
             }
         }
 
@@ -59,8 +59,7 @@ namespace Power_Hand.Utils.ViewModels
             OnBackClickedCommand = new FunCommand(OnGoBackClicked);
         }
 
-
-
+   
         /// <summary>
         /// goes to the previous parent category (obviosly if the current category (folder) 
         /// is a sub-category of another
@@ -77,7 +76,8 @@ namespace Power_Hand.Utils.ViewModels
                 CurrentFolderId = currentFolder.ParentId;
 
                 // TODO Update UpdateCurrentItem
-            }
+            } 
+            if (CurrentFolderId == -1) { CurrentFolderId = 0; }
         }
 
         
@@ -97,18 +97,28 @@ namespace Power_Hand.Utils.ViewModels
 
             if (folders.Count != 0)
             {
-                if (_currentPath.Count > 0)
-                {
-                    Item item = new(name: "Back", id: -1, price: 0, parent: -1);
-                    folders.Insert(0, item);
-                }
+                // if (_currentPath.Count > 0)
+                Item item = new(name: "Back", id: -1, price: 0, parent: -1);
+                folders.Insert(0, item);
 
                 Folders = new ObservableCollection<Item>(folders);
             }
-            _eventAggregator.GetEvent<FolderIdChangedChannel>().Publish(CurrentFolderId);
+            _eventAggregator.GetEvent<FolderChangedChannel>().Publish(CurrentFolderId);
+            _eventAggregator.GetEvent<CurrentPathChannel>().Publish(GetCurrentPath());
         }
 
-        
+        private string GetCurrentPath()
+        {
+            string path = "";
+            _currentPath.ForEach(item =>
+            {
+                path += item.Name + "/";
+            });
+            path += CurrentFolderId;
+            return path;
+        }
+
+
 
 
         /// <summary>
@@ -124,6 +134,7 @@ namespace Power_Hand.Utils.ViewModels
             {
                 if (myItem != null) _currentPath.Remove(myItem);
             }
+
             _currentPath.Add(item);
 
             CurrentFolderId = item.Id;
@@ -132,5 +143,11 @@ namespace Power_Hand.Utils.ViewModels
 
         public override int MyRows() => 1;
         public override int MyColums() => 4;
+
+        public override ObservableCollection<Item> OnDatabaseChanged()
+        {
+            OpenFolder();
+            return [.. Folders];
+        }
     }
 }
