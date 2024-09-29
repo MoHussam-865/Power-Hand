@@ -1,15 +1,57 @@
 [
   {
     "ContainingType": "CablesMarketAPI.Controllers.ProductsController",
-    "Method": "GetProducts",
-    "RelativePath": "api/Products",
+    "Method": "DownloadImage",
+    "RelativePath": "api/Products/download",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "imagePath",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CablesMarketAPI.Controllers.ProductsController",
+    "Method": "Hello",
+    "RelativePath": "api/Products/hello",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CablesMarketAPI.Controllers.ProductsController",
+    "Method": "ReciveInvoice",
+    "RelativePath": "api/Products/order",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "message",
-        "Type": "CablesMarketAPI.Models.Message",
+        "Name": "invoice",
+        "Type": "MyDatabase.Models.Invoice",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CablesMarketAPI.Controllers.ProductsController",
+    "Method": "GetProducts",
+    "RelativePath": "api/Products/update",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lastUpdate",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

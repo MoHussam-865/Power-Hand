@@ -3281,11 +3281,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\Server\\CablesMarketAPI\\CablesMarketAPI.csproj",
+      "projectUniqueName": "C:\\Projects\\MyMainServer\\CablesMarketAPI\\CablesMarketAPI.csproj",
       "projectName": "CablesMarketAPI",
-      "projectPath": "C:\\Projects\\Server\\CablesMarketAPI\\CablesMarketAPI.csproj",
+      "projectPath": "C:\\Projects\\MyMainServer\\CablesMarketAPI\\CablesMarketAPI.csproj",
       "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\Server\\CablesMarketAPI\\obj\\",
+      "outputPath": "C:\\Projects\\MyMainServer\\CablesMarketAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3307,8 +3307,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Projects\\Server\\MyDatabase\\MyDatabase.csproj": {
-              "projectPath": "C:\\Projects\\Server\\MyDatabase\\MyDatabase.csproj"
+            "C:\\Projects\\MyMainServer\\MyDatabase\\MyDatabase.csproj": {
+              "projectPath": "C:\\Projects\\MyMainServer\\MyDatabase\\MyDatabase.csproj"
             }
           }
         }

@@ -11,8 +11,8 @@ namespace CablesMarketAPI.Models
         [JsonPropertyName("items")]
         public List<Item>? Items { get; set; }
 
-        /*[JsonPropertyName("invoice")]
-        public Invoice? Invoice { get; set; }*/
+        [JsonPropertyName("invoice")]
+        public Invoice? Invoice { get; set; }
         
         [JsonPropertyName("posts")]
         public List<Post>? Post {  get; set; }
@@ -29,7 +29,7 @@ namespace CablesMarketAPI.Models
             LastUpdate = lastUpdate;
             Items = items;
             Post = posts;
-            //Invoice = invoice;
+            Invoice = invoice;
             MyMessage = message;
         }
 

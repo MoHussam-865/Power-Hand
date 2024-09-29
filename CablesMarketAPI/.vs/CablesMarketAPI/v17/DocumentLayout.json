@@ -1,21 +1,34 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Projects\\Server\\CablesMarketAPI\\",
+  "WorkspaceRootPath": "C:\\Projects\\MyMainServer\\CablesMarketAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BA1E3A52-D952-4D0F-AECB-64FDEAEC3950}|CablesMarketAPI.csproj|c:\\projects\\server\\cablesmarketapi\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BA1E3A52-D952-4D0F-AECB-64FDEAEC3950}|CablesMarketAPI.csproj|solutionrelative:models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BA78BD03-8537-48B7-AACB-498FA7564E71}|..\\MyDatabase\\MyDatabase.csproj|c:\\projects\\mymainserver\\mydatabase\\models\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BA78BD03-8537-48B7-AACB-498FA7564E71}|..\\MyDatabase\\MyDatabase.csproj|c:\\projects\\server\\mydatabase\\models\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BA1E3A52-D952-4D0F-AECB-64FDEAEC3950}|CablesMarketAPI.csproj|c:\\projects\\mymainserver\\cablesmarketapi\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1E3A52-D952-4D0F-AECB-64FDEAEC3950}|CablesMarketAPI.csproj|solutionrelative:controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BA1E3A52-D952-4D0F-AECB-64FDEAEC3950}|CablesMarketAPI.csproj|c:\\projects\\server\\cablesmarketapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{BA1E3A52-D952-4D0F-AECB-64FDEAEC3950}|CablesMarketAPI.csproj|c:\\projects\\mymainserver\\cablesmarketapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{BA1E3A52-D952-4D0F-AECB-64FDEAEC3950}|CablesMarketAPI.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1E3A52-D952-4D0F-AECB-64FDEAEC3950}|CablesMarketAPI.csproj|c:\\projects\\mymainserver\\cablesmarketapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BA1E3A52-D952-4D0F-AECB-64FDEAEC3950}|CablesMarketAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BA1E3A52-D952-4D0F-AECB-64FDEAEC3950}|CablesMarketAPI.csproj|c:\\projects\\server\\cablesmarketapi\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BA1E3A52-D952-4D0F-AECB-64FDEAEC3950}|CablesMarketAPI.csproj|solutionrelative:controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BA1E3A52-D952-4D0F-AECB-64FDEAEC3950}|CablesMarketAPI.csproj|c:\\projects\\mymainserver\\cablesmarketapi\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1E3A52-D952-4D0F-AECB-64FDEAEC3950}|CablesMarketAPI.csproj|solutionrelative:models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA78BD03-8537-48B7-AACB-498FA7564E71}|..\\MyDatabase\\MyDatabase.csproj|c:\\projects\\mymainserver\\mydatabase\\models\\invoiceitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA78BD03-8537-48B7-AACB-498FA7564E71}|..\\MyDatabase\\MyDatabase.csproj|c:\\projects\\mymainserver\\mydatabase\\models\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA78BD03-8537-48B7-AACB-498FA7564E71}|..\\MyDatabase\\MyDatabase.csproj|c:\\projects\\mymainserver\\mydatabase\\models\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -25,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 118,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 13,
           "Children": [
             {
               "$type": "Bookmark",
@@ -69,52 +82,103 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Invoice.cs",
-              "DocumentMoniker": "C:\\Projects\\Server\\MyDatabase\\Models\\Invoice.cs",
-              "RelativeDocumentMoniker": "..\\MyDatabase\\Models\\Invoice.cs",
-              "ToolTip": "C:\\Projects\\Server\\MyDatabase\\Models\\Invoice.cs",
-              "RelativeToolTip": "..\\MyDatabase\\Models\\Invoice.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T15:56:55.911Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Projects\\Server\\CablesMarketAPI\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Projects\\Server\\CablesMarketAPI\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T15:47:15.967Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Message.cs",
-              "DocumentMoniker": "C:\\Projects\\Server\\CablesMarketAPI\\Models\\Message.cs",
-              "RelativeDocumentMoniker": "Models\\Message.cs",
-              "ToolTip": "C:\\Projects\\Server\\CablesMarketAPI\\Models\\Message.cs",
-              "RelativeToolTip": "Models\\Message.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T14:13:20.976Z",
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Projects\\MyMainServer\\CablesMarketAPI\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "C:\\Projects\\MyMainServer\\CablesMarketAPI\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAUwBAAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-09-29T17:21:34.85Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ProductsController.cs",
-              "DocumentMoniker": "C:\\Projects\\Server\\CablesMarketAPI\\Controllers\\ProductsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ProductsController.cs",
-              "ToolTip": "C:\\Projects\\Server\\CablesMarketAPI\\Controllers\\ProductsController.cs",
-              "RelativeToolTip": "Controllers\\ProductsController.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAqwBYAAAA8AAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Projects\\MyMainServer\\CablesMarketAPI\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Projects\\MyMainServer\\CablesMarketAPI\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAcwCsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T14:12:26.952Z"
+              "WhenOpened": "2024-09-29T15:28:25.6Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "C:\\Projects\\MyMainServer\\CablesMarketAPI\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProductsController.cs",
+              "ToolTip": "C:\\Projects\\MyMainServer\\CablesMarketAPI\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "Controllers\\ProductsController.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAiwG4AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-29T15:27:33.504Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Item.cs",
+              "DocumentMoniker": "C:\\Projects\\MyMainServer\\MyDatabase\\Models\\Item.cs",
+              "RelativeDocumentMoniker": "..\\MyDatabase\\Models\\Item.cs",
+              "ToolTip": "C:\\Projects\\MyMainServer\\MyDatabase\\Models\\Item.cs",
+              "RelativeToolTip": "..\\MyDatabase\\Models\\Item.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-29T09:03:12.933Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Message.cs",
+              "DocumentMoniker": "C:\\Projects\\MyMainServer\\CablesMarketAPI\\Models\\Message.cs",
+              "RelativeDocumentMoniker": "Models\\Message.cs",
+              "ToolTip": "C:\\Projects\\MyMainServer\\CablesMarketAPI\\Models\\Message.cs",
+              "RelativeToolTip": "Models\\Message.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-29T08:52:48.926Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "InvoiceItem.cs",
+              "DocumentMoniker": "C:\\Projects\\MyMainServer\\MyDatabase\\Models\\InvoiceItem.cs",
+              "RelativeDocumentMoniker": "..\\MyDatabase\\Models\\InvoiceItem.cs",
+              "ToolTip": "C:\\Projects\\MyMainServer\\MyDatabase\\Models\\InvoiceItem.cs",
+              "RelativeToolTip": "..\\MyDatabase\\Models\\InvoiceItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-29T08:34:30.239Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Invoice.cs",
+              "DocumentMoniker": "C:\\Projects\\MyMainServer\\MyDatabase\\Models\\Invoice.cs",
+              "RelativeDocumentMoniker": "..\\MyDatabase\\Models\\Invoice.cs",
+              "ToolTip": "C:\\Projects\\MyMainServer\\MyDatabase\\Models\\Invoice.cs",
+              "RelativeToolTip": "..\\MyDatabase\\Models\\Invoice.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwB0AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-29T08:34:28.801Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Client.cs",
+              "DocumentMoniker": "C:\\Projects\\MyMainServer\\MyDatabase\\Models\\Client.cs",
+              "RelativeDocumentMoniker": "..\\MyDatabase\\Models\\Client.cs",
+              "ToolTip": "C:\\Projects\\MyMainServer\\MyDatabase\\Models\\Client.cs",
+              "RelativeToolTip": "..\\MyDatabase\\Models\\Client.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwBIAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-29T08:34:23.278Z"
             }
           ]
         }

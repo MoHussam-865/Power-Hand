@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace MyDatabase.Models
 {
@@ -7,28 +8,50 @@ namespace MyDatabase.Models
     {
         
         [Key]
+        [JsonIgnore]
         public int Id { get; set; } = 0;
 
         //[ForeignKey("Id")]
+        [JsonIgnore]
         public int InvoiceId { get; set; }
         //[ForeignKey("Id")]
 
         #region Invoice 
         // just for query purpose
+        [JsonIgnore]
         public Invoice? Invoice { get; set; }
         //public Item? Item{ get; set; }
 
         #endregion
 
+        [JsonPropertyName("id")]
         public int ItemId { get; set; }
+
+        [JsonPropertyName("name")]
         public string Name { get; set; } = string.Empty;
+
+        [JsonPropertyName("price")]
         public double Price { get; set; }
+
+        [JsonPropertyName("qty")]
         public double Quantity { get; set; }
+
+        [JsonIgnore]
         public string? Notes { get; set; }
+
+
         public int ParentId { get; set; }
+
+        [JsonPropertyName("discount")]
         public double Discount { get; set; } = 0;
+
+        [JsonIgnore]
         public double Total { get => Price * Quantity * (1 - Discount); }
+
+        [JsonIgnore]
         public bool IsFolder { get; set; }
+
+        [JsonIgnore]
         public string? ImagePath { get; set; } = null;
 
 

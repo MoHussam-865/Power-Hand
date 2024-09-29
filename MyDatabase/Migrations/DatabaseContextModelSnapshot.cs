@@ -24,22 +24,30 @@ namespace Power_Hand.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Address")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasAnnotation("Relational:JsonPropertyName", "address");
 
                     b.Property<double>("Discount")
                         .HasColumnType("REAL");
 
                     b.Property<string>("Email")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasAnnotation("Relational:JsonPropertyName", "email");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("TEXT")
+                        .HasAnnotation("Relational:JsonPropertyName", "location");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasAnnotation("Relational:JsonPropertyName", "name");
 
                     b.Property<string>("Notes")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasAnnotation("Relational:JsonPropertyName", "phone");
 
                     b.HasKey("Id");
 
@@ -80,7 +88,8 @@ namespace Power_Hand.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<long>("Date")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("INTEGER")
+                        .HasAnnotation("Relational:JsonPropertyName", "date");
 
                     b.Property<double?>("Discount")
                         .HasColumnType("REAL");
@@ -98,7 +107,8 @@ namespace Power_Hand.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Note")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasAnnotation("Relational:JsonPropertyName", "note");
 
                     b.Property<double>("Payed")
                         .HasColumnType("REAL");
@@ -136,11 +146,13 @@ namespace Power_Hand.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("ItemId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("INTEGER")
+                        .HasAnnotation("Relational:JsonPropertyName", "itemId");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasAnnotation("Relational:JsonPropertyName", "name");
 
                     b.Property<string>("Notes")
                         .HasColumnType("TEXT");
@@ -149,16 +161,20 @@ namespace Power_Hand.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<double>("Price")
-                        .HasColumnType("REAL");
+                        .HasColumnType("REAL")
+                        .HasAnnotation("Relational:JsonPropertyName", "price");
 
                     b.Property<double>("Quantity")
-                        .HasColumnType("REAL");
+                        .HasColumnType("REAL")
+                        .HasAnnotation("Relational:JsonPropertyName", "qty");
 
                     b.HasKey("Id");
 
                     b.HasIndex("InvoiceId");
 
                     b.ToTable("InvoiceItem");
+
+                    b.HasAnnotation("Relational:JsonPropertyName", "items");
                 });
 
             modelBuilder.Entity("MyDatabase.Models.Item", b =>

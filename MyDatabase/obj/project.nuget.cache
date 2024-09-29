@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6DhUihR/ngg=",
+  "dgSpecHash": "YSs+y++9zHI=",
   "success": true,
-  "projectFilePath": "C:\\Projects\\Server\\MyDatabase\\MyDatabase.csproj",
+  "projectFilePath": "C:\\Projects\\MyMainServer\\MyDatabase\\MyDatabase.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dell\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\dell\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

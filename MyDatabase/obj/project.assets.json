@@ -2885,11 +2885,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\Server\\MyDatabase\\MyDatabase.csproj",
+      "projectUniqueName": "C:\\Projects\\MyMainServer\\MyDatabase\\MyDatabase.csproj",
       "projectName": "MyDatabase",
-      "projectPath": "C:\\Projects\\Server\\MyDatabase\\MyDatabase.csproj",
+      "projectPath": "C:\\Projects\\MyMainServer\\MyDatabase\\MyDatabase.csproj",
       "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\Server\\MyDatabase\\obj\\",
+      "outputPath": "C:\\Projects\\MyMainServer\\MyDatabase\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

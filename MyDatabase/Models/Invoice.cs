@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace MyDatabase.Models
 {
@@ -8,27 +9,57 @@ namespace MyDatabase.Models
         private object items;
 
         [Key]
+        [JsonIgnore]
         public int Id { get; set; }
+
+        [JsonPropertyName("date")]
         public long Date { get; set; }
-        public long? DueDate { get; set; }
-        public int Type { get; set; }
-        public int? ClientId { get; set; }
-
-        public int EmployeeId { get; set; }
-        public double? Discount { get; set; }
-        public double? VAT { get; set; }
-        public double Payed { get; set; }
-        public double Remaining { get; set; }
-        public string? Note { get; set; }
-
-        // this is a note to the staff does not get printed
-        public string? InvoiceNote { get; set; }
-        public bool IsDeleted { get; set; } = false;
 
         [NotMapped]
-        public List<InvoiceItem> Items { get; set; } = new List<InvoiceItem>();
+        [JsonPropertyName("items")]
+        public List<InvoiceItem> Items { get; set; } = [];
 
+        [JsonPropertyName("total")]
         public double Total { get => Items.Sum(x => x.Total); }
+
+        [JsonPropertyName("note")]
+        public string? Note { get; set; }
+
+        [NotMapped]
+        [JsonPropertyName("client")]
+        public Client? ClientData { get; set; }
+
+
+        [JsonIgnore]
+        public long? DueDate { get; set; }
+
+        [JsonIgnore]
+        public int Type { get; set; }
+
+        [JsonIgnore]
+        public int? ClientId { get; set; }
+
+        [JsonIgnore]
+        public int EmployeeId { get; set; }
+
+        [JsonIgnore]
+        public double? Discount { get; set; }
+
+        [JsonIgnore]
+        public double? VAT { get; set; }
+
+        [JsonIgnore]
+        public double Payed { get; set; }
+
+        [JsonIgnore]
+        public double Remaining { get; set; }
+
+        // this is a note to the staff does not get printed
+        [JsonIgnore]
+        public string? InvoiceNote { get; set; }
+
+        [JsonIgnore]
+        public bool IsDeleted { get; set; } = false;
 
 
         public Invoice() { }

@@ -1,10 +1,6 @@
 using MyDatabase;
-using MyDatabase.Repository.Clients;
-using MyDatabase.Repository.Emploee;
-using MyDatabase.Repository.Invoices;
 using MyDatabase.Repository.Items;
 using MyDatabase.Repository.Posts;
-using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +11,18 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
 });
 
+builder.Services.AddCors(option =>
+{
+    option.AddPolicy("AllowAllOrigins", builder =>
+    {
+        builder.AllowAnyOrigin() 
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddControllers();
+builder.Services.AddHttpClient();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -31,13 +38,10 @@ builder.Services.AddScoped<IPostsRepo, PostsRepoImpl>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+if (app.Environment.IsDevelopment()) { app.UseSwagger(); app.UseSwaggerUI(); }
 
 app.UseHttpsRedirection();
+
 
 app.UseAuthorization();
 
